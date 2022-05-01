@@ -1,0 +1,23 @@
+Package: visualizeR
+Type: Package
+Title: What a color! What a viz!
+Version: 0.1.0
+Authors@R: c(
+        person(
+            'Noblet', 'Guillaume',
+            email = 'gnoblet@zaclys.net',
+            role = c('aut', 'cre')
+            )
+        )
+URL: https://github.com/gnoblet/visualizeR,
+        https://gnoblet.github.io/visualizeR/
+Maintainer: Guillaume Noblet <gnoblet@zaclys.net>
+Description: It basically provides colors as hex codes, color palettes, and some viz functions (graphs and maps).
+Depends: R (>= 4.1.0)
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.1.2
+Imports: ggplot2, rlang, grDevices, simplevis
+Suggests: knitr
+VignetteBuilder: knitr
