@@ -11,14 +11,17 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
+
+desc = read.dcf('DESCRIPTION')
+desc = setNames(as.list(desc), colnames(desc))
 ```
 
-# visualizeR
 
-<!-- badges: start -->
-<!-- badges: end -->
+# `r desc$Package` <img src="man/figures/logo.png" align="right" alt="" width="120"/>
 
-The goal of visualizeR is to propose some utils to get REACH and AGORA colors, ready-to-go color palettes, and a few visualization functions (horizontal hist graph for instance).
+> `r desc$Title`
+
+`visualizeR` proposes some utils to get REACH and AGORA colors, ready-to-go color palettes, and a few visualization functions (horizontal hist graph for instance).
 
 ## Installation
 
