@@ -49,7 +49,7 @@ scale_color  <- function(initiative = "reach", palette = "main", discrete = TRUE
 #' @return A fill scale for ggplot
 #'
 #' @export
-scale_color  <- function(initiative = "reach", palette = "main", discrete = TRUE, reverse = FALSE, ...) {
+scale_fill  <- function(initiative = "reach", palette = "main", discrete = TRUE, reverse = FALSE, ...) {
 
   if (initiative == "reach") {
     pal <- pal_reach(
