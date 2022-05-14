@@ -6,6 +6,7 @@
 #'
 #' @return The base REACH theme
 #'
+#' @export
 theme_reach <- function(family = "Leelawadee") {
 
   rlang::check_installed("ggplot2", reason = "Package \"ggplot2\" needed for `theme_reach_*()` to work. Please install it.")
@@ -47,7 +48,7 @@ theme_reach_borders <- function(family = "Leelawadee") {
 
 
 
-#' @title Some reach more minimal theme for ggplot
+#' @title Some reach more minimal theme for a ggplot histogram
 #'
 #' @param family The font family. Default to "Leelawadee"
 #'
@@ -67,7 +68,7 @@ theme_reach_hist <- function(family = "Leelawadee") {
 }
 
 
-#' @title Some reach more minimal theme for ggplot
+#' @title Some reach more minimal theme for a ggplot flipped histogram
 #'
 #' @param family The font family. Default to "Leelawadee"
 #'

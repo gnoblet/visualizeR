@@ -2,7 +2,7 @@
 % Please edit documentation in R/theme_reach.R
 \name{theme_reach_hist}
 \alias{theme_reach_hist}
-\title{Some reach more minimal theme for ggplot}
+\title{Some reach more minimal theme for a ggplot histogram}
 \usage{
 theme_reach_hist(family = "Leelawadee")
 }

@@ -12,7 +12,6 @@
 #' @param group_title The group legend title. Defaut to NULL
 #' @param font_family The font family. Default to "Leelawadee"
 #' @param stack Should the chart be stacked? Default to "FALSE" (dodge)
-#' @param reverse Boolean indicating whether the palette should be reversed
 #' @param ... Other arguments to be passed to "simplevis::gg_hbar" or "simplevis:gg_hbar_col"
 #'
 #' @return A horizontal bar chart
@@ -21,7 +20,7 @@
 hbar_percent <- function(.tbl, x, y, group = NULL, initiative = "reach", x_title = "", y_title = "", group_title = NULL, font_family = "Leelawadee",  stack = FALSE, ...){
 
 
-  if_vec_not_in_stop(initiative, c("reach", "agora", "impact"), "initiative")
+  if (!(initiative %in% c("reach", "agora", "impact"))) rlang::abort(c("Wrong `initiative` arg", "*" = paste0("Arg `initiative` cannot be: ", initiative), "i" = "It must be one of 'reach' or 'agora' or 'impact'"))
 
   if (initiative == "reach") main_col <- cols_reach("main_grey")
 
@@ -30,12 +29,11 @@ hbar_percent <- function(.tbl, x, y, group = NULL, initiative = "reach", x_title
   if (initiative == "impact") rlang::abort("IMPACT colors are under development")
 
   if (is.null(group)) {
-     hbar <- data |>
+     hbar <- .tbl |>
        simplevis::gg_hbar(
          x_var = {{ x }},
          y_var = {{ y }},
-         title = title,
-         theme = gg_theme(font = font, pal_title =  main_col),
+         theme = simplevis::gg_theme(font = font_family, pal_title =  main_col),
          x_title = x_title,
          y_title = y_title,
          alpha_fill = 1,
@@ -47,16 +45,15 @@ hbar_percent <- function(.tbl, x, y, group = NULL, initiative = "reach", x_title
     group_name <- rlang::as_name(rlang::enquo(group))
     if_not_in_stop(.tbl, group_name)
 
-    hbar <- data |>
+    hbar <- .tbl |>
       simplevis::gg_hbar_col(
         x_var = {{ x }},
         y_var = {{ y }},
         col_var = {{ group }},
-        title = title,
-        theme = gg_theme(font = font, pal_title =  main_col),
+        theme = simplevis::gg_theme(font = font_family, pal_title =  main_col),
         x_title = x_title,
         y_title = y_title,
-        col_title = col_title,
+        col_title = group_title,
         alpha_fill = 1,
         pal = main_col,
         x_labels = scales::percent,
@@ -81,7 +78,6 @@ hbar_percent <- function(.tbl, x, y, group = NULL, initiative = "reach", x_title
 #' @param group_title The group legend title. Defaut to NULL
 #' @param font_family The font family. Default to "Leelawadee"
 #' @param stack Should the chart be stacked? Default to "FALSE" (dodge)
-#' @param reverse Boolean indicating whether the palette should be reversed
 #' @param ... Other arguments to be passed to "simplevis::gg_hbar" or "simplevis:gg_hbar_col"
 #'
 #' @return A horizontal bar chart
@@ -90,7 +86,7 @@ hbar_percent <- function(.tbl, x, y, group = NULL, initiative = "reach", x_title
 hbar <- function(.tbl, x, y, group = NULL, initiative = "reach", x_title = "", y_title = "", group_title = NULL, font_family = "Leelawadee",  stack = FALSE, ...){
 
 
-  if_vec_not_in_stop(initiative, c("reach", "agora", "impact"), "initiative")
+  if (!(initiative %in% c("reach", "agora", "impact"))) rlang::abort(c("Wrong `initiative` arg", "*" = paste0("Arg `initiative` cannot be: ", initiative), "i" = "It must be one of 'reach' or 'agora' or 'impact'"))
 
   if (initiative == "reach") main_col <- cols_reach("main_grey")
 
@@ -99,12 +95,11 @@ hbar <- function(.tbl, x, y, group = NULL, initiative = "reach", x_title = "", y
   if (initiative == "impact") rlang::abort("IMPACT colors are under development")
 
   if (is.null(group)) {
-    hbar <- data |>
+    hbar <- .tbl |>
       simplevis::gg_hbar(
         x_var = {{ x }},
         y_var = {{ y }},
-        title = title,
-        theme = gg_theme(font = font, pal_title =  main_col),
+        theme = simplevis::gg_theme(font = font_family, pal_title =  main_col),
         x_title = x_title,
         y_title = y_title,
         alpha_fill = 1,
@@ -115,16 +110,15 @@ hbar <- function(.tbl, x, y, group = NULL, initiative = "reach", x_title = "", y
     group_name <- rlang::as_name(rlang::enquo(group))
     if_not_in_stop(.tbl, group_name)
 
-    hbar <- data |>
+    hbar <- .tbl |>
       simplevis::gg_hbar_col(
         x_var = {{ x }},
         y_var = {{ y }},
         col_var = {{ group }},
-        title = title,
-        theme = gg_theme(font = font, pal_title =  main_col),
+        theme = simplevis::gg_theme(font = font_family, pal_title =  main_col),
         x_title = x_title,
         y_title = y_title,
-        col_title = col_title,
+        col_title = group_title,
         alpha_fill = 1,
         pal = main_col,
         stack = stack,

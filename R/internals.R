@@ -85,3 +85,13 @@ if_vec_not_in_stop <- function(vec, cols, vec_name, arg = NULL){
     )
   }
 }
+
+#' @title Subvec not in
+#'
+#' @param vector A vector to subset
+#' @param set A set-vector
+#'
+#' @return A subset of vector not in set
+subvec_not_in <- function(vector, set){
+  vector[!(vector %in% set)]
+}

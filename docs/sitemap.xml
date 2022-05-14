@@ -16,10 +16,28 @@
     <loc>https://gnoblet.github.io/visualizeR/news/index.html</loc>
   </url>
   <url>
+    <loc>https://gnoblet.github.io/visualizeR/reference/abort_bad_argument.html</loc>
+  </url>
+  <url>
+    <loc>https://gnoblet.github.io/visualizeR/reference/buffer_bbox.html</loc>
+  </url>
+  <url>
     <loc>https://gnoblet.github.io/visualizeR/reference/cols_agora.html</loc>
   </url>
   <url>
     <loc>https://gnoblet.github.io/visualizeR/reference/cols_reach.html</loc>
+  </url>
+  <url>
+    <loc>https://gnoblet.github.io/visualizeR/reference/hbar.html</loc>
+  </url>
+  <url>
+    <loc>https://gnoblet.github.io/visualizeR/reference/hbar_percent.html</loc>
+  </url>
+  <url>
+    <loc>https://gnoblet.github.io/visualizeR/reference/if_not_in_stop.html</loc>
+  </url>
+  <url>
+    <loc>https://gnoblet.github.io/visualizeR/reference/if_vec_not_in_stop.html</loc>
   </url>
   <url>
     <loc>https://gnoblet.github.io/visualizeR/reference/index.html</loc>
@@ -32,6 +50,9 @@
   </url>
   <url>
     <loc>https://gnoblet.github.io/visualizeR/reference/scale_color.html</loc>
+  </url>
+  <url>
+    <loc>https://gnoblet.github.io/visualizeR/reference/subvec_not_in.html</loc>
   </url>
   <url>
     <loc>https://gnoblet.github.io/visualizeR/reference/theme_reach.html</loc>
