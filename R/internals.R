@@ -1,5 +1,3 @@
-
-
 #' @title Abord bad argument
 #'
 #' @param arg An argument

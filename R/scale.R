@@ -1,11 +1,11 @@
 #' Color scale constructor for REACH or AGORA colors
 #'
 #' @param initiative Either "reach" or "agora
-#' @param palette Character name of palette in drsimonj_palettes
+#' @param palette Palette name from `pal_reach()` or `pal_agora()`
 #' @param discrete Boolean indicating whether color aesthetic is discrete or not
 #' @param reverse Boolean indicating whether the palette should be reversed
 #' @param ... Additional arguments passed to discrete_scale() or
-#'            scale_color_gradientn(), used respectively when discrete is TRUE or FALSE
+#'            scale_color_gradient(), used respectively when discrete is TRUE or FALSE
 #' @return A color scale for ggplot
 #'
 #' @export
@@ -41,11 +41,11 @@ scale_color  <- function(initiative = "reach", palette = "main", discrete = TRUE
 #' Fill scale constructor for REACH or AGORA colors
 #'
 #' @param initiative Either "reach" or "agora
-#' @param palette Character name of palette in drsimonj_palettes
+#' @param palette Palette name from `pal_reach()` or `pal_agora()`
 #' @param discrete Boolean indicating whether color aesthetic is discrete or not
 #' @param reverse Boolean indicating whether the palette should be reversed
 #' @param ... Additional arguments passed to discrete_scale() or
-#'            scale_fill_gradientn(), used respectively when discrete is TRUE or FALSE
+#'            scale_fill_gradient(), used respectively when discrete is TRUE or FALSE
 #' @return A fill scale for ggplot
 #'
 #' @export

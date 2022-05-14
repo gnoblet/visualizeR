@@ -15,14 +15,14 @@ scale_color(
 \arguments{
 \item{initiative}{Either "reach" or "agora}
 
-\item{palette}{Character name of palette in drsimonj_palettes}
+\item{palette}{Palette name from `pal_reach()` or `pal_agora()`}
 
 \item{discrete}{Boolean indicating whether color aesthetic is discrete or not}
 
 \item{reverse}{Boolean indicating whether the palette should be reversed}
 
 \item{...}{Additional arguments passed to discrete_scale() or
-scale_color_gradientn(), used respectively when discrete is TRUE or FALSE}
+scale_color_gradient(), used respectively when discrete is TRUE or FALSE}
 }
 \value{
 A color scale for ggplot

@@ -1,6 +1,6 @@
 # visualizeR 0.1.2.9000
 
-* There was a duplicate `scale_color()` function, which should have been and is now `scale_fill()'`
+* There was a duplicate `scale_color()` function, which should have been and is now `scale_fill()`
 
 --- 
 
