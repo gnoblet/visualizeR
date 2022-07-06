@@ -104,7 +104,6 @@ hbar <- function(.tbl, x, y, group = NULL, initiative = "reach", x_title = "", y
         y_title = y_title,
         alpha_fill = 1,
         pal = main_col,
-        stack = stack,
         ...)
   } else {
     group_name <- rlang::as_name(rlang::enquo(group))

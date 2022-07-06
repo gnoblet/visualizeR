@@ -1,3 +1,9 @@
+# visualizeR 0.1.3.9000
+
+* Small change to `hbar()`: removes error arg within `simplevis::gg_hbar()` call.
+
+---
+
 # visualizeR 0.1.2.9000
 
 * There was a duplicate `scale_color()` function, which should have been and is now `scale_fill()`
