@@ -1,3 +1,9 @@
+# visualizeR 0.1.4.9000
+
+* `hbar()`gains a new boolean argument `reverse` to pass to `pal_reach()` or `pal_agora()`, indicating if the color palette should be reversed or not.
+
+---
+
 # visualizeR 0.1.3.9000
 
 * Small change to `hbar()`: removes error arg within `simplevis::gg_hbar()` call.

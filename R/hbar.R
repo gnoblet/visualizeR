@@ -12,19 +12,20 @@
 #' @param group_title The group legend title. Defaut to NULL
 #' @param font_family The font family. Default to "Leelawadee"
 #' @param stack Should the chart be stacked? Default to "FALSE" (dodge)
+#' @param reverse Boolean indicating whether the color palette should be reversed
 #' @param ... Other arguments to be passed to "simplevis::gg_hbar" or "simplevis:gg_hbar_col"
 #'
 #' @return A horizontal bar chart
 #'
 #' @export
-hbar_percent <- function(.tbl, x, y, group = NULL, initiative = "reach", x_title = "", y_title = "", group_title = NULL, font_family = "Leelawadee",  stack = FALSE, ...){
+hbar_percent <- function(.tbl, x, y, group = NULL, initiative = "reach", x_title = "", y_title = "", group_title = NULL, font_family = "Leelawadee",  stack = FALSE, reverse = FALSE, ...){
 
 
   if (!(initiative %in% c("reach", "agora", "impact"))) rlang::abort(c("Wrong `initiative` arg", "*" = paste0("Arg `initiative` cannot be: ", initiative), "i" = "It must be one of 'reach' or 'agora' or 'impact'"))
 
-  if (initiative == "reach") main_col <- cols_reach("main_grey")
+  if (initiative == "reach") main_col <- pal_reach("main", reverse = reverse)
 
-  if (initiative == "agora") main_col <- cols_agora("main_bordeaux")
+  if (initiative == "agora") main_col <- pal_agora("main", reverse = reverse)
 
   if (initiative == "impact") rlang::abort("IMPACT colors are under development")
 
@@ -78,19 +79,20 @@ hbar_percent <- function(.tbl, x, y, group = NULL, initiative = "reach", x_title
 #' @param group_title The group legend title. Defaut to NULL
 #' @param font_family The font family. Default to "Leelawadee"
 #' @param stack Should the chart be stacked? Default to "FALSE" (dodge)
+#' @param reverse Boolean indicating whether the color palette should be reversed
 #' @param ... Other arguments to be passed to "simplevis::gg_hbar" or "simplevis:gg_hbar_col"
 #'
 #' @return A horizontal bar chart
 #'
 #' @export
-hbar <- function(.tbl, x, y, group = NULL, initiative = "reach", x_title = "", y_title = "", group_title = NULL, font_family = "Leelawadee",  stack = FALSE, ...){
+hbar <- function(.tbl, x, y, group = NULL, initiative = "reach", x_title = "", y_title = "", group_title = NULL, font_family = "Leelawadee",  stack = FALSE, reverse = FALSE,...){
 
 
   if (!(initiative %in% c("reach", "agora", "impact"))) rlang::abort(c("Wrong `initiative` arg", "*" = paste0("Arg `initiative` cannot be: ", initiative), "i" = "It must be one of 'reach' or 'agora' or 'impact'"))
 
-  if (initiative == "reach") main_col <- cols_reach("main_grey")
+  if (initiative == "reach") main_col <- pal_reach("main", reverse = reverse)
 
-  if (initiative == "agora") main_col <- cols_agora("main_bordeaux")
+  if (initiative == "agora") main_col <- pal_agora("main", reverse = reverse)
 
   if (initiative == "impact") rlang::abort("IMPACT colors are under development")
 

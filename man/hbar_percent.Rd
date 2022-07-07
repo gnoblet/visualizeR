@@ -15,6 +15,7 @@ hbar_percent(
   group_title = NULL,
   font_family = "Leelawadee",
   stack = FALSE,
+  reverse = FALSE,
   ...
 )
 }
@@ -38,6 +39,8 @@ hbar_percent(
 \item{font_family}{The font family. Default to "Leelawadee"}
 
 \item{stack}{Should the chart be stacked? Default to "FALSE" (dodge)}
+
+\item{reverse}{Boolean indicating whether the color palette should be reversed}
 
 \item{...}{Other arguments to be passed to "simplevis::gg_hbar" or "simplevis:gg_hbar_col"}
 }
