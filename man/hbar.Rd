@@ -10,12 +10,17 @@ hbar(
   y,
   group = NULL,
   initiative = "reach",
+  pal = "primary",
+  width = 0.5,
   x_title = "",
   y_title = "",
   group_title = NULL,
   font_family = "Leelawadee",
-  stack = FALSE,
+  scales_percent = TRUE,
+  position = "dodge",
   reverse = FALSE,
+  title = "",
+  subtitle = "",
   ...
 )
 }
@@ -30,6 +35,10 @@ hbar(
 
 \item{initiative}{Either "reach" or "agora" or "impact" for the color palette}
 
+\item{pal}{The color palette from the initiative}
+
+\item{width}{Width.}
+
 \item{x_title}{The x scale title. Default to empty string}
 
 \item{y_title}{The y scale title. Default to empty string}
@@ -38,15 +47,21 @@ hbar(
 
 \item{font_family}{The font family. Default to "Leelawadee"}
 
-\item{stack}{Should the chart be stacked? Default to "FALSE" (dodge)}
+\item{scales_percent}{Should x_labels be scaled to percentages? Default to TRUE.}
+
+\item{position}{Should the chart be stacked? Default to dodge}
 
 \item{reverse}{Boolean indicating whether the color palette should be reversed}
 
-\item{...}{Other arguments to be passed to "simplevis::gg_hbar" or "simplevis:gg_hbar_col"}
+\item{title}{Plot title. Default to empty string}
+
+\item{subtitle}{Plot subtitle. Default to empty string}
+
+\item{...}{Other arguments to be passed to "ggblanket::gg_col"}
 }
 \value{
 A horizontal bar chart
 }
 \description{
-without any change to the x scale
+Simple horizontal bar chart
 }

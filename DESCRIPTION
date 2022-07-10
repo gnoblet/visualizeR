@@ -1,7 +1,7 @@
 Package: visualizeR
 Type: Package
 Title: What a color! What a viz!
-Version: 0.1.4.9000
+Version: 0.1.5.9000
 Authors@R: c(
         person(
             'Noblet', 'Guillaume',
@@ -18,6 +18,12 @@ License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.0
-Imports: ggplot2, rlang, grDevices, simplevis, glue, scales
+Imports: 
+    ggplot2,
+    rlang,
+    grDevices,
+    glue,
+    scales,
+    ggblanket
 Suggests: knitr, sf
 VignetteBuilder: knitr

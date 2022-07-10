@@ -4,13 +4,13 @@
     <loc>https://gnoblet.github.io/visualizeR/404.html</loc>
   </url>
   <url>
+    <loc>https://gnoblet.github.io/visualizeR/LICENSE.html</loc>
+  </url>
+  <url>
     <loc>https://gnoblet.github.io/visualizeR/authors.html</loc>
   </url>
   <url>
     <loc>https://gnoblet.github.io/visualizeR/index.html</loc>
-  </url>
-  <url>
-    <loc>https://gnoblet.github.io/visualizeR/LICENSE.html</loc>
   </url>
   <url>
     <loc>https://gnoblet.github.io/visualizeR/news/index.html</loc>
@@ -29,9 +29,6 @@
   </url>
   <url>
     <loc>https://gnoblet.github.io/visualizeR/reference/hbar.html</loc>
-  </url>
-  <url>
-    <loc>https://gnoblet.github.io/visualizeR/reference/hbar_percent.html</loc>
   </url>
   <url>
     <loc>https://gnoblet.github.io/visualizeR/reference/if_not_in_stop.html</loc>

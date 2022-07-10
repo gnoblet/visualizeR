@@ -1,6 +1,12 @@
+# visualizeR 0.1.5.9000
+
+* Move from `simplevis` to successor `ggblanket`.
+
+---
+
 # visualizeR 0.1.4.9000
 
-* `hbar()`gains a new boolean argument `reverse` to pass to `pal_reach()` or `pal_agora()`, indicating if the color palette should be reversed or not.
+* `hbar()` gains a new boolean argument `reverse` to pass to `pal_reach()` or `pal_agora()`, indicating if the color palette should be reversed or not.
 
 ---
 
