@@ -16,13 +16,10 @@ hbar_percent(
   y_title = "",
   group_title = NULL,
   font_family = "Leelawadee",
-  font_size = 12,
   position = "dodge",
   reverse = FALSE,
   title = "",
   subtitle = "",
-  title_font_size = 16,
-  subtitle_font_size = 14,
   ...
 )
 }
@@ -49,8 +46,6 @@ hbar_percent(
 
 \item{font_family}{The font family. Default to "Leelawadee"}
 
-\item{font_size}{Body font size; default to 12}
-
 \item{position}{Should the chart be stacked? Default to dodge}
 
 \item{reverse}{Boolean indicating whether the color palette should be reversed}
@@ -58,10 +53,6 @@ hbar_percent(
 \item{title}{Plot title. Default to empty string}
 
 \item{subtitle}{Plot subtitle. Default to empty string}
-
-\item{title_font_size}{Default to 16}
-
-\item{subtitle_font_size}{Default to 14}
 
 \item{...}{Other arguments to be passed to "ggblanket::gg_col"}
 }
