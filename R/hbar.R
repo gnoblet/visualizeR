@@ -15,12 +15,13 @@
 #' @param reverse Boolean indicating whether the color palette should be reversed
 #' @param title Plot title. Default to empty string
 #' @param subtitle Plot subtitle. Default to empty string
+#' @param theme Some ggplot2 theme
 #' @param ... Other arguments to be passed to "ggblanket::gg_col"
 #'
 #' @return A horizontal bar chart
 #'
 #' @export
-hbar <- function(.tbl, x, y, group = NULL, initiative = "reach", pal = "primary", width = 0.5, x_title = "", y_title = "", group_title = NULL, font_family = "Leelawadee", position = "dodge", reverse = FALSE, title = "", subtitle = "", ...){
+hbar <- function(.tbl, x, y, group = NULL, initiative = "reach", pal = "primary", width = 0.5, x_title = "", y_title = "", group_title = NULL, font_family = "Leelawadee", position = "dodge", reverse = FALSE, title = "", subtitle = "", theme = NULL, ...){
 
 
   if (!(initiative %in% c("reach", "agora", "impact"))) rlang::abort(c("Wrong `initiative` arg", "*" = paste0("Arg `initiative` cannot be: ", initiative), "i" = "It must be one of 'reach' or 'agora' or 'impact'"))
@@ -64,6 +65,7 @@ hbar <- function(.tbl, x, y, group = NULL, initiative = "reach", pal = "primary"
            stat = "identity",
            title = "",
            subtitle = "",
+           theme = theme,
            ...
            )
 
@@ -89,12 +91,13 @@ hbar <- function(.tbl, x, y, group = NULL, initiative = "reach", pal = "primary"
 #' @param reverse Boolean indicating whether the color palette should be reversed
 #' @param title Plot title. Default to empty string
 #' @param subtitle Plot subtitle. Default to empty string
+#' @param theme Some ggplot2 theme
 #' @param ... Other arguments to be passed to "ggblanket::gg_col"
 #'
 #' @return A horizontal bar chart
 #'
 #' @export
-hbar_percent <- function(.tbl, x, y, group = NULL, initiative = "reach", pal = "primary", width = 0.5, x_title = "", y_title = "", group_title = NULL, font_family = "Leelawadee",  position = "dodge", reverse = FALSE, title = "", subtitle = "", ...){
+hbar_percent <- function(.tbl, x, y, group = NULL, initiative = "reach", pal = "primary", width = 0.5, x_title = "", y_title = "", group_title = NULL, font_family = "Leelawadee",  position = "dodge", reverse = FALSE, title = "", subtitle = "", theme = NULL, ...){
 
 
   if (!(initiative %in% c("reach", "agora", "impact"))) rlang::abort(c("Wrong `initiative` arg", "*" = paste0("Arg `initiative` cannot be: ", initiative), "i" = "It must be one of 'reach' or 'agora' or 'impact'"))
@@ -139,6 +142,7 @@ hbar_percent <- function(.tbl, x, y, group = NULL, initiative = "reach", pal = "
                       stat = "identity",
                       title = "",
                       subtitle = "",
+                      theme = theme,
                       ...
     )
 
