@@ -20,7 +20,7 @@ hbar(
   reverse = FALSE,
   title = "",
   subtitle = "",
-  theme = NULL,
+  gg_theme = NULL,
   ...
 )
 }
@@ -55,7 +55,7 @@ hbar(
 
 \item{subtitle}{Plot subtitle. Default to empty string}
 
-\item{theme}{Some ggplot2 theme}
+\item{gg_theme}{Some ggplot2 theme}
 
 \item{...}{Other arguments to be passed to "ggblanket::gg_col"}
 }
