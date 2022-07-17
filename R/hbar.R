@@ -139,7 +139,7 @@ hbar_percent <- function(.tbl, x, y, group = NULL, initiative = "reach", palette
                       width = width,
                       x_labels = scales::percent,
                       position = position,
-                      stat = "identity",pkg
+                      stat = "identity",
                       title = "",
                       subtitle = "",
                       theme = theme,
