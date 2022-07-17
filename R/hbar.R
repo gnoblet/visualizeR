@@ -5,7 +5,7 @@
 #' @param y Some column on the y scale
 #' @param group Some grouping categorical column, e.g. administrative areas
 #' @param initiative Either "reach" or "agora" or "impact" for the color palette
-#' @param pal The color palette from the initiative
+#' @param palette The color palette from the initiative
 #' @param width Width
 #' @param x_title The x scale title. Default to empty string
 #' @param y_title The y scale title. Default to empty string
@@ -21,29 +21,29 @@
 #' @return A horizontal bar chart
 #'
 #' @export
-hbar <- function(.tbl, x, y, group = NULL, initiative = "reach", pal = "primary", width = 0.5, x_title = "", y_title = "", group_title = NULL, font_family = "Leelawadee", position = "dodge", reverse = FALSE, title = "", subtitle = "", theme = NULL, ...){
+hbar <- function(.tbl, x, y, group = NULL, initiative = "reach", palette = "primary", width = 0.5, x_title = "", y_title = "", group_title = NULL, font_family = "Leelawadee", position = "dodge", reverse = FALSE, title = "", subtitle = "", theme = NULL, ...){
 
 
   if (!(initiative %in% c("reach", "agora", "impact"))) rlang::abort(c("Wrong `initiative` arg", "*" = paste0("Arg `initiative` cannot be: ", initiative), "i" = "It must be one of 'reach' or 'agora' or 'impact'"))
 
   if (initiative == "reach") {
-    palette <- pal_reach(pal, reverse = reverse)
+    palette <- pal_reach(palette, reverse = reverse)
     main_col <- cols_reach("main_grey")
 
     if(is.null(palette)) rlang::warn(
-      c(paste0("There is no palette '", pal, "' for initiative 'reach'. Fallback to ggblanket's default color palette."),
+      c(paste0("There is no palette '", palette, "' for initiative 'reach'. Fallback to ggblanket's default color palette."),
         "i" = paste0("Use `pal_reach(show_palettes = T)` to see the list of availabale palettes.")
         )
       )
   }
 
   if (initiative == "agora") {
-    palette <- pal_agora(pal, reverse = reverse)
+    palette <- pal_agora(palette, reverse = reverse)
     main_col <- cols_agora("main_bordeaux")
 
 
     if(is.null(palette)) rlang::warn(
-      c(paste0("There is no palette '", pal, "' for initiative 'agora'. Fallback to ggblanket's default color palette."),
+      c(paste0("There is no palette '", palette, "' for initiative 'agora'. Fallback to ggblanket's default color palette."),
                "i" = paste0("Use `pal_agora(show_palettes = T)` to see the list of availabale palettes.")
         )
       )
@@ -81,7 +81,7 @@ hbar <- function(.tbl, x, y, group = NULL, initiative = "reach", pal = "primary"
 #' @param y Some column on the y scale
 #' @param group Some grouping categorical column, e.g. administrative areas
 #' @param initiative Either "reach" or "agora" or "impact" for the color palette
-#' @param pal The color palette from the initiative
+#' @param palette The color palette from the initiative
 #' @param width Width
 #' @param x_title The x scale title. Default to empty string
 #' @param y_title The y scale title. Default to empty string
@@ -97,29 +97,29 @@ hbar <- function(.tbl, x, y, group = NULL, initiative = "reach", pal = "primary"
 #' @return A horizontal bar chart
 #'
 #' @export
-hbar_percent <- function(.tbl, x, y, group = NULL, initiative = "reach", pal = "primary", width = 0.5, x_title = "", y_title = "", group_title = NULL, font_family = "Leelawadee",  position = "dodge", reverse = FALSE, title = "", subtitle = "", theme = NULL, ...){
+hbar_percent <- function(.tbl, x, y, group = NULL, initiative = "reach", palette = "primary", width = 0.5, x_title = "", y_title = "", group_title = NULL, font_family = "Leelawadee",  position = "dodge", reverse = FALSE, title = "", subtitle = "", theme = NULL, ...){
 
 
   if (!(initiative %in% c("reach", "agora", "impact"))) rlang::abort(c("Wrong `initiative` arg", "*" = paste0("Arg `initiative` cannot be: ", initiative), "i" = "It must be one of 'reach' or 'agora' or 'impact'"))
 
   if (initiative == "reach") {
-    palette <- pal_reach(pal, reverse = reverse)
+    palette <- pal_reach(palette, reverse = reverse)
     main_col <- cols_reach("main_grey")
 
     if(is.null(palette)) rlang::warn(
-      c(paste0("There is no palette '", pal, "' for initiative 'reach'. Fallback to ggblanket's default color palette."),
+      c(paste0("There is no palette '", palette, "' for initiative 'reach'. Fallback to ggblanket's default color palette."),
         "i" = paste0("Use `pal_reach(show_palettes = T)` to see the list of availabale palettes.")
       )
     )
   }
 
   if (initiative == "agora") {
-    palette <- pal_agora(pal, reverse = reverse)
+    palette <- pal_agora(palette, reverse = reverse)
     main_col <- cols_agora("main_bordeaux")
 
 
     if(is.null(palette)) rlang::warn(
-      c(paste0("There is no palette '", pal, "' for initiative 'agora'. Fallback to ggblanket's default color palette."),
+      c(paste0("There is no palette '", palette, "' for initiative 'agora'. Fallback to ggblanket's default color palette."),
         "i" = paste0("Use `pal_agora(show_palettes = T)` to see the list of availabale palettes.")
       )
     )
@@ -139,7 +139,7 @@ hbar_percent <- function(.tbl, x, y, group = NULL, initiative = "reach", pal = "
                       width = width,
                       x_labels = scales::percent,
                       position = position,
-                      stat = "identity",
+                      stat = "identity",pkg
                       title = "",
                       subtitle = "",
                       theme = theme,

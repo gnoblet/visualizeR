@@ -10,7 +10,7 @@ hbar(
   y,
   group = NULL,
   initiative = "reach",
-  pal = "primary",
+  palette = "primary",
   width = 0.5,
   x_title = "",
   y_title = "",
@@ -35,7 +35,7 @@ hbar(
 
 \item{initiative}{Either "reach" or "agora" or "impact" for the color palette}
 
-\item{pal}{The color palette from the initiative}
+\item{palette}{The color palette from the initiative}
 
 \item{width}{Width}
 
