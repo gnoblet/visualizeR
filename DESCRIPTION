@@ -1,7 +1,7 @@
 Package: visualizeR
 Type: Package
 Title: What a color! What a viz!
-Version: 0.1.6.9000
+Version: 0.1.7.9000
 Authors@R: c(
         person(
             'Noblet', 'Guillaume',
