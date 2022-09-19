@@ -23,8 +23,10 @@ devtools::install_github("gnoblet/visualizeR", build_vignettes = TRUE)
 
 Roadmap is as follows:
 
--   [ ] Add IMPACT’s colors
--   [ ] Add all color palettes from the internal documentation
+-   [x] Add IMPACT’s colors
+-   [x] Add all color palettes from the internal documentation
+-   [ ] There remains to be added more-than-7-color palettes and black
+    color palettes
 -   [ ] Add new types of visualization (e.g. dumbbell plot)
 -   [ ] Use examples
 -   [ ] Add some ease-map functions
