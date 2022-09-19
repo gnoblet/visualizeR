@@ -1,3 +1,10 @@
+# visualizeR 0.1.6.9000
+
+* IMPACT colors and palettes are added: function `cols_impact()` `pal_impact()`.
+* Color palettes from REACH are added (2 to 7 continuous palettes) ; see updated `cols_reach()` and `pal_reach()`.
+
+---
+
 # visualizeR 0.1.5.9000
 
 * Move from `simplevis` to successor `ggblanket`.
