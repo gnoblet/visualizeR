@@ -1,3 +1,9 @@
+# visualizeR 0.1.7.9000
+
+* Fixed some color palettes.
+
+---
+
 # visualizeR 0.1.6.9000
 
 * IMPACT colors and palettes are added: function `cols_impact()` `pal_impact()`.
