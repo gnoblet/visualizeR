@@ -24,6 +24,6 @@ Imports:
     grDevices,
     glue,
     scales,
-    ggblanket
+    ggblanket >= 1.5.0
 Suggests: knitr, sf
 VignetteBuilder: knitr
