@@ -1,3 +1,11 @@
+# visualizeR 0.2.9000
+
+* Breaking changes: almost all functions got refinements, and there are new functions, typically `hbar()` becomes `bar_reach()` and `point_reach()` is added.
+* Following `theme_reach()` is now used by all plotting functions.
+* Add README.md.
+
+---
+
 # visualizeR 0.1.7.9000
 
 * Fixed some color palettes.
