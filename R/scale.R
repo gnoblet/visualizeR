@@ -1,11 +1,13 @@
 #' Color scale constructor for REACH or AGORA colors
 #'
-#' @param initiative Either "reach" or "agora
-#' @param palette Palette name from `pal_reach()` or `pal_agora()`
-#' @param discrete Boolean indicating whether color aesthetic is discrete or not
-#' @param reverse Boolean indicating whether the palette should be reversed
+#' @param initiative Either "reach" or "agora.
+#' @param palette Palette name from `pal_reach()` or `pal_agora()`.
+#' @param discrete Boolean indicating whether color aesthetic is discrete or not.
+#' @param reverse Boolean indicating whether the palette should be reversed.
+#' @param reverse_guide Boolean indicating whether the guide should be reversed.
 #' @param ... Additional arguments passed to discrete_scale() or
-#'            scale_color_gradient(), used respectively when discrete is TRUE or FALSE
+#'            scale_fill_gradient(), used respectively when discrete is TRUE or FALSE.
+#'
 #' @return A color scale for ggplot
 #'
 #' @export
@@ -59,13 +61,15 @@ scale_color  <- function(initiative = "reach", palette = "main", discrete = TRUE
 
 #' Fill scale constructor for REACH or AGORA colors
 #'
-#' @param initiative Either "reach" or "agora
-#' @param palette Palette name from `pal_reach()` or `pal_agora()`
-#' @param discrete Boolean indicating whether color aesthetic is discrete or not
-#' @param reverse Boolean indicating whether the palette should be reversed
+#' @param initiative Either "reach" or "agora.
+#' @param palette Palette name from `pal_reach()` or `pal_agora()`.
+#' @param discrete Boolean indicating whether color aesthetic is discrete or not.
+#' @param reverse Boolean indicating whether the palette should be reversed.
+#' @param reverse_guide Boolean indicating whether the guide should be reversed.
 #' @param ... Additional arguments passed to discrete_scale() or
-#'            scale_fill_gradient(), used respectively when discrete is TRUE or FALSE
-#' @return A fill scale for ggplot
+#'            scale_fill_gradient(), used respectively when discrete is TRUE or FALSE.
+#'
+#' @return A fill scale for ggplot.
 #'
 #' @export
 scale_fill  <- function(initiative = "reach", palette = "main", discrete = TRUE, reverse = FALSE, reverse_guide = TRUE, ...) {

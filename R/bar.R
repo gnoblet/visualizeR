@@ -20,7 +20,7 @@
 #' @param text_size The size of all text other than the title, subtitle and caption. Defaults to 10.
 #' @param title_size The size of the title text. Defaults to 14.
 #' @param legend_position Position of the legend; Default to "right". Can take "right", "left", "top", "bottom" or "none".
-#' @param legend_direction Direction of the legend. Default to "vertical". Can take "vertical" or "horizontal".
+#' @param legend_rev Reverse the color in the guide? Default to TRUE.
 #' @param void Boolean to remove all elements from the plot. Default to FALSE.
 #' @param ... Other arguments to be passed to "ggblanket::gg_col"
 #'
@@ -41,7 +41,7 @@ bar_reach <- function(df, x, y, group = NULL, percent = TRUE, palette = "main", 
 
   if (percent) x_labels <- scales::percent else x_labels <- NULL
 
-  hbar <- df |>
+  pl <- df |>
     ggblanket::gg_col(x = {{ x }},
            y = {{ y }},
            col = {{ group }},
@@ -70,5 +70,5 @@ bar_reach <- function(df, x, y, group = NULL, percent = TRUE, palette = "main", 
            ...
            )
 
-  return(hbar)
+  return(pl)
 }

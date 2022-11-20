@@ -1,8 +1,8 @@
 #' @title ggplot2 theme with REACH color palettes
 #'
 #' @param palette Palette name from 'pal_reach()'.
-#' @param discrete 	Boolean indicating whether color aesthetic is discrete or not
-#' @param reverse Boolean indicating whether the palette should be reversed
+#' @param discrete 	Boolean indicating whether color aesthetic is discrete or not.
+#' @param reverse Boolean indicating whether the palette should be reversed.
 #' @param family The font family for all plot's texts. Default to "Leelawadee".
 #' @param text_size The size of all text other than the title, subtitle and caption. Defaults to 10.
 #' @param title_size The size of the title text_family. Defaults to 14.
@@ -10,6 +10,7 @@
 #' @param panel_background_pal The color for the panel background color. Default to white.
 #' @param legend_position Position of the legend; Default to "right". Can take "right", "left", "top", "bottom" or "none".
 #' @param legend_direction Direction of the legend. Default to "vertical". Can take "vertical" or "horizontal".
+#' @param legend_reverse Reverse the color in the guide? Default to TRUE.
 #' @param void Boolean to remove all elements from the plot. Default to FALSE.
 #' @param ...	Additional arguments passed to `ggblanket::gg_theme()`.
 #'

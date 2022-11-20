@@ -2,16 +2,54 @@
 % Please edit documentation in R/theme_reach.R
 \name{theme_reach}
 \alias{theme_reach}
-\title{Base REACH ggplot2 theme}
+\title{ggplot2 theme with REACH color palettes}
 \usage{
-theme_reach(family = "Leelawadee")
+theme_reach(
+  palette = "main",
+  discrete = TRUE,
+  reverse = FALSE,
+  family = "Leelawadee",
+  text_size = 10,
+  title_size = 14,
+  plot_background_pal = "#FFFFFF",
+  panel_background_pal = "#FFFFFF",
+  void = FALSE,
+  legend_position = "right",
+  legend_direction = "vertical",
+  legend_reverse = TRUE,
+  ...
+)
 }
 \arguments{
-\item{family}{The font family. Default to "Leelawadee"}
+\item{palette}{Palette name from 'pal_reach()'.}
+
+\item{discrete}{Boolean indicating whether color aesthetic is discrete or not.}
+
+\item{reverse}{Boolean indicating whether the palette should be reversed.}
+
+\item{family}{The font family for all plot's texts. Default to "Leelawadee".}
+
+\item{text_size}{The size of all text other than the title, subtitle and caption. Defaults to 10.}
+
+\item{title_size}{The size of the title text_family. Defaults to 14.}
+
+\item{plot_background_pal}{The color for the plot background color. Default to white.}
+
+\item{panel_background_pal}{The color for the panel background color. Default to white.}
+
+\item{void}{Boolean to remove all elements from the plot. Default to FALSE.}
+
+\item{legend_position}{Position of the legend; Default to "right". Can take "right", "left", "top", "bottom" or "none".}
+
+\item{legend_direction}{Direction of the legend. Default to "vertical". Can take "vertical" or "horizontal".}
+
+\item{legend_reverse}{Reverse the color in the guide? Default to TRUE.}
+
+\item{...}{Additional arguments passed to `ggblanket::gg_theme()`.}
 }
 \value{
 The base REACH theme
 }
 \description{
-Give some reach colors and fonts to a ggplot. Based on theme_bw()
+Give some reach colors and fonts to a ggplot.
 }
