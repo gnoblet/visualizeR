@@ -9,13 +9,14 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%"
+  out.width = "100%",
+  warning = FALSE,
+  message = FALSE
 )
 
 desc = read.dcf('DESCRIPTION')
 desc = setNames(as.list(desc), colnames(desc))
 ```
-
 
 # `r desc$Package` <img src="man/figures/logo.png" align="right" alt="" width="120"/>
 
@@ -54,7 +55,7 @@ Please, do not hesitate to pull request any new viz or colors or color palettes,
 
 Color palettes for REACH, AGORA and IMPACT are available. Functions to access colors and palettes are `cols_initiative()` or `pal_initiative()`. For now, the initiative with the most colors and color palettes is REACH. Feel free to pull requests new AGORA and IMPACT colors.
 
-```{r example-colors, eval = FALSE}
+```{r example-colors, eval = TRUE}
 library(visualizeR)
 
 # Get all saved REACH colors, named
@@ -88,13 +89,16 @@ bar_reach(df, mean_bl, island, species, percent = FALSE, palette = "artichoke_3"
 ```
 
 ## Example 3: Point chart, already REACH themed
+
+At this stage, `point_reach()` only supports categorical grouping colors with the `group` arg.
+
 ```{r example-point-chart, eval = TRUE}
 
 # Simple point chart
 point_reach(penguins, bill_length_mm, flipper_length_mm)
 
 # Point chart with grouping colors, greater dot size, some transparency, reversed color palette
-point_reach(penguins, bill_length_mm, flipper_length_mm, island, alpha = 0.5, size = 2, reverse = TRUE)
+point_reach(penguins, bill_length_mm, flipper_length_mm, island, alpha = 0.6, size = 3, reverse = TRUE)
 
 # Using another color palettes
 point_reach(penguins, bill_length_mm, flipper_length_mm, island, palette = "artichoke_3")
