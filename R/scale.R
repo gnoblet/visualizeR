@@ -9,7 +9,7 @@
 #' @return A color scale for ggplot
 #'
 #' @export
-scale_color  <- function(initiative = "reach", palette = "main", discrete = TRUE, reverse = FALSE, ...) {
+scale_color  <- function(initiative = "reach", palette = "main", discrete = TRUE, reverse = FALSE, reverse_guide = TRUE, ...) {
 
   if (initiative == "reach") {
     pal <- pal_reach(
@@ -30,9 +30,28 @@ scale_color  <- function(initiative = "reach", palette = "main", discrete = TRUE
   }
 
   if (discrete) {
-    ggplot2::discrete_scale("colour", paste0(initiative, "_", palette), palette = pal, ...)
+    ggplot2::discrete_scale(
+      "colour",
+      paste0(initiative, "_", palette),
+      palette = pal,
+      guide = ggplot2::guide_legend(
+        title.position = "top",
+        draw.ulim = TRUE,
+        draw.llim = TRUE,
+        ticks.colour = "#F1F3F5",
+        reverse = reverse_guide),
+      ...)
   } else {
-    ggplot2::scale_color_gradientn(colours = pal(256), ...)
+    ggplot2::scale_color_gradientn(
+      colours = pal(256),
+      guide = ggplot2::guide_colorbar(
+        title.position = "top",
+        draw.ulim = TRUE,
+        draw.llim = TRUE,
+        ticks.colour = "#F1F3F5",
+        reverse = reverse_guide
+      ),
+      ...)
   }
 }
 
@@ -49,7 +68,7 @@ scale_color  <- function(initiative = "reach", palette = "main", discrete = TRUE
 #' @return A fill scale for ggplot
 #'
 #' @export
-scale_fill  <- function(initiative = "reach", palette = "main", discrete = TRUE, reverse = FALSE, ...) {
+scale_fill  <- function(initiative = "reach", palette = "main", discrete = TRUE, reverse = FALSE, reverse_guide = TRUE, ...) {
 
   if (initiative == "reach") {
     pal <- pal_reach(
@@ -70,8 +89,26 @@ scale_fill  <- function(initiative = "reach", palette = "main", discrete = TRUE,
   }
 
   if (discrete) {
-    ggplot2::discrete_scale("fill", paste0(initiative, "_", palette), palette = pal, ...)
+    ggplot2::discrete_scale(
+      "fill",
+      paste0(initiative, "_", palette),
+      palette = pal,
+      guide = ggplot2::guide_legend(
+        title.position = "top",
+        draw.ulim = TRUE,
+        draw.llim = TRUE,
+        ticks.colour = "#F1F3F5",
+        reverse = reverse_guide),
+      ...)
   } else {
-    ggplot2::scale_fill_gradientn(colours = pal(256), ...)
+    ggplot2::scale_fill_gradientn(
+      colours = pal(256),
+      guide = ggplot2::guide_colorbar(
+        title.position = "top",
+        draw.ulim = TRUE,
+        draw.llim = TRUE,
+        ticks.colour = "#F1F3F5",
+        reverse = reverse_guide),
+        ...)
   }
 }
