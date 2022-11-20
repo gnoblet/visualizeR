@@ -11,7 +11,6 @@
 #' @export
 pal_reach <- function(palette = "main", reverse = FALSE, color_ramp_palette = FALSE, show_palettes = FALSE, ...) {
 
-
   palettes_reach <- list(
     `main`            = cols_reach("main_grey", "main_red", "main_lt_grey", "main_beige"),
     `primary`         = cols_reach("main_grey", "main_red"),
@@ -58,7 +57,7 @@ pal_reach <- function(palette = "main", reverse = FALSE, color_ramp_palette = FA
   if (reverse) pal <- rev(pal)
 
   if (color_ramp_palette) {
-    rlang::check_installed("grDevices", reason = "Package \"grDevices\" needed for `pal_reach()` woth 'color_ramp_palette' set to `TRUE` to work. Please install it.")
+    rlang::check_installed("grDevices", reason = "Package \"grDevices\" needed for `pal_reach()` with 'color_ramp_palette' set to `TRUE` to work. Please install it.")
 
     pal <- grDevices::colorRampPalette(pal, ...)
   }
