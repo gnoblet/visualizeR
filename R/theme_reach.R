@@ -31,6 +31,7 @@ theme_reach <- function(
     void = FALSE,
     legend_position = "right",
     legend_direction = "vertical",
+    legend_reverse = TRUE,
     ...
     ) {
 
@@ -47,17 +48,18 @@ theme_reach <- function(
 
   # Default legend to right position
   theme_reach <- theme_reach +
-  ggplot2::theme(legend.position = legend_position)
+    ggplot2::theme(legend.position = legend_position)
 
   # Defaut legend to vertical direction
   theme_reach <- theme_reach +
-  ggplot2::theme(legend.direction = legend_direction)
+    ggplot2::theme(legend.direction = legend_direction)
 
   # Add reach color palettes by default
+  # (reversed guide is defaulted to TRUE for natural reading)
   theme_reach <- list(
     theme_reach,
-    scale_color(palette = palette, discrete = discrete, reverse = reverse),
-    scale_fill(palette = palette, discrete = discrete, reverse = reverse)
+    scale_color(palette = palette, discrete = discrete, reverse = reverse, reverse_guide = legend_reverse),
+    scale_fill(palette = palette, discrete = discrete, reverse = reverse, reverse_guide = legend_reverse)
     )
 
 
