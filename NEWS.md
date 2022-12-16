@@ -1,3 +1,9 @@
+# visualizeR 0.3.9000
+
+* Breaking changes: update to `ggblanket` v1.6.1.
+* Add plotting functions for indicator maps.
+
+
 # visualizeR 0.2.9000
 
 * Breaking changes: almost all functions got refinements, and there are new functions, typically `hbar()` becomes `bar_reach()` and `point_reach()` is added.

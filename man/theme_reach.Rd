@@ -13,7 +13,6 @@ theme_reach(
   title_size = 14,
   plot_background_pal = "#FFFFFF",
   panel_background_pal = "#FFFFFF",
-  void = FALSE,
   legend_position = "right",
   legend_direction = "vertical",
   legend_reverse = TRUE,
@@ -36,8 +35,6 @@ theme_reach(
 \item{plot_background_pal}{The color for the plot background color. Default to white.}
 
 \item{panel_background_pal}{The color for the panel background color. Default to white.}
-
-\item{void}{Boolean to remove all elements from the plot. Default to FALSE.}
 
 \item{legend_position}{Position of the legend; Default to "right". Can take "right", "left", "top", "bottom" or "none".}
 
