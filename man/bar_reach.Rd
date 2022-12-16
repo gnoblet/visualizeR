@@ -26,7 +26,6 @@ bar_reach(
   title_size = 14,
   legend_position = "right",
   legend_rev = TRUE,
-  void = FALSE,
   ...
 )
 }
@@ -72,8 +71,6 @@ bar_reach(
 \item{legend_position}{Position of the legend; Default to "right". Can take "right", "left", "top", "bottom" or "none".}
 
 \item{legend_rev}{Reverse the color in the guide? Default to TRUE.}
-
-\item{void}{Boolean to remove all elements from the plot. Default to FALSE.}
 
 \item{...}{Other arguments to be passed to "ggblanket::gg_col"}
 }

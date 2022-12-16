@@ -11,7 +11,6 @@
 #' @param legend_position Position of the legend; Default to "right". Can take "right", "left", "top", "bottom" or "none".
 #' @param legend_direction Direction of the legend. Default to "vertical". Can take "vertical" or "horizontal".
 #' @param legend_reverse Reverse the color in the guide? Default to TRUE.
-#' @param void Boolean to remove all elements from the plot. Default to FALSE.
 #' @param ...	Additional arguments passed to `ggblanket::gg_theme()`.
 #'
 #'
@@ -29,7 +28,6 @@ theme_reach <- function(
     title_size = 14,
     plot_background_pal = "#FFFFFF",
     panel_background_pal = "#FFFFFF",
-    void = FALSE,
     legend_position = "right",
     legend_direction = "vertical",
     legend_reverse = TRUE,
@@ -42,9 +40,7 @@ theme_reach <- function(
     text_size = text_size,
     title_size = title_size,
     plot_background_pal = plot_background_pal,
-    panel_background_pal = panel_background_pal,
-    void = void
-  )
+    panel_background_pal = panel_background_pal)
 
 
   # Default legend to right position
