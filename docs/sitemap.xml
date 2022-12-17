@@ -4,13 +4,13 @@
     <loc>https://gnoblet.github.io/visualizeR/404.html</loc>
   </url>
   <url>
-    <loc>https://gnoblet.github.io/visualizeR/LICENSE.html</loc>
-  </url>
-  <url>
     <loc>https://gnoblet.github.io/visualizeR/authors.html</loc>
   </url>
   <url>
     <loc>https://gnoblet.github.io/visualizeR/index.html</loc>
+  </url>
+  <url>
+    <loc>https://gnoblet.github.io/visualizeR/LICENSE.html</loc>
   </url>
   <url>
     <loc>https://gnoblet.github.io/visualizeR/news/index.html</loc>
@@ -19,10 +19,37 @@
     <loc>https://gnoblet.github.io/visualizeR/reference/abort_bad_argument.html</loc>
   </url>
   <url>
+    <loc>https://gnoblet.github.io/visualizeR/reference/add_admin_boundaries.html</loc>
+  </url>
+  <url>
+    <loc>https://gnoblet.github.io/visualizeR/reference/add_admin_labels.html</loc>
+  </url>
+  <url>
+    <loc>https://gnoblet.github.io/visualizeR/reference/add_compass.html</loc>
+  </url>
+  <url>
+    <loc>https://gnoblet.github.io/visualizeR/reference/add_credits.html</loc>
+  </url>
+  <url>
+    <loc>https://gnoblet.github.io/visualizeR/reference/add_indicator_layer.html</loc>
+  </url>
+  <url>
+    <loc>https://gnoblet.github.io/visualizeR/reference/add_layout.html</loc>
+  </url>
+  <url>
+    <loc>https://gnoblet.github.io/visualizeR/reference/add_scale_bar.html</loc>
+  </url>
+  <url>
     <loc>https://gnoblet.github.io/visualizeR/reference/bar_reach.html</loc>
   </url>
   <url>
+    <loc>https://gnoblet.github.io/visualizeR/reference/border_admin0.html</loc>
+  </url>
+  <url>
     <loc>https://gnoblet.github.io/visualizeR/reference/buffer_bbox.html</loc>
+  </url>
+  <url>
+    <loc>https://gnoblet.github.io/visualizeR/reference/centroid_admin1.html</loc>
   </url>
   <url>
     <loc>https://gnoblet.github.io/visualizeR/reference/cols_agora.html</loc>
@@ -34,6 +61,9 @@
     <loc>https://gnoblet.github.io/visualizeR/reference/cols_reach.html</loc>
   </url>
   <url>
+    <loc>https://gnoblet.github.io/visualizeR/reference/frontier_admin0.html</loc>
+  </url>
+  <url>
     <loc>https://gnoblet.github.io/visualizeR/reference/if_not_in_stop.html</loc>
   </url>
   <url>
@@ -41,6 +71,12 @@
   </url>
   <url>
     <loc>https://gnoblet.github.io/visualizeR/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://gnoblet.github.io/visualizeR/reference/indicator_admin1.html</loc>
+  </url>
+  <url>
+    <loc>https://gnoblet.github.io/visualizeR/reference/line_admin1.html</loc>
   </url>
   <url>
     <loc>https://gnoblet.github.io/visualizeR/reference/pal_agora.html</loc>

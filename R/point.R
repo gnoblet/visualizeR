@@ -18,7 +18,6 @@
 #' @param text_size The size of all text other than the title, subtitle and caption. Defaults to 10.
 #' @param title_size The size of the title text. Defaults to 14.
 #' @param legend_position Position of the legend; Default to "right". Can take "right", "left", "top", "bottom" or "none".
-#' @param void Boolean to remove all elements from the plot. Default to FALSE.
 #' @param ... Other arguments to be passed to "ggblanket::gg_col"
 #'
 #' @description `ggblanket` as internals for deciding whether the bar chart is horizontally readable.
@@ -26,7 +25,7 @@
 #' @return A bar chart
 #'
 #' @export
-point_reach <- function(df, x, y, group = NULL, palette = "main", reverse = FALSE, family = "Leelawadee", alpha = 1, size = 1.5, x_title = NULL, y_title = NULL, group_title = NULL, title = NULL, subtitle = NULL, caption = NULL, text_size = 10, title_size = 14, legend_position = "right", void = FALSE, ...){
+point_reach <- function(df, x, y, group = NULL, palette = "main", reverse = FALSE, family = "Leelawadee", alpha = 1, size = 1.5, x_title = NULL, y_title = NULL, group_title = NULL, title = NULL, subtitle = NULL, caption = NULL, text_size = 10, title_size = 14, legend_position = "right", ...){
 
   pal <- pal_reach(palette)
 
@@ -56,8 +55,7 @@ point_reach <- function(df, x, y, group = NULL, palette = "main", reverse = FALS
                         text_size = text_size,
                         title_size = title_size,
                         plot_background_pal = "#FFFFFF",
-                        panel_background_pal = "#FFFFFF",
-                        void = FALSE
+                        panel_background_pal = "#FFFFFF"
                       ),
                       ...
     )

@@ -38,7 +38,7 @@ Please, do not hesitate to pull request any new viz or colors or color
 palettes, or to email request any change
 (<guillaume.noblet@reach-initiative.org> or <gnoblet@zaclys.net>).
 
-## Example 1: extracting colors
+## Colors
 
 Color palettes for REACH, AGORA and IMPACT are available. Functions to
 access colors and palettes are `cols_initiative()` or
@@ -73,7 +73,9 @@ pal_reach(show_palettes = T)
 #> [33] "blue_4"          "blue_5"          "blue_6"          "blue_7"
 ```
 
-## Example 2: Bar chart, already REACH themed
+## Charts
+
+### Example 1: Bar chart, already REACH themed
 
 ``` r
 library(visualizeR)
@@ -101,7 +103,7 @@ bar_reach(df, mean_bl, island, species, percent = FALSE, palette = "artichoke_3"
 
 <img src="man/figures/README-example-bar-chart-2.png" width="100%" />
 
-## Example 3: Point chart, already REACH themed
+### Example 2: Point chart, already REACH themed
 
 At this stage, `point_reach()` only supports categorical grouping colors
 with the `group` arg.
@@ -129,3 +131,36 @@ point_reach(penguins, bill_length_mm, flipper_length_mm, island, palette = "arti
 ```
 
 <img src="man/figures/README-example-point-chart-3.png" width="100%" />
+
+## Maps
+
+``` r
+
+# Add indicator layer 
+# - based on "pretty" classes and title "Proportion (%)" 
+# - buffer to add a 10% around the bounding box
+map <- add_indicator_layer(
+  indicator_admin1, 
+  opn_dfc,
+  buffer = 0.1) + 
+  # Layout - some defaults - add the map title
+  add_layout("% of HH that reported open defecation as sanitation facility") + 
+  # Admin boundaries as list of shape files (lines) and colors, line widths and labels as vectors
+  add_admin_boundaries(
+    lines = list(line_admin1, border_admin0, frontier_admin0),
+    colors = cols_reach("main_lt_grey", "dk_grey", "black"),
+    lwds = c(0.5, 2, 3),
+    labels = c("Department", "Country", "Dominican Rep. frontier"),
+    title = "Administrative boundaries") + 
+  # Add text labels - centered on admin 1 centroids
+  add_admin_labels(centroid_admin1, ADM1_FR_UPPER) +
+  # Add a compass
+  add_compass() +
+  # Add a scale bar
+  add_scale_bar() +
+  # Add credits
+  add_credits("Admin. boundaries. : CNIGS \nCoord. system: GCS WGS 1984")
+```
+
+![Once exported with
+`tmap::tmap_save()`.](man/figures/README-example-map.png)
