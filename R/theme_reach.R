@@ -96,7 +96,11 @@ theme_reach <- function(
     plot.caption.position =  "plot",
     # Text sizes
     axis.text = ggplot2::element_text(size = axis_text_size),
-    axis.title = ggplot2::element_text(size = axis_title_size)
+    axis.title = ggplot2::element_text(size = axis_title_size),
+    # Wrap title
+    plot.title = ggtext::element_textbox_simple(),
+    plot.subtitle = ggtext::element_textbox_simple(),
+    plot.caption = ggtext::element_textbox_simple()
   )
 
   # Axis lines ?

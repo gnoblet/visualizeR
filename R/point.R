@@ -13,15 +13,12 @@
 #' @param title Plot title. Default to NULL.
 #' @param subtitle Plot subtitle. Default to NULL.
 #' @param caption Plot caption. Default to NULL.
-#' @param title_wrap Wrap title, number of characters.
-#' @param subtitle_wrap Wrap subtitle, number of characters.
-#' @param caption_wrap Wrap caption, number of characters.
 #' @param theme Whatever theme. Default to theme_reach().
 #'
 #' @return A bar chart
 #'
 #' @export
-point <- function(df, x, y, group = NULL, flip = TRUE, alpha = 1, size = 1, x_title = NULL, y_title = NULL, group_title = NULL, title = NULL, subtitle = NULL, caption = NULL, title_wrap = 60, subtitle_wrap = 60, caption_wrap = 120, theme = theme_reach()){
+point <- function(df, x, y, group = NULL, flip = TRUE, alpha = 1, size = 1, x_title = NULL, y_title = NULL, group_title = NULL, title = NULL, subtitle = NULL, caption = NULL, theme = theme_reach()){
 
   # To do :
   # - automate bar width and text size, or at least give the flexibility and still center text
@@ -41,9 +38,9 @@ point <- function(df, x, y, group = NULL, flip = TRUE, alpha = 1, size = 1, x_ti
 
   # Add title, subtitle, caption, x_title, y_title
   g <- g + ggplot2::labs(
-    title = stringr::str_wrap(title, title_wrap),
-    subtitle = stringr::str_wrap(subtitle, subtitle_wrap),
-    caption = stringr::str_wrap(caption, caption_wrap),
+    title = title,
+    subtitle = subtitle,
+    caption = caption,
     x = x_title,
     y = y_title,
     color = group_title,

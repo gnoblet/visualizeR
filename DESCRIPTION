@@ -24,6 +24,7 @@ Imports:
     grDevices,
     glue,
     scales,
-    stringr
+    stringr,
+    ggtext
 Suggests: knitr, sf, tmap
 VignetteBuilder: knitr
