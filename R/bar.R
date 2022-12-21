@@ -4,69 +4,133 @@
 #' @param x A numeric column.
 #' @param y A character column or coercible as a character column.
 #' @param group Some grouping categorical column, e.g. administrative areas or population groups.
-#' @param palette Palette name from 'pal_reach()'.
-#' @param percent TRUE or FALSE. Should the x-labels be displayed as percentages? Default to TRUE.
-#' @param reverse Boolean indicating whether the palette should be reversed.
-#' @param family The font family for all plot's texts. Default to "Leelawadee".
-#' @param alpha Transparency.
-#' @param width Width.
+#' @param flip TRUE or FALSE. Default to TRUE or horizontal bar plot.
+#' @param percent TRUE or FALSE. Should the x-labels (and text labels if present) be displayed as percentages? Default to TRUE.
+#' @param position Should the chart be stacked? Default to "dodge". Can take "dodge" and "stack".
+#' @param alpha Fill transparency.
 #' @param x_title The x scale title. Default to NULL.
 #' @param y_title The y scale title. Default to NULL.
 #' @param group_title The group legend title. Default to NULL.
-#' @param position Should the chart be stacked? Default to "dodge". Can take "dodge" and "stack".
 #' @param title Plot title. Default to NULL.
 #' @param subtitle Plot subtitle. Default to NULL.
-#' @param caption Caption title string. Default to NULL.
-#' @param text_size The size of all text other than the title, subtitle and caption. Defaults to 10.
-#' @param title_size The size of the title text. Defaults to 14.
-#' @param legend_position Position of the legend; Default to "right". Can take "right", "left", "top", "bottom" or "none".
-#' @param legend_rev Reverse the color in the guide? Default to TRUE.
-#' @param ... Other arguments to be passed to "ggblanket::gg_col"
-#'
-#' @description `ggblanket` as internals for deciding whether the bar chart is horizontally readable.
+#' @param caption Plot caption. Default to NULL.
+#' @param add_text TRUE or FALSE. Add the value as text.
+#' @param add_text_suffix If percent is FALSE, should we add a suffix to the text label?
+#' @param theme Whatever theme. Default to theme_reach().
 #'
 #' @return A bar chart
 #'
 #' @export
-bar_reach <- function(df, x, y, group = NULL, percent = TRUE, palette = "main", reverse = FALSE, family = "Leelawadee", alpha = 1, width = 0.5, x_title = NULL, y_title = NULL, group_title = NULL, position = "dodge", title = NULL, subtitle = NULL, caption = NULL, text_size = 10, title_size = 14, legend_position = "right", legend_rev = TRUE, ...){
+bar <- function(df, x, y, group = NULL, flip = TRUE, percent = TRUE, position = "dodge", alpha = 1,  x_title = NULL, y_title = NULL, group_title = NULL, title = NULL, subtitle = NULL, caption = NULL, add_text = FALSE, add_text_suffix = "", theme = theme_reach()){
 
-  pal <- pal_reach(palette)
+  # To do :
+  # - automate bar width and text size, or at least give the flexibility and still center text
+  # - add facet possibility
 
-  if(is.null(pal)) rlang::warn(
-      c(paste0("There is no palette '", palette, "' for initiative 'reach'. Fallback to ggblanket's default color palette."),
-        "i" = paste0("Use `pal_reach(show_palettes = T)` to see the list of availabale palettes.")
+  # Prepare group, x and y names
+  # if (is.null(x_title)) x_title <- rlang::as_name(rlang::enquo(x))
+  # if (is.null(y_title)) y_title <- rlang::as_name(rlang::enquo(y))
+  # if (is.null(group_title)) group_title <- rlang::as_name(rlang::enquo(group))
+
+  # Mapping
+  g <- ggplot2::ggplot(
+      df,
+      mapping = ggplot2::aes(x = {{ x }}, y = {{ y }}, fill = {{ group }}, color = {{ group }}
         )
+      )
+
+  # Add title, subtitle, caption, x_title, y_title
+  g <- g + ggplot2::labs(
+    title = title,
+    subtitle = subtitle,
+    caption = caption,
+    x = x_title,
+    y = y_title,
+    color = group_title,
+    fill = group_title
   )
 
-  if (percent) x_labels <- scales::percent else x_labels <- NULL
+  width <- 0.5
+  dodge_width <- 0.5
 
-  pl <- df |>
-    ggblanket::gg_col(x = {{ x }},
-           y = {{ y }},
-           col = {{ group }},
-           x_title = x_title,
-           x_labels = x_labels,
-           y_title = y_title,
-           col_title = group_title,
-           alpha = alpha,
-           width = width,
-           position = position,
-           title = title,
-           subtitle = subtitle,
-           caption = caption,
-           col_legend_place = legend_position,
-           theme = theme_reach(
-             palette = palette,
-             reverse = reverse,
-             family = family,
-             text_size = text_size,
-             title_size = title_size,
-             plot_background_pal = "#FFFFFF",
-             panel_background_pal = "#FFFFFF",
-             legend_reverse = legend_rev
-          ),
-           ...
-           )
+  # Should the graph use position_fill?
+  if (position == "stack"){
+    g <- g + ggplot2::geom_col(
+      alpha    = alpha,
+      width    = width,
+      position = ggplot2::position_stack()
+    )
+  } else if (position == "dodge"){
+    g <- g + ggplot2::geom_col(
+      alpha    = alpha,
+      width    = width,
+      position = ggplot2::position_dodge2(
+        width = dodge_width,
+        preserve = "single")
+    )
+  } else{
+    g <- g + ggplot2::geom_col(
+      alpha = alpha,
+      width = width
+    )
+  }
+  #
+  # Labels to percent and expand scale
+  if (percent) {
+    g <- g + ggplot2::scale_y_continuous(
+      labels         = scales::label_percent(
+        accuracy     = 1,
+        decimal.mark = ",",
+        suffix       = " %"),
+      expand = c(0.01, 0.1)
+    )
+  } else {
+    g <- g + ggplot2::scale_y_continuous(expand = c(0.01, 0.1))
+  }
 
-  return(pl)
+  # Because a text legend should always be horizontal, especially for an horizontal bar graph
+  if (flip){
+      g <- g + ggplot2::coord_flip()
+    }
+
+  # Add text to bars
+  if (flip) hjust_flip <- 1.5 else hjust_flip <- 0.5
+  if (flip) vjust_flip <- 0.5 else vjust_flip <- 1.5
+
+  if (add_text & position != "dodge") {
+    rlang::abort("Adding text labels and positions different than dodges as not been implemented yet")
+  }
+
+  # Add text labels
+  if (add_text) {
+    if (percent) {
+      g <- g + ggplot2::geom_text(
+        ggplot2::aes(
+          label = scales::label_percent(
+            accuracy     = 1,
+            decimal.mark = ",",
+            suffix       = " %")({{ y }}),
+          group = {{ group }}),
+          hjust = hjust_flip,
+          vjust = vjust_flip,
+        color = "white",
+        fontface = "bold",
+        position = ggplot2::position_dodge(width = dodge_width))
+    } else {
+      g <- g + ggplot2::geom_text(
+        ggplot2::aes(
+          label = paste0(round({{ y }}), add_text_suffix),
+          group = {{ group }}),
+        hjust = hjust_flip,
+        vjust = vjust_flip,
+        color = "white",
+        fontface = "bold",
+        position = ggplot2::position_dodge(width = dodge_width))
+    }
+  }
+
+  # Add theme
+  g <- g + theme
+
+  return(g)
 }
