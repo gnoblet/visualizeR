@@ -89,19 +89,27 @@ df <- penguins |>
     mean_fl = mean(flipper_length_mm, na.rm = T)) |> 
   ungroup()
 
-# Simple bar chart by group
-bar_reach(df, mean_bl, island, species, percent = FALSE, x_title = "Mean of bill length")
+# Simple bar chart by group with some alpha transparency
+bar(df, island, mean_bl, species, percent = FALSE, alpha = 0.6, x_title = "Mean of bill length")
 ```
 
 <img src="man/figures/README-example-bar-chart-1.png" width="100%" />
 
 ``` r
 
-# Using another color palette
-bar_reach(df, mean_bl, island, species, percent = FALSE, palette = "artichoke_3", legend_rev = TRUE)
+# Using another color palette through `theme_reach()` and changing scale to percent
+bar(df, island,mean_bl, species, percent = TRUE, theme = theme_reach(palette = "artichoke_3"))
 ```
 
 <img src="man/figures/README-example-bar-chart-2.png" width="100%" />
+
+``` r
+
+# Not flipped, with text added, group_title, no y-axis and no bold for legend
+bar(df, island, mean_bl, species, group_title = "Species", flip = FALSE, add_text = TRUE, add_text_suffix = "%", percent = FALSE, theme = theme_reach(text_font_face = "plain", axis_y = FALSE))
+```
+
+<img src="man/figures/README-example-bar-chart-3.png" width="100%" />
 
 ### Example 2: Point chart, already REACH themed
 
@@ -111,7 +119,7 @@ with the `group` arg.
 ``` r
 
 # Simple point chart
-point_reach(penguins, bill_length_mm, flipper_length_mm)
+point(penguins, bill_length_mm, flipper_length_mm)
 ```
 
 <img src="man/figures/README-example-point-chart-1.png" width="100%" />
@@ -119,7 +127,7 @@ point_reach(penguins, bill_length_mm, flipper_length_mm)
 ``` r
 
 # Point chart with grouping colors, greater dot size, some transparency, reversed color palette
-point_reach(penguins, bill_length_mm, flipper_length_mm, island, alpha = 0.6, size = 3, reverse = TRUE)
+point(penguins, bill_length_mm, flipper_length_mm, island, alpha = 0.6, size = 3, theme = theme_reach(reverse = TRUE))
 ```
 
 <img src="man/figures/README-example-point-chart-2.png" width="100%" />
@@ -127,7 +135,7 @@ point_reach(penguins, bill_length_mm, flipper_length_mm, island, alpha = 0.6, si
 ``` r
 
 # Using another color palettes
-point_reach(penguins, bill_length_mm, flipper_length_mm, island, palette = "artichoke_3")
+point(penguins, bill_length_mm, flipper_length_mm, island, size = 1.5, x_title = "Bill", y_title = "Flipper", title = "Length (mm)", theme = theme_reach(palette = "artichoke_3", text_font_face = , grid_x = T))
 ```
 
 <img src="man/figures/README-example-point-chart-3.png" width="100%" />

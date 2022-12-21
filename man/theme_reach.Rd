@@ -8,14 +8,24 @@ theme_reach(
   palette = "main",
   discrete = TRUE,
   reverse = FALSE,
-  family = "Leelawadee",
+  font_family = "Leelawadee",
+  title_size = 12,
+  title_color = cols_reach("main_grey"),
+  title_font_face = "bold",
   text_size = 10,
-  title_size = 14,
-  plot_background_pal = "#FFFFFF",
-  panel_background_pal = "#FFFFFF",
+  text_color = cols_reach("main_grey"),
+  text_font_face = "bold",
+  panel_background_color = "#FFFFFF",
   legend_position = "right",
   legend_direction = "vertical",
   legend_reverse = TRUE,
+  axis_x = TRUE,
+  axis_y = TRUE,
+  grid_x = FALSE,
+  grid_y = FALSE,
+  grid_color = cols_reach("main_lt_grey"),
+  grid_x_size = 0.1,
+  grid_y_size = 0.1,
   ...
 )
 }
@@ -26,15 +36,21 @@ theme_reach(
 
 \item{reverse}{Boolean indicating whether the palette should be reversed.}
 
-\item{family}{The font family for all plot's texts. Default to "Leelawadee".}
+\item{font_family}{The font family for all plot's texts. Default to "Leelawadee".}
+
+\item{title_size}{The size of the title. Defaults to 12.}
+
+\item{title_color}{Title color.}
+
+\item{title_font_face}{Title font face. Default to "bold". Font face ("plain", "italic", "bold", "bold.italic").}
 
 \item{text_size}{The size of all text other than the title, subtitle and caption. Defaults to 10.}
 
-\item{title_size}{The size of the title text_family. Defaults to 14.}
+\item{text_color}{Text color.}
 
-\item{plot_background_pal}{The color for the plot background color. Default to white.}
+\item{text_font_face}{Text font face. Default to "bold". Font face ("plain", "italic", "bold", "bold.italic").}
 
-\item{panel_background_pal}{The color for the panel background color. Default to white.}
+\item{panel_background_color}{The color for the panel background color. Default to white.}
 
 \item{legend_position}{Position of the legend; Default to "right". Can take "right", "left", "top", "bottom" or "none".}
 
@@ -42,7 +58,21 @@ theme_reach(
 
 \item{legend_reverse}{Reverse the color in the guide? Default to TRUE.}
 
-\item{...}{Additional arguments passed to `ggblanket::gg_theme()`.}
+\item{axis_x}{Boolean. Do you need x-axis?}
+
+\item{axis_y}{Boolean. Do you need y-axis?}
+
+\item{grid_x}{Boolean. Do you need major grid lines for x-axis?}
+
+\item{grid_y}{Boolean. Do you need major grid lines for y-axis?}
+
+\item{grid_color}{Grid lines color.}
+
+\item{grid_x_size}{X line size.}
+
+\item{grid_y_size}{Y line size.}
+
+\item{...}{Additional arguments passed to `ggplot2::gg_theme()`.}
 }
 \value{
 The base REACH theme
