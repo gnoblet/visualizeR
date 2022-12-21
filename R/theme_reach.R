@@ -13,6 +13,9 @@
 #' @param panel_background_color The color for the panel background color. Default to white.
 #' @param legend_position Position of the legend; Default to "right". Can take "right", "left", "top", "bottom" or "none".
 #' @param legend_direction Direction of the legend. Default to "vertical". Can take "vertical" or "horizontal".
+#' @param legend_title_size Legend title size.
+#' @param legend_title_color Legend title color.
+#' @param legend_title_font_face Legend title font face. Default to "plain". Font face ("plain", "italic", "bold", "bold.italic").
 #' @param legend_reverse Reverse the color in the guide? Default to TRUE.
 #' @param title_size The size of the legend title. Defaults to 11.
 #' @param title_color Legend title color.
@@ -24,8 +27,8 @@
 #' @param axis_text_color Axis text color.
 #' @param axis_text_font_face Axis text font face. Default to "plain". Font face ("plain", "italic", "bold", "bold.italic").
 #' @param axis_title_size Axis title size.
-#' @param axis_text_color Axis title color.
-#' @param axis_text_font_face Axis title font face. Default to "plain". Font face ("plain", "italic", "bold", "bold.italic").
+#' @param axis_title_color Axis title color.
+#' @param axis_title_font_face Axis title font face. Default to "plain". Font face ("plain", "italic", "bold", "bold.italic").
 #' @param grid_x Boolean. Do you need major grid lines for x-axis?
 #' @param grid_y Boolean. Do you need major grid lines for y-axis?
 #' @param grid_x_size X line size.
