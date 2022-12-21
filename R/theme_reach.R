@@ -46,6 +46,8 @@ theme_reach <- function(
     legend_reverse = TRUE,
     axis_x = TRUE,
     axis_y = TRUE,
+    axis_text_size = 10,
+    axis_title_size = 11,
     grid_x = FALSE,
     grid_y = FALSE,
     grid_color = cols_reach("main_lt_grey"),
@@ -89,7 +91,10 @@ theme_reach <- function(
     # Remove background for legend key
     legend.key = ggplot2::element_blank(),
     plot.title.position = "plot",
-    plot.caption.position =  "plot"
+    plot.caption.position =  "plot",
+    # Text sizes
+    axis.text = ggplot2::element_text(size = axis_text_size),
+    axis.title = ggplot2::element_text(size = axis_title_size)
   )
 
   # Axis lines ?
