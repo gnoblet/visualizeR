@@ -1,3 +1,11 @@
+# visualizeR 0.5.9000
+
+* Add wrapping of title, subtitle and caption thanks to `ggtext`
+* Add wrapping of labels for `bar()` x-discrete scale.
+* Add further parameters to `theme_reach()`
+
+---
+
 # visualizeR 0.4.9000
 
 * Breaking changes: remove dependency to `ggblanket`.

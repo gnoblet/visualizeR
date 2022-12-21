@@ -2,7 +2,7 @@
 % Please edit documentation in R/point.R
 \name{point}
 \alias{point}
-\title{Simple bar chart}
+\title{Simple point chart}
 \usage{
 point(
   df,
@@ -54,5 +54,5 @@ point(
 A bar chart
 }
 \description{
-Simple bar chart
+Simple point chart
 }
