@@ -21,7 +21,7 @@
 #' @return A bar chart
 #'
 #' @export
-bar <- function(df, x, y, group = NULL, flip = TRUE, percent = TRUE, position = "dodge", alpha = 1,  x_title = NULL, y_title = NULL, group_title = NULL, title = NULL, subtitle = NULL, caption = NULL, add_text = FALSE, add_text_suffix = "", theme = theme_reach()){
+bar <- function(df, x, y, group = NULL, flip = TRUE, percent = TRUE, position = "dodge", alpha = 1,  x_title = NULL, y_title = NULL, group_title = NULL, title = NULL, subtitle = NULL, caption = NULL, add_text = FALSE, add_text_suffix = "", title_wrap = 60, subtitle_wrap = 60, caption_wrap = 120, theme = theme_reach()){
 
   # To do :
   # - automate bar width and text size, or at least give the flexibility and still center text
@@ -41,9 +41,9 @@ bar <- function(df, x, y, group = NULL, flip = TRUE, percent = TRUE, position = 
 
   # Add title, subtitle, caption, x_title, y_title
   g <- g + ggplot2::labs(
-    title = title,
-    subtitle = subtitle,
-    caption = caption,
+    title = stringr::str_wrap(title, title_wrap),
+    subtitle = stringr::str_wrap(subtitle, subtitle_wrap),
+    caption = stringr::str_wrap(caption, caption_wrap),
     x = x_title,
     y = y_title,
     color = group_title,
