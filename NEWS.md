@@ -1,8 +1,18 @@
+# visualizeR 0.4.9000
+
+* Breaking changes: remove dependency to `ggblanket`.
+* Full rewrite of `theme_reach()`.
+* `bar_reach` is now `bar()` and theming is passed through argument `theme` for which default is `theme_reach()`.
+* `point_reach` is now `point()` and theming is passed through argument `theme` for which default is `theme_reach()`.
+
+---
+
 # visualizeR 0.3.9000
 
 * Breaking changes: update to `ggblanket` v1.6.1.
 * Add plotting functions for indicator maps.
 
+---
 
 # visualizeR 0.2.9000
 
