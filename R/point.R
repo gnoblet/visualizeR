@@ -1,4 +1,4 @@
-#' @title Simple bar chart
+#' @title Simple point chart
 #'
 #' @param df A data frame.
 #' @param x A numeric column.

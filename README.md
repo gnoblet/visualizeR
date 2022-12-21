@@ -135,7 +135,7 @@ point(penguins, bill_length_mm, flipper_length_mm, island, alpha = 0.6, size = 3
 ``` r
 
 # Using another color palettes
-point(penguins, bill_length_mm, flipper_length_mm, island, size = 1.5, x_title = "Bill", y_title = "Flipper", title = "Length (mm)", theme = theme_reach(palette = "artichoke_3", text_font_face = , grid_x = T))
+point(penguins, bill_length_mm, flipper_length_mm, island, size = 1.5, x_title = "Bill", y_title = "Flipper", title = "Length (mm)", theme = theme_reach(palette = "artichoke_3", text_font_face = , grid_x = T,  title_position_to_plot = FALSE))
 ```
 
 <img src="man/figures/README-example-point-chart-3.png" width="100%" />

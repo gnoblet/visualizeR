@@ -12,20 +12,31 @@ theme_reach(
   title_size = 12,
   title_color = cols_reach("main_grey"),
   title_font_face = "bold",
+  title_position_to_plot = TRUE,
   text_size = 10,
   text_color = cols_reach("main_grey"),
-  text_font_face = "bold",
+  text_font_face = "plain",
   panel_background_color = "#FFFFFF",
   legend_position = "right",
   legend_direction = "vertical",
   legend_reverse = TRUE,
+  legend_title_size = 11,
+  legend_title_color = cols_reach("main_grey"),
+  legend_title_font_face = "plain",
   axis_x = TRUE,
   axis_y = TRUE,
+  axis_text_size = 10,
+  axis_text_color = cols_reach("main_grey"),
+  axis_text_font_face = "plain",
+  axis_title_size = 11,
+  axis_title_color = cols_reach("main_grey"),
+  axis_title_font_face = "bold",
   grid_x = FALSE,
   grid_y = FALSE,
   grid_color = cols_reach("main_lt_grey"),
   grid_x_size = 0.1,
   grid_y_size = 0.1,
+  caption_position_to_plot = TRUE,
   ...
 )
 }
@@ -38,11 +49,13 @@ theme_reach(
 
 \item{font_family}{The font family for all plot's texts. Default to "Leelawadee".}
 
-\item{title_size}{The size of the title. Defaults to 12.}
+\item{title_size}{The size of the legend title. Defaults to 11.}
 
-\item{title_color}{Title color.}
+\item{title_color}{Legend title color.}
 
-\item{title_font_face}{Title font face. Default to "bold". Font face ("plain", "italic", "bold", "bold.italic").}
+\item{title_font_face}{Legend title font face. Default to "plain". Font face ("plain", "italic", "bold", "bold.italic").}
+
+\item{title_position_to_plot}{TRUE or FALSE. Positioning to plot or to panel?}
 
 \item{text_size}{The size of all text other than the title, subtitle and caption. Defaults to 10.}
 
@@ -58,9 +71,27 @@ theme_reach(
 
 \item{legend_reverse}{Reverse the color in the guide? Default to TRUE.}
 
+\item{legend_title_size}{Legend title size.}
+
+\item{legend_title_color}{Legend title color.}
+
+\item{legend_title_font_face}{Legend title font face. Default to "plain". Font face ("plain", "italic", "bold", "bold.italic").}
+
 \item{axis_x}{Boolean. Do you need x-axis?}
 
 \item{axis_y}{Boolean. Do you need y-axis?}
+
+\item{axis_text_size}{Axis text size.}
+
+\item{axis_text_color}{Axis text color.}
+
+\item{axis_text_font_face}{Axis text font face. Default to "plain". Font face ("plain", "italic", "bold", "bold.italic").}
+
+\item{axis_title_size}{Axis title size.}
+
+\item{axis_title_color}{Axis title color.}
+
+\item{axis_title_font_face}{Axis title font face. Default to "plain". Font face ("plain", "italic", "bold", "bold.italic").}
 
 \item{grid_x}{Boolean. Do you need major grid lines for x-axis?}
 
@@ -71,6 +102,8 @@ theme_reach(
 \item{grid_x_size}{X line size.}
 
 \item{grid_y_size}{Y line size.}
+
+\item{caption_position_to_plot}{TRUE or FALSE. Positioning to plot or to panel?}
 
 \item{...}{Additional arguments passed to `ggplot2::gg_theme()`.}
 }

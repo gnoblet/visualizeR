@@ -11,6 +11,7 @@ bar(
   group = NULL,
   flip = TRUE,
   percent = TRUE,
+  wrap = NULL,
   position = "dodge",
   alpha = 1,
   x_title = NULL,
@@ -36,6 +37,8 @@ bar(
 \item{flip}{TRUE or FALSE. Default to TRUE or horizontal bar plot.}
 
 \item{percent}{TRUE or FALSE. Should the x-labels (and text labels if present) be displayed as percentages? Default to TRUE.}
+
+\item{wrap}{Should x-labels be wrapped? Number of characters.}
 
 \item{position}{Should the chart be stacked? Default to "dodge". Can take "dodge" and "stack".}
 
