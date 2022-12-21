@@ -87,7 +87,9 @@ theme_reach <- function(
     panel.grid.minor.x = ggplot2::element_blank(),
     panel.grid.minor.y = ggplot2::element_blank(),
     # Remove background for legend key
-    legend.key = ggplot2::element_blank()
+    legend.key = ggplot2::element_blank(),
+    plot.title.position = "plot",
+    plot.caption.position =  "plot"
   )
 
   # Axis lines ?
