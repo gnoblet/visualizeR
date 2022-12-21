@@ -6,6 +6,7 @@
 #' @param group Some grouping categorical column, e.g. administrative areas or population groups.
 #' @param flip TRUE or FALSE. Default to TRUE or horizontal bar plot.
 #' @param percent TRUE or FALSE. Should the x-labels (and text labels if present) be displayed as percentages? Default to TRUE.
+#' @param wrap Should x-labels be wrapped? Number of characters.
 #' @param position Should the chart be stacked? Default to "dodge". Can take "dodge" and "stack".
 #' @param alpha Fill transparency.
 #' @param x_title The x scale title. Default to NULL.
@@ -21,7 +22,7 @@
 #' @return A bar chart
 #'
 #' @export
-bar <- function(df, x, y, group = NULL, flip = TRUE, percent = TRUE, position = "dodge", alpha = 1,  x_title = NULL, y_title = NULL, group_title = NULL, title = NULL, subtitle = NULL, caption = NULL, add_text = FALSE, add_text_suffix = "", theme = theme_reach()){
+bar <- function(df, x, y, group = NULL, flip = TRUE, percent = TRUE, wrap = NULL, position = "dodge", alpha = 1,  x_title = NULL, y_title = NULL, group_title = NULL, title = NULL, subtitle = NULL, caption = NULL, add_text = FALSE, add_text_suffix = "", theme = theme_reach()){
 
   # To do :
   # - automate bar width and text size, or at least give the flexibility and still center text
@@ -86,6 +87,10 @@ bar <- function(df, x, y, group = NULL, flip = TRUE, percent = TRUE, position = 
     )
   } else {
     g <- g + ggplot2::scale_y_continuous(expand = c(0.01, 0.1))
+  }
+
+  if (!is.null(wrap)) {
+    g <- g + ggplot2::scale_x_discrete(labels = scales::label_wrap(wrap))
   }
 
   # Because a text legend should always be horizontal, especially for an horizontal bar graph
