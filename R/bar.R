@@ -16,6 +16,9 @@
 #' @param caption Plot caption. Default to NULL.
 #' @param add_text TRUE or FALSE. Add the value as text.
 #' @param add_text_suffix If percent is FALSE, should we add a suffix to the text label?
+#' @param title_wrap Wrap title, number of characters.
+#' @param subtitle_wrap Wrap subtitle, number of characters.
+#' @param caption_wrap Wrap caption, number of characters.
 #' @param theme Whatever theme. Default to theme_reach().
 #'
 #' @return A bar chart

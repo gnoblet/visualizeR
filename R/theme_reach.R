@@ -16,6 +16,8 @@
 #' @param legend_reverse Reverse the color in the guide? Default to TRUE.
 #' @param axis_x Boolean. Do you need x-axis?
 #' @param axis_y Boolean. Do you need y-axis?
+#' @param axis_text_size Axis text size.
+#' @param axis_title_size Axis title size.
 #' @param grid_x Boolean. Do you need major grid lines for x-axis?
 #' @param grid_y Boolean. Do you need major grid lines for y-axis?
 #' @param grid_x_size X line size.
