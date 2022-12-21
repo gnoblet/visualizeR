@@ -23,6 +23,7 @@ Imports:
     rlang,
     grDevices,
     glue,
-    scales
+    scales,
+    stringr
 Suggests: knitr, sf, tmap
 VignetteBuilder: knitr
