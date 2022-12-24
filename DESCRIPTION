@@ -1,7 +1,7 @@
 Package: visualizeR
 Type: Package
 Title: What a color! What a viz!
-Version: 0.5.9000
+Version: 0.6.9000
 Authors@R: c(
         person(
             'Noblet', 'Guillaume',
@@ -24,6 +24,9 @@ Imports:
     grDevices,
     glue,
     scales,
-    ggtext
+    ggtext,
+    ggrepel,
+    tidyr,
+    dplyr
 Suggests: knitr, sf, tmap
 VignetteBuilder: knitr

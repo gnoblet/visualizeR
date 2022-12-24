@@ -112,6 +112,33 @@ point(penguins, bill_length_mm, flipper_length_mm, island, alpha = 0.6, size = 3
 point(penguins, bill_length_mm, flipper_length_mm, island, size = 1.5, x_title = "Bill", y_title = "Flipper", title = "Length (mm)", theme = theme_reach(palette = "artichoke_3", text_font_face = , grid_x = T,  title_position_to_plot = FALSE))
 ```
 
+
+### Example 3! Dumbbell plot, REACH themed
+
+Remember to ensure that your data are in the long format and you only have two groups on the x-axis; for instance, IDP and returnee and no NA values.
+
+```{r example-dumbbell-plot, eval = TRUE}
+# Prepare long data
+df <- tibble::tibble(
+  admin1 = rep(c("A", "B", "C", "D", "E", "F", "G", "H"), 2),
+  setting = c(rep(c("Rural", "Urban"), 4), rep(c("Urban", "Rural"), 4)),
+  stat = rnorm(16, mean = 50, sd = 18)
+) |>
+  dplyr::mutate(stat = round(stat, 0))
+
+# Example
+dumbbell(df,
+         stat,
+         setting,
+         admin1,
+         title = "% of HHs that reported open defecation as sanitation facility",
+         group_y_title = "Admin 1",
+         theme = theme_reach(legend_position =  "bottom",
+                             legend_direction = "horizontal",
+                             palette = "primary",
+                             title_position_to_plot = FALSE))
+```
+
 ## Maps
 
 ```{r example-map}
