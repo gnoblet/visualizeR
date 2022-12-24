@@ -23,14 +23,14 @@ devtools::install_github("gnoblet/visualizeR", build_vignettes = TRUE)
 
 Roadmap is as follows:
 
-- [x] Add IMPACT’s colors
-- [x] Add all color palettes from the internal documentation
-- [ ] There remains to be added more-than-7-color palettes and black
-  color palettes
-- [ ] Add new types of visualization (e.g. dumbbell plot)
-- [ ] Use examples
-- [ ] Add some ease-map functions
-- [ ] Add some interactive functions (maps and graphs)
+-   [x] Add IMPACT’s colors
+-   [x] Add all color palettes from the internal documentation
+-   [ ] There remains to be added more-than-7-color palettes and black
+    color palettes
+-   [ ] Add new types of visualization (e.g. dumbbell plot)
+-   [ ] Use examples
+-   [ ] Add some ease-map functions
+-   [ ] Add some interactive functions (maps and graphs)
 
 ## Request
 
@@ -96,7 +96,6 @@ bar(df, island, mean_bl, species, percent = FALSE, alpha = 0.6, x_title = "Mean 
 <img src="man/figures/README-example-bar-chart-1.png" width="100%" />
 
 ``` r
-
 # Using another color palette through `theme_reach()` and changing scale to percent
 bar(df, island,mean_bl, species, percent = TRUE, theme = theme_reach(palette = "artichoke_3"))
 ```
@@ -104,7 +103,6 @@ bar(df, island,mean_bl, species, percent = TRUE, theme = theme_reach(palette = "
 <img src="man/figures/README-example-bar-chart-2.png" width="100%" />
 
 ``` r
-
 # Not flipped, with text added, group_title, no y-axis and no bold for legend
 bar(df, island, mean_bl, species, group_title = "Species", flip = FALSE, add_text = TRUE, add_text_suffix = "%", percent = FALSE, theme = theme_reach(text_font_face = "plain", axis_y = FALSE))
 ```
@@ -117,7 +115,6 @@ At this stage, `point_reach()` only supports categorical grouping colors
 with the `group` arg.
 
 ``` r
-
 # Simple point chart
 point(penguins, bill_length_mm, flipper_length_mm)
 ```
@@ -125,7 +122,6 @@ point(penguins, bill_length_mm, flipper_length_mm)
 <img src="man/figures/README-example-point-chart-1.png" width="100%" />
 
 ``` r
-
 # Point chart with grouping colors, greater dot size, some transparency, reversed color palette
 point(penguins, bill_length_mm, flipper_length_mm, island, alpha = 0.6, size = 3, theme = theme_reach(reverse = TRUE))
 ```
@@ -133,17 +129,45 @@ point(penguins, bill_length_mm, flipper_length_mm, island, alpha = 0.6, size = 3
 <img src="man/figures/README-example-point-chart-2.png" width="100%" />
 
 ``` r
-
 # Using another color palettes
 point(penguins, bill_length_mm, flipper_length_mm, island, size = 1.5, x_title = "Bill", y_title = "Flipper", title = "Length (mm)", theme = theme_reach(palette = "artichoke_3", text_font_face = , grid_x = T,  title_position_to_plot = FALSE))
 ```
 
 <img src="man/figures/README-example-point-chart-3.png" width="100%" />
 
+### Example 3! Dumbbell plot, REACH themed
+
+Remember to ensure that your data are in the long format and you only
+have two groups on the x-axis; for instance, IDP and returnee and no NA
+values.
+
+``` r
+# Prepare long data
+df <- tibble::tibble(
+  admin1 = rep(c("A", "B", "C", "D", "E", "F", "G", "H"), 2),
+  setting = c(rep(c("Rural", "Urban"), 4), rep(c("Urban", "Rural"), 4)),
+  stat = rnorm(16, mean = 50, sd = 18)
+) |>
+  dplyr::mutate(stat = round(stat, 0))
+
+# Example
+dumbbell(df,
+         stat,
+         setting,
+         admin1,
+         title = "% of HHs that reported open defecation as sanitation facility",
+         group_y_title = "Admin 1",
+         theme = theme_reach(legend_position =  "bottom",
+                             legend_direction = "horizontal",
+                             palette = "primary",
+                             title_position_to_plot = FALSE))
+```
+
+<img src="man/figures/README-example-dumbbell-plot-1.png" width="100%" />
+
 ## Maps
 
 ``` r
-
 # Add indicator layer 
 # - based on "pretty" classes and title "Proportion (%)" 
 # - buffer to add a 10% around the bounding box

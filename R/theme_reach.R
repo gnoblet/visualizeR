@@ -16,6 +16,9 @@
 #' @param legend_title_size Legend title size.
 #' @param legend_title_color Legend title color.
 #' @param legend_title_font_face Legend title font face. Default to "plain". Font face ("plain", "italic", "bold", "bold.italic").
+#' @param legend_text_size Legend text size.
+#' @param legend_text_color Legend text color.
+#' @param legend_text_font_face Legend text font face. Default to "plain". Font face ("plain", "italic", "bold", "bold.italic").
 #' @param legend_reverse Reverse the color in the guide? Default to TRUE.
 #' @param title_size The size of the legend title. Defaults to 11.
 #' @param title_color Legend title color.
@@ -62,6 +65,9 @@ theme_reach <- function(
     legend_title_size = 11,
     legend_title_color = cols_reach("main_grey"),
     legend_title_font_face = "plain",
+    legend_text_size = 10,
+    legend_text_color = cols_reach("main_grey"),
+    legend_text_font_face = "plain",
     axis_x = TRUE,
     axis_y = TRUE,
     axis_text_size = 10,
@@ -133,7 +139,13 @@ theme_reach <- function(
       size = legend_title_size,
       face = legend_title_font_face,
       family = font_family,
-      color = legend_title_color)
+      color = legend_title_color),
+    legend.text = ggplot2::element_text(
+      size = legend_text_size,
+      face = legend_text_font_face,
+      family = font_family,
+      color = legend_text_color
+    )
   )
 
   # Position of title

@@ -23,6 +23,9 @@ theme_reach(
   legend_title_size = 11,
   legend_title_color = cols_reach("main_grey"),
   legend_title_font_face = "plain",
+  legend_text_size = 10,
+  legend_text_color = cols_reach("main_grey"),
+  legend_text_font_face = "plain",
   axis_x = TRUE,
   axis_y = TRUE,
   axis_text_size = 10,
@@ -76,6 +79,12 @@ theme_reach(
 \item{legend_title_color}{Legend title color.}
 
 \item{legend_title_font_face}{Legend title font face. Default to "plain". Font face ("plain", "italic", "bold", "bold.italic").}
+
+\item{legend_text_size}{Legend text size.}
+
+\item{legend_text_color}{Legend text color.}
+
+\item{legend_text_font_face}{Legend text font face. Default to "plain". Font face ("plain", "italic", "bold", "bold.italic").}
 
 \item{axis_x}{Boolean. Do you need x-axis?}
 
