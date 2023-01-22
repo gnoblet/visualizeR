@@ -50,7 +50,7 @@ theme_reach <- function(
     palette = "main",
     discrete = TRUE,
     reverse = FALSE,
-    font_family = "Leelawadee",
+    font_family = "Segoe UI",
     title_size = 12,
     title_color = cols_reach("main_grey"),
     title_font_face = "bold",
@@ -76,6 +76,9 @@ theme_reach <- function(
     axis_title_size = 11,
     axis_title_color = cols_reach("main_grey"),
     axis_title_font_face = "bold",
+    axis_text_x_angle = 0,
+    axis_text_x_vjust = 0,
+    axis_text_x_hjust = 0,
     grid_x = FALSE,
     grid_y = FALSE,
     grid_color = cols_reach("main_lt_grey"),
@@ -145,6 +148,11 @@ theme_reach <- function(
       face = legend_text_font_face,
       family = font_family,
       color = legend_text_color
+    ),
+    axis.text.x = ggplot2::element_text(
+      angle = axis_text_x_angle,
+      vjust = axis_text_x_vjust,
+      hjust = axis_text_x_hjust
     )
   )
 
