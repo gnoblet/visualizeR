@@ -113,7 +113,7 @@ point(penguins, bill_length_mm, flipper_length_mm, island, size = 1.5, x_title =
 ```
 
 
-### Example 3! Dumbbell plot, REACH themed
+### Example 3: Dumbbell plot, REACH themed
 
 Remember to ensure that your data are in the long format and you only have two groups on the x-axis; for instance, IDP and returnee and no NA values.
 
@@ -126,18 +126,80 @@ df <- tibble::tibble(
 ) |>
   dplyr::mutate(stat = round(stat, 0))
 
-# Example
+# Example, adding a parameter to `theme_reach()` passed on `ggplot2::theme()` to align legend title
 dumbbell(df,
          stat,
          setting,
          admin1,
          title = "% of HHs that reported open defecation as sanitation facility",
          group_y_title = "Admin 1",
+         group_x_title = "Setting",
          theme = theme_reach(legend_position =  "bottom",
                              legend_direction = "horizontal",
+                             legend_title_font_face = "bold",
                              palette = "primary",
-                             title_position_to_plot = FALSE))
+                             title_position_to_plot = FALSE,
+                             legend.title.align = 0.5)) +
+  # Change legend title position (could be included as part of the function)
+  ggplot2::guides(  
+    color = ggplot2::guide_legend(title.position = "left"),
+    fill =  ggplot2::guide_legend(title.position = "left")
+  )
 ```
+
+### Example 4: donut chart, REACH themed (to used moderately)
+```{r example-donut-plot, warning = FALSE}
+
+# Some summarized data: % of HHs by displacement status
+df <- tibble::tibble(
+  status = c("Displaced", "Non displaced", "Returnee", "Don't know/Prefer not to say"),
+  percentage = c(18, 65, 12, 3)
+)
+
+# Donut
+donut(df, 
+      status, 
+      percentage, 
+      hole_size  = 3, 
+      add_text_suffix = "%", 
+      add_text_color = cols_reach("dk_grey"), 
+      add_text_treshold_display = 5,
+      x_title = "Displacement status", 
+      title = "% of HHs by displacement status", 
+      theme = theme_reach(legend_reverse = TRUE))
+```
+
+### Example 5: alluvial chart, REACH themed
+```{r example-alluvial-plot, warning = FALSE}
+
+# Some summarized data: % of HHs by self-reported status of displacement in 2021 and in 2022
+df <- tibble::tibble(
+  status_from = c(rep("Displaced", 4),
+                  rep("Non displaced", 4),
+                  rep("Returnee", 4),
+                  rep("Dnk/Pnts", 4)),
+  status_to = c("Displaced", "Non displaced", "Returnee", "Dnk/Pnts", "Displaced", "Non displaced", "Returnee", "Dnk/Pnts", "Displaced", "Non displaced", "Returnee", "Dnk/Pnts", "Displaced", "Non displaced", "Returnee", "Dnk/Pnts"),
+  percentage = c(20, 8, 18, 1, 12, 21, 0, 2, 0, 3, 12, 1, 0, 0, 1, 1)
+)
+
+# Alluvial, here the group is the status for 2021
+
+alluvial(df, 
+         status_from, 
+         status_to,
+         percentage, 
+         status_from,
+         from_levels = c("Displaced", "Non displaced", "Returnee", "Dnk/Pnts"), 
+         alpha = 0.8, 
+         group_title = "Status for 2021",
+         title = "% of HHs by self-reported status from 2021 to 2022", 
+         theme = theme_reach(
+           axis_y = FALSE, 
+           legend_position = "none"))
+
+```
+
+
 
 ## Maps
 
