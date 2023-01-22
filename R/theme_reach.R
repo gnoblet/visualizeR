@@ -77,8 +77,8 @@ theme_reach <- function(
     axis_title_color = cols_reach("main_grey"),
     axis_title_font_face = "bold",
     axis_text_x_angle = 0,
-    axis_text_x_vjust = 0,
-    axis_text_x_hjust = 0,
+    axis_text_x_vjust = 0.5,
+    axis_text_x_hjust = 0.5,
     grid_x = FALSE,
     grid_y = FALSE,
     grid_color = cols_reach("main_lt_grey"),
@@ -199,7 +199,7 @@ theme_reach <- function(
     ggplot2::theme(
       panel.grid.major.x = ggplot2::element_line(
         color = grid_color,
-        linewidth = grid_y_size)
+        linewidth = grid_x_size)
     )
 
   # Y - major grid lines
