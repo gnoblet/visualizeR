@@ -32,11 +32,16 @@
 #' @param axis_title_size Axis title size.
 #' @param axis_title_color Axis title color.
 #' @param axis_title_font_face Axis title font face. Default to "plain". Font face ("plain", "italic", "bold", "bold.italic").
-#' @param grid_x Boolean. Do you need major grid lines for x-axis?
-#' @param grid_y Boolean. Do you need major grid lines for y-axis?
-#' @param grid_x_size X line size.
-#' @param grid_y_size Y line size.
-#' @param grid_color Grid lines color.
+#' @param grid_major_x Boolean. Do you need major grid lines for x-axis?
+#' @param grid_major_y Boolean. Do you need major grid lines for y-axis?
+#' @param grid_major_x_size Major X line size.
+#' @param grid_major_y_size Major Y line size.
+#' @param grid_major_color Major grid lines color.
+#' @param grid_minor_x Boolean. Do you need minor grid lines for x-axis?
+#' @param grid_minor_y Boolean. Do you need minor grid lines for y-axis?
+#' @param grid_minor_x_size Minor X line size.
+#' @param grid_minor_y_size Minor Y line size.
+#' @param grid_minor_color Minor grid lines color.
 #' @param caption_position_to_plot TRUE or FALSE. Positioning to plot or to panel?
 #' @param ...	Additional arguments passed to `ggplot2::gg_theme()`.
 #'
@@ -79,11 +84,16 @@ theme_reach <- function(
     axis_text_x_angle = 0,
     axis_text_x_vjust = 0.5,
     axis_text_x_hjust = 0.5,
-    grid_x = FALSE,
-    grid_y = FALSE,
-    grid_color = cols_reach("main_lt_grey"),
-    grid_x_size = 0.1,
-    grid_y_size = 0.1,
+    grid_major_x = FALSE,
+    grid_major_y = FALSE,
+    grid_major_color = cols_reach("main_lt_grey"),
+    grid_major_x_size = 0.1,
+    grid_major_y_size = 0.1,
+    grid_minor_x = FALSE,
+    grid_minor_y = FALSE,
+    grid_minor_color = cols_reach("main_lt_grey"),
+    grid_minor_x_size = 0.05,
+    grid_minor_y_size = 0.05,
     caption_position_to_plot = TRUE,
     ...
     ) {
@@ -117,9 +127,6 @@ theme_reach <- function(
     panel.background = ggplot2::element_rect(
       fill = panel_background_color
     ),
-    # Remove minor grid lines
-    panel.grid.minor.x = ggplot2::element_blank(),
-    panel.grid.minor.y = ggplot2::element_blank(),
     # Remove background for legend key
     legend.key = ggplot2::element_blank(),
     # Text sizes
@@ -192,26 +199,48 @@ theme_reach <- function(
   }
 
   # X - major grid lines
-  if (!grid_x) theme_reach <- theme_reach +
+  if (!grid_major_x) theme_reach <- theme_reach +
     ggplot2::theme(
       panel.grid.major.x = ggplot2::element_blank()
   ) else theme_reach <- theme_reach +
     ggplot2::theme(
       panel.grid.major.x = ggplot2::element_line(
-        color = grid_color,
-        linewidth = grid_x_size)
+        color = grid_major_color,
+        linewidth = grid_major_x_size)
     )
 
   # Y - major grid lines
-  if (!grid_y) theme_reach <- theme_reach +
+  if (!grid_major_y) theme_reach <- theme_reach +
     ggplot2::theme(
       panel.grid.major.y = ggplot2::element_blank()
   ) else theme_reach <- theme_reach +
     ggplot2::theme(
       panel.grid.major.y = ggplot2::element_line(
-        color = grid_color,
-        linewidth = grid_y_size)
+        color = grid_major_color,
+        linewidth = grid_major_y_size)
     )
+
+  # X - minor grid lines
+  if (!grid_minor_x) theme_reach <- theme_reach +
+      ggplot2::theme(
+        panel.grid.minor.x = ggplot2::element_blank()
+      ) else theme_reach <- theme_reach +
+          ggplot2::theme(
+            panel.grid.minor.x = ggplot2::element_line(
+              color = grid_minor_color,
+              linewidth = grid_minor_x_size)
+          )
+
+  # Y - minor grid lines
+  if (!grid_minor_y) theme_reach <- theme_reach +
+      ggplot2::theme(
+        panel.grid.minor.y = ggplot2::element_blank()
+      ) else theme_reach <- theme_reach +
+          ggplot2::theme(
+            panel.grid.minor.y = ggplot2::element_line(
+              color = grid_minor_color,
+              linewidth = grid_minor_y_size)
+              )
 
   # Other parameters
   theme_reach <- theme_reach + ggplot2::theme(...)
