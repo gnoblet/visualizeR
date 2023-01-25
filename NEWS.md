@@ -8,6 +8,13 @@
 
 ---
 
+# visualizeR 0.6.9000
+
+* Add `dumbbell()`.
+* Add further parameters to `theme_reach()`.
+
+---
+
 # visualizeR 0.5.9000
 
 * Add wrapping of title, subtitle and caption thanks to `ggtext`

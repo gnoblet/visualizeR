@@ -29,6 +29,9 @@
 #' @param axis_text_size Axis text size.
 #' @param axis_text_color Axis text color.
 #' @param axis_text_font_face Axis text font face. Default to "plain". Font face ("plain", "italic", "bold", "bold.italic").
+#' @param axis_text_x_angle Angle for the x-axis text.
+#' @param axis_text_x_vjust Vertical adjustment for the x-axis text.
+#' @param axis_text_x_hjust Vertical adjustment for the x-axis text.
 #' @param axis_title_size Axis title size.
 #' @param axis_title_color Axis title color.
 #' @param axis_title_font_face Axis title font face. Default to "plain". Font face ("plain", "italic", "bold", "bold.italic").

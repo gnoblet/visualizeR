@@ -110,6 +110,12 @@ theme_reach(
 
 \item{axis_title_font_face}{Axis title font face. Default to "plain". Font face ("plain", "italic", "bold", "bold.italic").}
 
+\item{axis_text_x_angle}{Angle for the x-axis text.}
+
+\item{axis_text_x_vjust}{Vertical adjustment for the x-axis text.}
+
+\item{axis_text_x_hjust}{Vertical adjustment for the x-axis text.}
+
 \item{grid_major_x}{Boolean. Do you need major grid lines for x-axis?}
 
 \item{grid_major_y}{Boolean. Do you need major grid lines for y-axis?}
