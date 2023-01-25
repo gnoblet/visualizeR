@@ -8,7 +8,7 @@ theme_reach(
   palette = "main",
   discrete = TRUE,
   reverse = FALSE,
-  font_family = "Leelawadee",
+  font_family = "Segoe UI",
   title_size = 12,
   title_color = cols_reach("main_grey"),
   title_font_face = "bold",
@@ -34,11 +34,19 @@ theme_reach(
   axis_title_size = 11,
   axis_title_color = cols_reach("main_grey"),
   axis_title_font_face = "bold",
-  grid_x = FALSE,
-  grid_y = FALSE,
-  grid_color = cols_reach("main_lt_grey"),
-  grid_x_size = 0.1,
-  grid_y_size = 0.1,
+  axis_text_x_angle = 0,
+  axis_text_x_vjust = 0.5,
+  axis_text_x_hjust = 0.5,
+  grid_major_x = FALSE,
+  grid_major_y = FALSE,
+  grid_major_color = cols_reach("main_lt_grey"),
+  grid_major_x_size = 0.1,
+  grid_major_y_size = 0.1,
+  grid_minor_x = FALSE,
+  grid_minor_y = FALSE,
+  grid_minor_color = cols_reach("main_lt_grey"),
+  grid_minor_x_size = 0.05,
+  grid_minor_y_size = 0.05,
   caption_position_to_plot = TRUE,
   ...
 )
@@ -102,15 +110,31 @@ theme_reach(
 
 \item{axis_title_font_face}{Axis title font face. Default to "plain". Font face ("plain", "italic", "bold", "bold.italic").}
 
-\item{grid_x}{Boolean. Do you need major grid lines for x-axis?}
+\item{axis_text_x_angle}{Angle for the x-axis text.}
 
-\item{grid_y}{Boolean. Do you need major grid lines for y-axis?}
+\item{axis_text_x_vjust}{Vertical adjustment for the x-axis text.}
 
-\item{grid_color}{Grid lines color.}
+\item{axis_text_x_hjust}{Vertical adjustment for the x-axis text.}
 
-\item{grid_x_size}{X line size.}
+\item{grid_major_x}{Boolean. Do you need major grid lines for x-axis?}
 
-\item{grid_y_size}{Y line size.}
+\item{grid_major_y}{Boolean. Do you need major grid lines for y-axis?}
+
+\item{grid_major_color}{Major grid lines color.}
+
+\item{grid_major_x_size}{Major X line size.}
+
+\item{grid_major_y_size}{Major Y line size.}
+
+\item{grid_minor_x}{Boolean. Do you need minor grid lines for x-axis?}
+
+\item{grid_minor_y}{Boolean. Do you need minor grid lines for y-axis?}
+
+\item{grid_minor_color}{Minor grid lines color.}
+
+\item{grid_minor_x_size}{Minor X line size.}
+
+\item{grid_minor_y_size}{Minor Y line size.}
 
 \item{caption_position_to_plot}{TRUE or FALSE. Positioning to plot or to panel?}
 
