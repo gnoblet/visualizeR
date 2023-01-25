@@ -55,7 +55,7 @@
 <span>  palette <span class="op">=</span> <span class="st">"main"</span>,</span>
 <span>  discrete <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  reverse <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  font_family <span class="op">=</span> <span class="st">"Leelawadee"</span>,</span>
+<span>  font_family <span class="op">=</span> <span class="st">"Segoe UI"</span>,</span>
 <span>  title_size <span class="op">=</span> <span class="fl">12</span>,</span>
 <span>  title_color <span class="op">=</span> <span class="fu"><a href="cols_reach.html">cols_reach</a></span><span class="op">(</span><span class="st">"main_grey"</span><span class="op">)</span>,</span>
 <span>  title_font_face <span class="op">=</span> <span class="st">"bold"</span>,</span>
@@ -81,11 +81,19 @@
 <span>  axis_title_size <span class="op">=</span> <span class="fl">11</span>,</span>
 <span>  axis_title_color <span class="op">=</span> <span class="fu"><a href="cols_reach.html">cols_reach</a></span><span class="op">(</span><span class="st">"main_grey"</span><span class="op">)</span>,</span>
 <span>  axis_title_font_face <span class="op">=</span> <span class="st">"bold"</span>,</span>
-<span>  grid_x <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  grid_y <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  grid_color <span class="op">=</span> <span class="fu"><a href="cols_reach.html">cols_reach</a></span><span class="op">(</span><span class="st">"main_lt_grey"</span><span class="op">)</span>,</span>
-<span>  grid_x_size <span class="op">=</span> <span class="fl">0.1</span>,</span>
-<span>  grid_y_size <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>  axis_text_x_angle <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  axis_text_x_vjust <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  axis_text_x_hjust <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  grid_major_x <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  grid_major_y <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  grid_major_color <span class="op">=</span> <span class="fu"><a href="cols_reach.html">cols_reach</a></span><span class="op">(</span><span class="st">"main_lt_grey"</span><span class="op">)</span>,</span>
+<span>  grid_major_x_size <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>  grid_major_y_size <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>  grid_minor_x <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  grid_minor_y <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  grid_minor_color <span class="op">=</span> <span class="fu"><a href="cols_reach.html">cols_reach</a></span><span class="op">(</span><span class="st">"main_lt_grey"</span><span class="op">)</span>,</span>
+<span>  grid_minor_x_size <span class="op">=</span> <span class="fl">0.05</span>,</span>
+<span>  grid_minor_y_size <span class="op">=</span> <span class="fl">0.05</span>,</span>
 <span>  caption_position_to_plot <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -209,24 +217,44 @@
 <dd><p>Axis title font face. Default to "plain". Font face ("plain", "italic", "bold", "bold.italic").</p></dd>
 
 
-<dt>grid_x</dt>
+<dt>grid_major_x</dt>
 <dd><p>Boolean. Do you need major grid lines for x-axis?</p></dd>
 
 
-<dt>grid_y</dt>
+<dt>grid_major_y</dt>
 <dd><p>Boolean. Do you need major grid lines for y-axis?</p></dd>
 
 
-<dt>grid_color</dt>
-<dd><p>Grid lines color.</p></dd>
+<dt>grid_major_color</dt>
+<dd><p>Major grid lines color.</p></dd>
 
 
-<dt>grid_x_size</dt>
-<dd><p>X line size.</p></dd>
+<dt>grid_major_x_size</dt>
+<dd><p>Major X line size.</p></dd>
 
 
-<dt>grid_y_size</dt>
-<dd><p>Y line size.</p></dd>
+<dt>grid_major_y_size</dt>
+<dd><p>Major Y line size.</p></dd>
+
+
+<dt>grid_minor_x</dt>
+<dd><p>Boolean. Do you need minor grid lines for x-axis?</p></dd>
+
+
+<dt>grid_minor_y</dt>
+<dd><p>Boolean. Do you need minor grid lines for y-axis?</p></dd>
+
+
+<dt>grid_minor_color</dt>
+<dd><p>Minor grid lines color.</p></dd>
+
+
+<dt>grid_minor_x_size</dt>
+<dd><p>Minor X line size.</p></dd>
+
+
+<dt>grid_minor_y_size</dt>
+<dd><p>Minor Y line size.</p></dd>
 
 
 <dt>caption_position_to_plot</dt>

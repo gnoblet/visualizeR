@@ -94,13 +94,15 @@
 <li>
 <input type="checkbox" disabled>There remains to be added more-than-7-color palettes and black color palettes</li>
 <li>
-<input type="checkbox" disabled>Add new types of visualization (e.g. dumbbell plot)</li>
+<input type="checkbox" disabled checked>Add new types of visualization (e.g. dumbbell plot, lollipop plot, etc.)</li>
 <li>
-<input type="checkbox" disabled>Use examples</li>
+<input type="checkbox" disabled checked>Use examples</li>
 <li>
 <input type="checkbox" disabled>Add some ease-map functions</li>
 <li>
 <input type="checkbox" disabled>Add some interactive functions (maps and graphs)</li>
+<li>
+<input type="checkbox" disabled>Consolidate and make errors transparent</li>
 </ul>
 </div>
 <div class="section level2">
@@ -158,15 +160,15 @@
 <span></span>
 <span><span class="co"># Simple bar chart by group with some alpha transparency</span></span>
 <span><span class="fu"><a href="reference/bar.html">bar</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">island</span>, <span class="va">mean_bl</span>, <span class="va">species</span>, percent <span class="op">=</span> <span class="cn">FALSE</span>, alpha <span class="op">=</span> <span class="fl">0.6</span>, x_title <span class="op">=</span> <span class="st">"Mean of bill length"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-example-bar-chart-1.png" width="100%"></p>
+<p><img src="reference/figures/README-example-bar-chart-1.png" width="65%"></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Using another color palette through `theme_reach()` and changing scale to percent</span></span>
 <span><span class="fu"><a href="reference/bar.html">bar</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">island</span>,<span class="va">mean_bl</span>, <span class="va">species</span>, percent <span class="op">=</span> <span class="cn">TRUE</span>, theme <span class="op">=</span> <span class="fu"><a href="reference/theme_reach.html">theme_reach</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"artichoke_3"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-example-bar-chart-2.png" width="100%"></p>
+<p><img src="reference/figures/README-example-bar-chart-2.png" width="65%"></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Not flipped, with text added, group_title, no y-axis and no bold for legend</span></span>
 <span><span class="fu"><a href="reference/bar.html">bar</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">island</span>, <span class="va">mean_bl</span>, <span class="va">species</span>, group_title <span class="op">=</span> <span class="st">"Species"</span>, flip <span class="op">=</span> <span class="cn">FALSE</span>, add_text <span class="op">=</span> <span class="cn">TRUE</span>, add_text_suffix <span class="op">=</span> <span class="st">"%"</span>, percent <span class="op">=</span> <span class="cn">FALSE</span>, theme <span class="op">=</span> <span class="fu"><a href="reference/theme_reach.html">theme_reach</a></span><span class="op">(</span>text_font_face <span class="op">=</span> <span class="st">"plain"</span>, axis_y <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-example-bar-chart-3.png" width="100%"></p>
+<p><img src="reference/figures/README-example-bar-chart-3.png" width="65%"></p>
 </div>
 <div class="section level3">
 <h3 id="example-2-point-chart-already-reach-themed">Example 2: Point chart, already REACH themed<a class="anchor" aria-label="anchor" href="#example-2-point-chart-already-reach-themed"></a>
@@ -175,47 +177,152 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Simple point chart</span></span>
 <span><span class="fu"><a href="reference/point.html">point</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="va">bill_length_mm</span>, <span class="va">flipper_length_mm</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-example-point-chart-1.png" width="100%"></p>
+<p><img src="reference/figures/README-example-point-chart-1.png" width="65%"></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Point chart with grouping colors, greater dot size, some transparency, reversed color palette</span></span>
 <span><span class="fu"><a href="reference/point.html">point</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="va">bill_length_mm</span>, <span class="va">flipper_length_mm</span>, <span class="va">island</span>, alpha <span class="op">=</span> <span class="fl">0.6</span>, size <span class="op">=</span> <span class="fl">3</span>, theme <span class="op">=</span> <span class="fu"><a href="reference/theme_reach.html">theme_reach</a></span><span class="op">(</span>reverse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-example-point-chart-2.png" width="100%"></p>
+<p><img src="reference/figures/README-example-point-chart-2.png" width="65%"></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Using another color palettes</span></span>
-<span><span class="fu"><a href="reference/point.html">point</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="va">bill_length_mm</span>, <span class="va">flipper_length_mm</span>, <span class="va">island</span>, size <span class="op">=</span> <span class="fl">1.5</span>, x_title <span class="op">=</span> <span class="st">"Bill"</span>, y_title <span class="op">=</span> <span class="st">"Flipper"</span>, title <span class="op">=</span> <span class="st">"Length (mm)"</span>, theme <span class="op">=</span> <span class="fu"><a href="reference/theme_reach.html">theme_reach</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"artichoke_3"</span>, text_font_face <span class="op">=</span> , grid_x <span class="op">=</span> <span class="cn">T</span>,  title_position_to_plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-example-point-chart-3.png" width="100%"></p>
+<span><span class="fu"><a href="reference/point.html">point</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="va">bill_length_mm</span>, <span class="va">flipper_length_mm</span>, <span class="va">island</span>, size <span class="op">=</span> <span class="fl">1.5</span>, x_title <span class="op">=</span> <span class="st">"Bill"</span>, y_title <span class="op">=</span> <span class="st">"Flipper"</span>, title <span class="op">=</span> <span class="st">"Length (mm)"</span>, theme <span class="op">=</span> <span class="fu"><a href="reference/theme_reach.html">theme_reach</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"artichoke_3"</span>, text_font_face <span class="op">=</span> , grid_major_x <span class="op">=</span> <span class="cn">TRUE</span>,  title_position_to_plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-example-point-chart-3.png" width="65%"></p>
 </div>
 <div class="section level3">
-<h3 id="example-3-dumbbell-plot-reach-themed">Example 3! Dumbbell plot, REACH themed<a class="anchor" aria-label="anchor" href="#example-3-dumbbell-plot-reach-themed"></a>
+<h3 id="example-3-dumbbell-plot-reach-themed">Example 3: Dumbbell plot, REACH themed<a class="anchor" aria-label="anchor" href="#example-3-dumbbell-plot-reach-themed"></a>
 </h3>
 <p>Remember to ensure that your data are in the long format and you only have two groups on the x-axis; for instance, IDP and returnee and no NA values.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Prepare long data</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
-<span>  admin1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>, <span class="st">"D"</span>, <span class="st">"E"</span>, <span class="st">"F"</span>, <span class="st">"G"</span>, <span class="st">"H"</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>,</span>
+<span>  admin1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>, <span class="fl">2</span><span class="op">)</span>,</span>
 <span>  setting <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Rural"</span>, <span class="st">"Urban"</span><span class="op">)</span>, <span class="fl">4</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Urban"</span>, <span class="st">"Rural"</span><span class="op">)</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  stat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">16</span>, mean <span class="op">=</span> <span class="fl">50</span>, sd <span class="op">=</span> <span class="fl">18</span><span class="op">)</span></span>
 <span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">stat</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Example</span></span>
+<span><span class="co"># Example, adding a parameter to `theme_reach()` passed on `ggplot2::theme()` to align legend title</span></span>
 <span><span class="fu"><a href="reference/dumbbell.html">dumbbell</a></span><span class="op">(</span><span class="va">df</span>,</span>
 <span>         <span class="va">stat</span>,</span>
 <span>         <span class="va">setting</span>,</span>
 <span>         <span class="va">admin1</span>,</span>
 <span>         title <span class="op">=</span> <span class="st">"% of HHs that reported open defecation as sanitation facility"</span>,</span>
 <span>         group_y_title <span class="op">=</span> <span class="st">"Admin 1"</span>,</span>
+<span>         group_x_title <span class="op">=</span> <span class="st">"Setting"</span>,</span>
 <span>         theme <span class="op">=</span> <span class="fu"><a href="reference/theme_reach.html">theme_reach</a></span><span class="op">(</span>legend_position <span class="op">=</span>  <span class="st">"bottom"</span>,</span>
 <span>                             legend_direction <span class="op">=</span> <span class="st">"horizontal"</span>,</span>
+<span>                             legend_title_font_face <span class="op">=</span> <span class="st">"bold"</span>,</span>
 <span>                             palette <span class="op">=</span> <span class="st">"primary"</span>,</span>
-<span>                             title_position_to_plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-example-dumbbell-plot-1.png" width="100%"></p>
+<span>                             title_position_to_plot <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                             legend.title.align <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="co"># Change legend title position (could be included as part of the function)</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html" class="external-link">guides</a></span><span class="op">(</span>  </span>
+<span>    color <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html" class="external-link">guide_legend</a></span><span class="op">(</span>title.position <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span>,</span>
+<span>    fill <span class="op">=</span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html" class="external-link">guide_legend</a></span><span class="op">(</span>title.position <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-example-dumbbell-plot-1.png" width="65%"></p>
+</div>
+<div class="section level3">
+<h3 id="example-4-donut-chart-reach-themed-to-used-moderately">Example 4: donut chart, REACH themed (to used moderately)<a class="anchor" aria-label="anchor" href="#example-4-donut-chart-reach-themed-to-used-moderately"></a>
+</h3>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Some summarized data: % of HHs by displacement status</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
+<span>  status <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Displaced"</span>, <span class="st">"Non displaced"</span>, <span class="st">"Returnee"</span>, <span class="st">"Don't know/Prefer not to say"</span><span class="op">)</span>,</span>
+<span>  percentage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">18</span>, <span class="fl">65</span>, <span class="fl">12</span>, <span class="fl">3</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Donut</span></span>
+<span><span class="fu"><a href="reference/donut.html">donut</a></span><span class="op">(</span><span class="va">df</span>, </span>
+<span>      <span class="va">status</span>, </span>
+<span>      <span class="va">percentage</span>, </span>
+<span>      hole_size  <span class="op">=</span> <span class="fl">3</span>, </span>
+<span>      add_text_suffix <span class="op">=</span> <span class="st">"%"</span>, </span>
+<span>      add_text_color <span class="op">=</span> <span class="fu"><a href="reference/cols_reach.html">cols_reach</a></span><span class="op">(</span><span class="st">"dk_grey"</span><span class="op">)</span>, </span>
+<span>      add_text_treshold_display <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>      x_title <span class="op">=</span> <span class="st">"Displacement status"</span>, </span>
+<span>      title <span class="op">=</span> <span class="st">"% of HHs by displacement status"</span>, </span>
+<span>      theme <span class="op">=</span> <span class="fu"><a href="reference/theme_reach.html">theme_reach</a></span><span class="op">(</span>legend_reverse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-example-donut-plot-1.png" width="65%"></p>
+</div>
+<div class="section level3">
+<h3 id="example-5-alluvial-chart-reach-themed">Example 5: alluvial chart, REACH themed<a class="anchor" aria-label="anchor" href="#example-5-alluvial-chart-reach-themed"></a>
+</h3>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Some summarized data: % of HHs by self-reported status of displacement in 2021 and in 2022</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
+<span>  status_from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Displaced"</span>, <span class="fl">4</span><span class="op">)</span>,</span>
+<span>                  <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Non displaced"</span>, <span class="fl">4</span><span class="op">)</span>,</span>
+<span>                  <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Returnee"</span>, <span class="fl">4</span><span class="op">)</span>,</span>
+<span>                  <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Dnk/Pnts"</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  status_to <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Displaced"</span>, <span class="st">"Non displaced"</span>, <span class="st">"Returnee"</span>, <span class="st">"Dnk/Pnts"</span>, <span class="st">"Displaced"</span>, <span class="st">"Non displaced"</span>, <span class="st">"Returnee"</span>, <span class="st">"Dnk/Pnts"</span>, <span class="st">"Displaced"</span>, <span class="st">"Non displaced"</span>, <span class="st">"Returnee"</span>, <span class="st">"Dnk/Pnts"</span>, <span class="st">"Displaced"</span>, <span class="st">"Non displaced"</span>, <span class="st">"Returnee"</span>, <span class="st">"Dnk/Pnts"</span><span class="op">)</span>,</span>
+<span>  percentage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">8</span>, <span class="fl">18</span>, <span class="fl">1</span>, <span class="fl">12</span>, <span class="fl">21</span>, <span class="fl">0</span>, <span class="fl">2</span>, <span class="fl">0</span>, <span class="fl">3</span>, <span class="fl">12</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Alluvial, here the group is the status for 2021</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/alluvial.html">alluvial</a></span><span class="op">(</span><span class="va">df</span>, </span>
+<span>         <span class="va">status_from</span>, </span>
+<span>         <span class="va">status_to</span>,</span>
+<span>         <span class="va">percentage</span>, </span>
+<span>         <span class="va">status_from</span>,</span>
+<span>         from_levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Displaced"</span>, <span class="st">"Non displaced"</span>, <span class="st">"Returnee"</span>, <span class="st">"Dnk/Pnts"</span><span class="op">)</span>, </span>
+<span>         alpha <span class="op">=</span> <span class="fl">0.8</span>, </span>
+<span>         group_title <span class="op">=</span> <span class="st">"Status for 2021"</span>,</span>
+<span>         title <span class="op">=</span> <span class="st">"% of HHs by self-reported status from 2021 to 2022"</span>, </span>
+<span>         theme <span class="op">=</span> <span class="fu"><a href="reference/theme_reach.html">theme_reach</a></span><span class="op">(</span></span>
+<span>           axis_y <span class="op">=</span> <span class="cn">FALSE</span>, </span>
+<span>           legend_position <span class="op">=</span> <span class="st">"none"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-example-alluvial-plot-1.png" width="65%"></p>
+</div>
+<div class="section level3">
+<h3 id="example-6-lollipop-chart">Example 6: lollipop chart<a class="anchor" aria-label="anchor" href="#example-6-lollipop-chart"></a>
+</h3>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
+<span><span class="co"># Prepare long data</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
+<span> admin1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">replicate</a></span><span class="op">(</span><span class="fl">15</span>, <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="va">letters</span>, <span class="fl">8</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html" class="external-link">unite</a></span><span class="op">(</span><span class="st">"admin1"</span>, sep <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">admin1</span><span class="op">)</span>,  </span>
+<span> stat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">15</span>, mean <span class="op">=</span> <span class="fl">50</span>, sd <span class="op">=</span> <span class="fl">15</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">stat</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Make lollipop plot, REACH themed, vertical with 45 degrees angle X-labels</span></span>
+<span><span class="fu"><a href="reference/lollipop.html">lollipop</a></span><span class="op">(</span><span class="va">df</span>,</span>
+<span>         <span class="va">admin1</span>,</span>
+<span>         <span class="va">stat</span>,</span>
+<span>         arrange <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>         add_text <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>         flip <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>         y_title <span class="op">=</span> <span class="st">"% of HHs"</span>,</span>
+<span>         x_title <span class="op">=</span> <span class="st">"Admin 1"</span>,</span>
+<span>         title <span class="op">=</span> <span class="st">"% of HHs that reported having received a humanitarian assistance"</span>,</span>
+<span>         theme <span class="op">=</span> <span class="fu"><a href="reference/theme_reach.html">theme_reach</a></span><span class="op">(</span>axis_text_x_angle <span class="op">=</span> <span class="fl">45</span>, </span>
+<span>                             grid_major_y <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>                             grid_major_y_size <span class="op">=</span> <span class="fl">0.2</span>, </span>
+<span>                             grid_major_x <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>                             grid_minor_y <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-example-lollipop-chart-1.png" width="65%"></p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Horizontal, greater point size, arranged by value, no grid, and text labels added</span></span>
+<span><span class="fu"><a href="reference/lollipop.html">lollipop</a></span><span class="op">(</span><span class="va">df</span>,</span>
+<span>         <span class="va">admin1</span>,</span>
+<span>         <span class="va">stat</span>,</span>
+<span>         arrange <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>         point_size <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>         point_color <span class="op">=</span> <span class="fu"><a href="reference/cols_reach.html">cols_reach</a></span><span class="op">(</span><span class="st">"main_beige"</span><span class="op">)</span>,</span>
+<span>         segment_size <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>         add_text <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>         add_text_suffix <span class="op">=</span> <span class="st">"%"</span>,</span>
+<span>         y_title <span class="op">=</span> <span class="st">"% of HHs"</span>,</span>
+<span>         x_title <span class="op">=</span> <span class="st">"Admin 1"</span>,</span>
+<span>         title <span class="op">=</span> <span class="st">"% of HHs that reported having received a humanitarian assistance in the 12 months prior to the assessment"</span>,</span>
+<span>         theme <span class="op">=</span> <span class="fu"><a href="reference/theme_reach.html">theme_reach</a></span><span class="op">(</span>title_position_to_plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-example-lollipop-chart-2.png" width="65%"></p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="maps">Maps<a class="anchor" aria-label="anchor" href="#maps"></a>
 </h2>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Add indicator layer </span></span>
 <span><span class="co"># - based on "pretty" classes and title "Proportion (%)" </span></span>
 <span><span class="co"># - buffer to add a 10% around the bounding box</span></span>

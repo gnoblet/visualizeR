@@ -3,7 +3,6 @@
 #' @param df A data frame.
 #' @param x A numeric column.
 #' @param y A character column or coercible as a character column.
-#' @param group Some grouping categorical column, e.g. administrative areas or population groups.
 #' @param flip TRUE or FALSE. Default to TRUE or horizontal lollipop plot.
 #' @param wrap Should x-labels be wrapped? Number of characters.
 #' @param arrange TRUE or FALSE. Arrange by highest percentage first.
@@ -16,11 +15,11 @@
 #' @param alpha Fill transparency.
 #' @param x_title The x scale title. Default to NULL.
 #' @param y_title The y scale title. Default to NULL.
-#' @param group_title The group legend title. Default to NULL.
 #' @param title Plot title. Default to NULL.
 #' @param subtitle Plot subtitle. Default to NULL.
 #' @param caption Plot caption. Default to NULL.
 #' @param add_text TRUE or FALSE. Add the y value as text within the bubble.
+#' @param add_text_size Text size.
 #' @param add_text_suffix If percent is FALSE, should we add a suffix to the text label?
 #' @param add_text_color Added text color. Default to white.
 #' @param add_text_fontface Added text font face. Default to "bold".
