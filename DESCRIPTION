@@ -27,6 +27,7 @@ Imports:
     ggtext,
     ggrepel,
     tidyr,
-    dplyr
+    dplyr,
+    ggalluvial
 Suggests: knitr, sf, tmap
 VignetteBuilder: knitr
