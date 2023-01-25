@@ -1,7 +1,10 @@
 # visualizeR 0.6.9000
 
 * Add `dumbbell()`.
-* Add further parameters to `theme_reach()`
+* Add `alluvial()`
+* Add `donut()`
+* Add `lollipop()`
+* Add further parameters to `theme_reach()`, including grid lines args.
 
 ---
 
