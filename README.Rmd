@@ -43,10 +43,11 @@ Roadmap is as follows:
 - [X] Add IMPACT's colors
 - [X] Add all color palettes from the internal documentation
 - [ ] There remains to be added more-than-7-color palettes and black color palettes
-- [ ] Add new types of visualization (e.g. dumbbell plot)
-- [ ] Use examples
+- [X] Add new types of visualization (e.g. dumbbell plot, lollipop plot, etc.)
+- [X] Use examples
 - [ ] Add some ease-map functions
 - [ ] Add some interactive functions (maps and graphs)
+- [ ] Consolidate and make errors transparent
 
 ## Request
 
@@ -73,7 +74,7 @@ pal_reach(show_palettes = T)
 
 ### Example 1: Bar chart, already REACH themed
 
-```{r example-bar-chart, eval = TRUE}
+```{r example-bar-chart, out.width = "65%", eval = TRUE}
 library(visualizeR)
 library(palmerpenguins)
 library(dplyr)
@@ -100,7 +101,7 @@ bar(df, island, mean_bl, species, group_title = "Species", flip = FALSE, add_tex
 
 At this stage, `point_reach()` only supports categorical grouping colors with the `group` arg.
 
-```{r example-point-chart, eval = TRUE}
+```{r example-point-chart, out.width = "65%", eval = TRUE}
 
 # Simple point chart
 point(penguins, bill_length_mm, flipper_length_mm)
@@ -109,7 +110,7 @@ point(penguins, bill_length_mm, flipper_length_mm)
 point(penguins, bill_length_mm, flipper_length_mm, island, alpha = 0.6, size = 3, theme = theme_reach(reverse = TRUE))
 
 # Using another color palettes
-point(penguins, bill_length_mm, flipper_length_mm, island, size = 1.5, x_title = "Bill", y_title = "Flipper", title = "Length (mm)", theme = theme_reach(palette = "artichoke_3", text_font_face = , grid_x = T,  title_position_to_plot = FALSE))
+point(penguins, bill_length_mm, flipper_length_mm, island, size = 1.5, x_title = "Bill", y_title = "Flipper", title = "Length (mm)", theme = theme_reach(palette = "artichoke_3", text_font_face = , grid_major_x = TRUE,  title_position_to_plot = FALSE))
 ```
 
 
@@ -117,10 +118,10 @@ point(penguins, bill_length_mm, flipper_length_mm, island, size = 1.5, x_title =
 
 Remember to ensure that your data are in the long format and you only have two groups on the x-axis; for instance, IDP and returnee and no NA values.
 
-```{r example-dumbbell-plot, eval = TRUE}
+```{r example-dumbbell-plot, out.width = "65%", eval = TRUE}
 # Prepare long data
 df <- tibble::tibble(
-  admin1 = rep(c("A", "B", "C", "D", "E", "F", "G", "H"), 2),
+  admin1 = rep(letters[1:8], 2),
   setting = c(rep(c("Rural", "Urban"), 4), rep(c("Urban", "Rural"), 4)),
   stat = rnorm(16, mean = 50, sd = 18)
 ) |>
@@ -148,7 +149,7 @@ dumbbell(df,
 ```
 
 ### Example 4: donut chart, REACH themed (to used moderately)
-```{r example-donut-plot, warning = FALSE}
+```{r example-donut-plot, out.width = "65%", warning = FALSE}
 
 # Some summarized data: % of HHs by displacement status
 df <- tibble::tibble(
@@ -170,7 +171,7 @@ donut(df,
 ```
 
 ### Example 5: alluvial chart, REACH themed
-```{r example-alluvial-plot, warning = FALSE}
+```{r example-alluvial-plot, out.width = "65%", warning = FALSE}
 
 # Some summarized data: % of HHs by self-reported status of displacement in 2021 and in 2022
 df <- tibble::tibble(
@@ -199,11 +200,53 @@ alluvial(df,
 
 ```
 
+### Example 6: lollipop chart
+```{r example-lollipop-chart, out.width = "65%", warning = FALSE}
+library(tidyr)
+# Prepare long data
+df <- tibble::tibble(
+ admin1 = replicate(15, sample(letters, 8)) |> t() |> as.data.frame() |> unite("admin1", sep = "") |> dplyr::pull(admin1),  
+ stat = rnorm(15, mean = 50, sd = 15)) |>
+  dplyr::mutate(stat = round(stat, 0))
+
+# Make lollipop plot, REACH themed, vertical with 45 degrees angle X-labels
+lollipop(df,
+         admin1,
+         stat,
+         arrange = FALSE,
+         add_text = FALSE,
+         flip = FALSE,
+         y_title = "% of HHs",
+         x_title = "Admin 1",
+         title = "% of HHs that reported having received a humanitarian assistance",
+         theme = theme_reach(axis_text_x_angle = 45, 
+                             grid_major_y = TRUE, 
+                             grid_major_y_size = 0.2, 
+                             grid_major_x = TRUE, 
+                             grid_minor_y = TRUE))
+
+# Horizontal, greater point size, arranged by value, no grid, and text labels added
+lollipop(df,
+         admin1,
+         stat,
+         arrange = TRUE,
+         point_size = 10,
+         point_color = cols_reach("main_beige"),
+         segment_size = 2,
+         add_text = TRUE,
+         add_text_suffix = "%",
+         y_title = "% of HHs",
+         x_title = "Admin 1",
+         title = "% of HHs that reported having received a humanitarian assistance in the 12 months prior to the assessment",
+         theme = theme_reach(title_position_to_plot = FALSE))
+
+
+```
 
 
 ## Maps
 
-```{r example-map}
+```{r example-map, out.width = "50%"}
 
 # Add indicator layer 
 # - based on "pretty" classes and title "Proportion (%)" 
