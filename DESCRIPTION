@@ -28,6 +28,7 @@ Imports:
     ggrepel,
     tidyr,
     dplyr,
-    ggalluvial
+    ggalluvial,
+    viridisLite
 Suggests: knitr, sf, tmap
 VignetteBuilder: knitr
