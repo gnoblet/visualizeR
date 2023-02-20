@@ -110,7 +110,7 @@ theme_reach <- function(
     rlang::abort(
       c(
         paste0("There is no initiative '", initiative, " to be used with theme_reach()."),
-        "i" = paste0("initiative should be either 'reach', 'agora' or 'default'")
+        "i" = paste0("initiative should be either 'reach' or 'default'")
       )
     )
 
