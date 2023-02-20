@@ -60,7 +60,7 @@ theme_reach <- function(
     palette = "main",
     discrete = TRUE,
     reverse = FALSE,
-    font_family = "Segoe UI",
+    font_family = "segoeui",
     title_size = 12,
     title_color = cols_reach("main_grey"),
     title_font_face = "bold",
