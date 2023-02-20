@@ -107,7 +107,7 @@ theme_reach <- function(
   # - add facet theming
 
   if (!initiative %in% c("reach", "default"))
-    rlang::stop(
+    rlang::abort(
       c(
         paste0("There is no initiative '", initiative, " to be used with theme_reach()."),
         "i" = paste0("initiative should be either 'reach', 'agora' or 'default'")
