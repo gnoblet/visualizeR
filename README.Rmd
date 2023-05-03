@@ -148,7 +148,7 @@ dumbbell(df,
   )
 ```
 
-### Example 4: donut chart, REACH themed (to used moderately)
+### Example 4: donut chart, REACH themed (to used once, not twice)
 ```{r example-donut-plot, out.width = "65%", warning = FALSE}
 
 # Some summarized data: % of HHs by displacement status
@@ -166,6 +166,17 @@ donut(df,
       add_text_color = cols_reach("dk_grey"), 
       add_text_treshold_display = 5,
       x_title = "Displacement status", 
+      title = "% of HHs by displacement status", 
+      theme = theme_reach(legend_reverse = TRUE))
+```
+
+### Example 4: donut chart, REACH themed (to used once, not twice)
+```{r example-donut-plot, out.width = "65%", warning = FALSE}
+
+# Donut
+waffle(df, 
+      status, 
+      percentage, 
       title = "% of HHs by displacement status", 
       theme = theme_reach(legend_reverse = TRUE))
 ```

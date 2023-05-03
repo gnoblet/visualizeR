@@ -67,6 +67,8 @@ theme_reach <- function(
     text_color = cols_reach("main_grey"),
     text_font_face = "plain",
     panel_background_color = "#FFFFFF",
+    panel_border = FALSE,
+    panel_border_color = cols_reach("main_grey"),
     legend_position = "right",
     legend_direction = "vertical",
     legend_reverse = TRUE,
@@ -244,6 +246,14 @@ theme_reach <- function(
               color = grid_minor_color,
               linewidth = grid_minor_y_size)
               )
+  if (!panel_border) theme_reach <- theme_reach +
+      ggplot2::theme(
+        panel.border = ggplot2::element_blank()
+      ) else theme_reach <- theme_reach +
+          ggplot2::theme(
+            panel.border = ggplot2::element_rect(color = panel_background_color)
+          )
+
 
   # Other parameters
   theme_reach <- theme_reach + ggplot2::theme(...)
