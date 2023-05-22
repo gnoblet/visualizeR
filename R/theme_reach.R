@@ -7,6 +7,7 @@
 #' @param title_size The size of the title. Defaults to 12.
 #' @param title_color Title color.
 #' @param title_font_face Title font face. Default to "bold". Font face ("plain", "italic", "bold", "bold.italic").
+#' @param title_hjust Title horizontal justification. Default to NULL. Use 0.5 to center the title.
 #' @param text_size The size of all text other than the title, subtitle and caption. Defaults to 10.
 #' @param text_color Text color.
 #' @param text_font_face Text font face. Default to "bold". Font face ("plain", "italic", "bold", "bold.italic").
@@ -62,6 +63,7 @@ theme_reach <- function(
     title_size = 12,
     title_color = cols_reach("main_grey"),
     title_font_face = "bold",
+    title_hjust = NULL,
     title_position_to_plot = TRUE,
     text_size = 10,
     text_color = cols_reach("main_grey"),
@@ -147,9 +149,13 @@ theme_reach <- function(
       face = axis_title_font_face,
       color = axis_title_color),
     # Wrap title
-    plot.title = ggtext::element_textbox_simple(),
-    plot.subtitle = ggtext::element_textbox_simple(),
-    plot.caption = ggtext::element_textbox_simple(),
+    plot.title = ggtext::element_textbox(
+      hjust = title_hjust
+    ),
+    plot.subtitle = ggtext::element_textbox(
+      hjust = title_hjust
+    ),
+    plot.caption = ggtext::element_textbox(),
     legend.title = ggplot2::element_text(
       size = legend_title_size,
       face = legend_title_font_face,
