@@ -13,6 +13,8 @@
 #' @param text_color Text color.
 #' @param text_font_face Text font face. Default to "bold". Font face ("plain", "italic", "bold", "bold.italic").
 #' @param panel_background_color The color for the panel background color. Default to white.
+#' @param panel_border Boolean. Plot a panel border? Default to FALSE.
+#' @param panel_border_color A color. Default to REACH main grey.
 #' @param legend_position Position of the legend; Default to "right". Can take "right", "left", "top", "bottom" or "none".
 #' @param legend_direction Direction of the legend. Default to "vertical". Can take "vertical" or "horizontal".
 #' @param legend_title_size Legend title size.
