@@ -4,7 +4,7 @@
 #' @param palette Palette name from 'pal_reach()'.
 #' @param discrete 	Boolean indicating whether color aesthetic is discrete or not.
 #' @param reverse Boolean indicating whether the palette should be reversed.
-#' @param font_family The font family for all plot's texts. Default to "Leelawadee".
+#' @param font_family The font family for all plot's texts. Default to "Segoe UI".
 #' @param title_size The size of the title. Defaults to 12.
 #' @param title_color Title color.
 #' @param title_font_face Title font face. Default to "bold". Font face ("plain", "italic", "bold", "bold.italic").
@@ -63,7 +63,7 @@ theme_reach <- function(
     palette = "main",
     discrete = TRUE,
     reverse = FALSE,
-    font_family = "segoeui",
+    font_family = "Segoe UI",
     title_size = 12,
     title_color = cols_reach("main_grey"),
     title_font_face = "bold",
