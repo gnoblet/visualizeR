@@ -28,7 +28,8 @@ Imports:
     ggrepel,
     tidyr,
     dplyr,
-    ggalluvial
+    ggalluvial,
+    viridisLite
 Remotes: 
     github::hrbrmstr/waffle
 Suggests: knitr, sf, tmap

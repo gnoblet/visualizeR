@@ -1,5 +1,6 @@
 #' @title ggplot2 theme with REACH color palettes
 #'
+#' @param initiative Either "reach" or "default".
 #' @param palette Palette name from 'pal_reach()'.
 #' @param discrete 	Boolean indicating whether color aesthetic is discrete or not.
 #' @param reverse Boolean indicating whether the palette should be reversed.
@@ -56,10 +57,11 @@
 #'
 #' @export
 theme_reach <- function(
+    initiative = "reach",
     palette = "main",
     discrete = TRUE,
     reverse = FALSE,
-    font_family = "Segoe UI",
+    font_family = "segoeui",
     title_size = 12,
     title_color = cols_reach("main_grey"),
     title_font_face = "bold",
@@ -107,6 +109,14 @@ theme_reach <- function(
 
   # To do :
   # - add facet theming
+
+  if (!initiative %in% c("reach", "default"))
+    rlang::abort(
+      c(
+        paste0("There is no initiative '", initiative, " to be used with theme_reach()."),
+        "i" = paste0("initiative should be either 'reach' or 'default'")
+      )
+    )
 
   # Basic simple theme
   # theme_reach <- ggplot2::theme_bw()
@@ -264,28 +274,12 @@ theme_reach <- function(
   # Other parameters
   theme_reach <- theme_reach + ggplot2::theme(...)
 
-
-  # Check if palette is an actual existing palette
-  pal <- pal_reach(palette)
-
-  if(is.null(pal)) {
-    rlang::warn(
-      c(
-        paste0("There is no palette '", palette, "' for initiative 'reach'. Fallback to REACH main palette."),
-        "i" = paste0("Use `pal_reach(show_palettes = TRUE)` to see the list of availabale palettes.")
-        )
-      )
-
-    palette <- "main"
-
-  }
-
   # Add reach color palettes by default
   # (reversed guide is defaulted to TRUE for natural reading)
   theme_reach <- list(
     theme_reach,
-    scale_color(palette = palette, discrete = discrete, reverse = reverse, reverse_guide = legend_reverse),
-    scale_fill(palette = palette, discrete = discrete, reverse = reverse, reverse_guide = legend_reverse)
+    scale_color(initiative = initiative, palette = palette, discrete = discrete, reverse = reverse, reverse_guide = legend_reverse),
+    scale_fill(initiative = initiative, palette = palette, discrete = discrete, reverse = reverse, reverse_guide = legend_reverse)
     )
 
 
