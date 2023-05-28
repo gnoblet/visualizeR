@@ -1,3 +1,14 @@
+#' @title Return function to interpolate a fallback palette base on viridis::magma()
+#'
+#' @param reverse Boolean indicating whether the palette should be reversed
+#' @param color_ramp_palette Should the output be a `grDevices::colorRampPalette` function or a vector of hex codes? Default to the latter with `FALSE`
+#' @param discrete Boolean. Discrete or not? Default to FALSE.
+#' @param n Number of colors in the palette. Default to 5. Passe to `viridis::magma()`
+#' @param ... Other parameters to pass to `grDevices::colorRampPalette()`
+#'
+#' @return A color palette
+#'
+#' @export
 pal_fallback <- function(reverse = FALSE,
                          color_ramp_palette = FALSE,
                          discrete = FALSE,
