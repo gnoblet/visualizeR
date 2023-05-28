@@ -16,10 +16,6 @@
 #' @return A waffle chart
 #'
 #' @export
-#'
-#' @example
-#' df <- data.frame(category = c("Category 1", "Category 2", "Category 3"),proportion = c(15, 55, 30))
-#' waffle(df, category, proportion, x_title = "A caption", title = "A title", subtitle = "A subtitle")
 waffle <- function(df,
                   x,
                   y,
@@ -36,7 +32,7 @@ waffle <- function(df,
                     axis_y = FALSE,
                     legend_position = "bottom",
                     legend_direction = "horizontal",
-                    hjust = 0.5)){
+                    title_hjust = 0.5)){
 
   # A basic and not robust check
   # - add check between 0 and 1
