@@ -138,6 +138,7 @@ scale_color <- function(initiative = "reach", palette = "main", discrete = TRUE,
 #' @export
 scale_fill <- function(initiative = "reach", palette = "main", discrete = TRUE, reverse = FALSE, reverse_guide = TRUE, ...) {
 
+
   if (initiative == "reach") {
 
     pal <- pal_reach(palette)
@@ -219,7 +220,7 @@ scale_fill <- function(initiative = "reach", palette = "main", discrete = TRUE, 
 
   if (discrete) {
     ggplot2::discrete_scale(
-      "colour",
+      "fill",
       paste0(initiative, "_", palette),
       palette = pal,
       guide = ggplot2::guide_legend(
