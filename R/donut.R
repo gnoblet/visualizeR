@@ -87,22 +87,20 @@ donut <- function(df,
     ggplot2::coord_polar(
       theta = "y"
     )
-  if (hole_size >= 2) g <- g + ggplot2::xlim(c(1, hole_size + 0.5)) # Try to remove that to see how to make a pie chart
 
-  # No axis
-  g <- g + ggplot2::theme(
-        axis.line.x = ggplot2::element_blank(),
-        axis.ticks.x = ggplot2::element_blank(),
-        axis.text.x = ggplot2::element_blank(),
-        axis.title.x = ggplot2::element_blank(),
-        axis.line.y = ggplot2::element_blank(),
-        axis.ticks.y = ggplot2::element_blank(),
-        axis.text.y = ggplot2::element_blank(),
-        axis.title.y = ggplot2::element_blank()
-  )
+  if (hole_size >= 2) g <- g + ggplot2::xlim(c(1, hole_size + 0.5)) # Try to remove that to see how to make a pie chart
 
   # Add theme
   g <- g + theme
+
+  # No axis
+  g <- g + ggplot2::theme(
+    axis.text = ggplot2::element_blank(),
+    axis.line = ggplot2::element_blank(),
+    axis.ticks = ggplot2::element_blank(),
+    axis.title = ggplot2::element_blank()
+  )
+
 
   return(g)
 
