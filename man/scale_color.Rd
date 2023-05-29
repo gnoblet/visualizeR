@@ -14,7 +14,7 @@ scale_color(
 )
 }
 \arguments{
-\item{initiative}{Either "reach" or "agora.}
+\item{initiative}{Either "reach" or "agora" or "default".}
 
 \item{palette}{Palette name from `pal_reach()` or `pal_agora()`.}
 

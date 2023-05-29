@@ -1,4 +1,13 @@
-# visualizeR 0.6.9000
+# visualizeR 0.8.9000
+
+* Add `waffle()`.
+* Add a `pal_default()` function as a fallback for scale functions and as an initiative in `theme_reach()`. It uses `viridis::magma()`.
+* Update of AGORA palettes.
+* Some other small bug fixes.
+
+---
+
+# visualizeR 0.7.9000
 
 * Add `dumbbell()`.
 * Add `alluvial()`

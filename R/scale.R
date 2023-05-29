@@ -1,6 +1,6 @@
 #' Color scale constructor for REACH or AGORA colors
 #'
-#' @param initiative Either "reach" or "agora.
+#' @param initiative Either "reach" or "agora" or "default".
 #' @param palette Palette name from `pal_reach()` or `pal_agora()`.
 #' @param discrete Boolean indicating whether color aesthetic is discrete or not.
 #' @param reverse Boolean indicating whether the palette should be reversed.
@@ -11,24 +11,85 @@
 #' @return A color scale for ggplot
 #'
 #' @export
-scale_color  <- function(initiative = "reach", palette = "main", discrete = TRUE, reverse = FALSE, reverse_guide = TRUE, ...) {
+scale_color <- function(initiative = "reach", palette = "main", discrete = TRUE, reverse = FALSE, reverse_guide = TRUE, ...) {
 
   if (initiative == "reach") {
-    pal <- pal_reach(
-      palette = palette,
-      reverse = reverse,
-      color_ramp_palette = TRUE,
-      show_palettes = FALSE
+
+    pal <- pal_reach(palette)
+
+    if (is.null(pal)) {
+
+      pal <- pal_fallback(
+        reverse = reverse,
+        discrete = discrete,
+        color_ramp_palette = TRUE)
+
+      rlang::warn(
+        c(
+          paste0("There is no palette '", palette, "' for the selected initiative. Fallback to pal_fallback()."),
+          "i" = paste0("Use `pal_reach(show_palettes = TRUE)` to see the list of available palettes.")
+        )
       )
+
+      if (discrete) palette <- "viridis" else palette <- "magma"
+
+    } else {
+
+      pal <- pal_reach(
+        palette = palette,
+        reverse = reverse,
+        color_ramp_palette = TRUE,
+        show_palettes = FALSE
+      )
+
+    }
+
   } else if (initiative == "agora") {
-    pal <- pal_agora(
-      palette = palette,
+
+    pal <- pal_agora(palette)
+
+    if (is.null(pal)) {
+
+      pal <- pal_fallback(
+        reverse = reverse,
+        discrete = discrete,
+        color_ramp_palette = TRUE)
+
+      rlang::warn(
+        c(
+          paste0("There is no palette '", palette, "' for the selected initiative. Fallback to pal_fallback()."),
+          "i" = paste0("Use `pal_reach(show_palettes = TRUE)` to see the list of available palettes.")
+        )
+      )
+
+      if (discrete) palette <- "viridis" else palette <- "magma"
+
+    } else {
+
+      pal <- pal_agora(
+        palette = palette,
+        reverse = reverse,
+        color_ramp_palette = TRUE,
+        show_palettes = FALSE
+      )
+    }
+
+  } else if (initiative == "default") {
+
+    pal <- pal_fallback(
       reverse = reverse,
-      color_ramp_palette = TRUE,
-      show_palettes = FALSE
-    )
+      discrete = discrete,
+      color_ramp_palette = TRUE)
+
+    if (discrete) palette <- "viridis" else palette <- "magma"
+
   } else {
-    rlang::abort(c("Wrong initiative parameter input", "*" = paste0(initiative, "is not an option"), "i" = "Parameter 'initiative' should be one of 'reach' or 'agora'"))
+    rlang::abort(
+      c(
+        paste0("There is no initiative '", initiative, "."),
+        "i" = paste0("initiative should be either 'reach', 'agora' or 'default'")
+      )
+    )
   }
 
   if (discrete) {
@@ -41,8 +102,10 @@ scale_color  <- function(initiative = "reach", palette = "main", discrete = TRUE
         draw.ulim = TRUE,
         draw.llim = TRUE,
         ticks.colour = "#F1F3F5",
-        reverse = reverse_guide),
-      ...)
+        reverse = reverse_guide
+      ),
+      ...
+    )
   } else {
     ggplot2::scale_color_gradientn(
       colours = pal(256),
@@ -53,7 +116,8 @@ scale_color  <- function(initiative = "reach", palette = "main", discrete = TRUE
         ticks.colour = "#F1F3F5",
         reverse = reverse_guide
       ),
-      ...)
+      ...
+    )
   }
 }
 
@@ -61,7 +125,7 @@ scale_color  <- function(initiative = "reach", palette = "main", discrete = TRUE
 
 #' Fill scale constructor for REACH or AGORA colors
 #'
-#' @param initiative Either "reach" or "agora.
+#' @param initiative Either "reach" or "agora" or "default".
 #' @param palette Palette name from `pal_reach()` or `pal_agora()`.
 #' @param discrete Boolean indicating whether color aesthetic is discrete or not.
 #' @param reverse Boolean indicating whether the palette should be reversed.
@@ -72,24 +136,86 @@ scale_color  <- function(initiative = "reach", palette = "main", discrete = TRUE
 #' @return A fill scale for ggplot.
 #'
 #' @export
-scale_fill  <- function(initiative = "reach", palette = "main", discrete = TRUE, reverse = FALSE, reverse_guide = TRUE, ...) {
+scale_fill <- function(initiative = "reach", palette = "main", discrete = TRUE, reverse = FALSE, reverse_guide = TRUE, ...) {
+
 
   if (initiative == "reach") {
-    pal <- pal_reach(
-      palette = palette,
-      reverse = reverse,
-      color_ramp_palette = TRUE,
-      show_palettes = FALSE
-    )
+
+    pal <- pal_reach(palette)
+
+    if (is.null(pal)) {
+
+      pal <- pal_fallback(
+        reverse = reverse,
+        discrete = discrete,
+        color_ramp_palette = TRUE)
+
+      rlang::warn(
+        c(
+          paste0("There is no palette '", palette, "' for the selected initiative. Fallback to pal_fallback()."),
+          "i" = paste0("Use `pal_reach(show_palettes = TRUE)` to see the list of available palettes.")
+        )
+      )
+
+      if (discrete) palette <- "viridis" else palette <- "magma"
+
+    } else {
+
+      pal <- pal_reach(
+        palette = palette,
+        reverse = reverse,
+        color_ramp_palette = TRUE,
+        show_palettes = FALSE
+      )
+
+    }
+
   } else if (initiative == "agora") {
-    pal <- pal_agora(
-      palette = palette,
+
+    pal <- pal_agora(palette)
+
+    if (is.null(pal)) {
+
+      pal <- pal_fallback(
+        reverse = reverse,
+        discrete = discrete,
+        color_ramp_palette = TRUE)
+
+      rlang::warn(
+        c(
+          paste0("There is no palette '", palette, "' for the selected initiative. Fallback to pal_fallback()."),
+          "i" = paste0("Use `pal_reach(show_palettes = TRUE)` to see the list of available palettes.")
+        )
+      )
+
+      if (discrete) palette <- "viridis" else palette <- "magma"
+
+    } else {
+
+      pal <- pal_agora(
+        palette = palette,
+        reverse = reverse,
+        color_ramp_palette = TRUE,
+        show_palettes = FALSE
+      )
+    }
+
+  } else if (initiative == "default") {
+
+    pal <- pal_fallback(
       reverse = reverse,
-      color_ramp_palette = TRUE,
-      show_palettes = FALSE
-    )
+      discrete = discrete,
+      color_ramp_palette = TRUE)
+
+    if (discrete) palette <- "viridis" else palette <- "magma"
+
   } else {
-    rlang::abort(c("Wrong initiative parameter input", "*" = paste0(initiative, "is not an option"), "i" = "Parameter 'initiative' should be one of 'reach' or 'agora'"))
+    rlang::abort(
+      c(
+        paste0("There is no initiative '", initiative, "."),
+        "i" = paste0("initiative should be either 'reach', 'agora' or 'default'")
+      )
+    )
   }
 
   if (discrete) {
@@ -102,17 +228,21 @@ scale_fill  <- function(initiative = "reach", palette = "main", discrete = TRUE,
         draw.ulim = TRUE,
         draw.llim = TRUE,
         ticks.colour = "#F1F3F5",
-        reverse = reverse_guide),
-      ...)
+        reverse = reverse_guide
+      ),
+      ...
+    )
   } else {
-    ggplot2::scale_fill_gradientn(
+    ggplot2::scale_color_gradientn(
       colours = pal(256),
       guide = ggplot2::guide_colorbar(
         title.position = "top",
         draw.ulim = TRUE,
         draw.llim = TRUE,
         ticks.colour = "#F1F3F5",
-        reverse = reverse_guide),
-        ...)
+        reverse = reverse_guide
+      ),
+      ...
+    )
   }
 }

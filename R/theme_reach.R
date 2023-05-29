@@ -1,16 +1,20 @@
 #' @title ggplot2 theme with REACH color palettes
 #'
+#' @param initiative Either "reach" or "default".
 #' @param palette Palette name from 'pal_reach()'.
 #' @param discrete 	Boolean indicating whether color aesthetic is discrete or not.
 #' @param reverse Boolean indicating whether the palette should be reversed.
-#' @param font_family The font family for all plot's texts. Default to "Leelawadee".
+#' @param font_family The font family for all plot's texts. Default to "Segoe UI".
 #' @param title_size The size of the title. Defaults to 12.
 #' @param title_color Title color.
 #' @param title_font_face Title font face. Default to "bold". Font face ("plain", "italic", "bold", "bold.italic").
+#' @param title_hjust Title horizontal justification. Default to NULL. Use 0.5 to center the title.
 #' @param text_size The size of all text other than the title, subtitle and caption. Defaults to 10.
 #' @param text_color Text color.
 #' @param text_font_face Text font face. Default to "bold". Font face ("plain", "italic", "bold", "bold.italic").
 #' @param panel_background_color The color for the panel background color. Default to white.
+#' @param panel_border Boolean. Plot a panel border? Default to FALSE.
+#' @param panel_border_color A color. Default to REACH main grey.
 #' @param legend_position Position of the legend; Default to "right". Can take "right", "left", "top", "bottom" or "none".
 #' @param legend_direction Direction of the legend. Default to "vertical". Can take "vertical" or "horizontal".
 #' @param legend_title_size Legend title size.
@@ -55,6 +59,7 @@
 #'
 #' @export
 theme_reach <- function(
+    initiative = "reach",
     palette = "main",
     discrete = TRUE,
     reverse = FALSE,
@@ -62,11 +67,14 @@ theme_reach <- function(
     title_size = 12,
     title_color = cols_reach("main_grey"),
     title_font_face = "bold",
+    title_hjust = NULL,
     title_position_to_plot = TRUE,
     text_size = 10,
     text_color = cols_reach("main_grey"),
     text_font_face = "plain",
     panel_background_color = "#FFFFFF",
+    panel_border = FALSE,
+    panel_border_color = cols_reach("main_grey"),
     legend_position = "right",
     legend_direction = "vertical",
     legend_reverse = TRUE,
@@ -103,6 +111,14 @@ theme_reach <- function(
 
   # To do :
   # - add facet theming
+
+  if (!initiative %in% c("reach", "default"))
+    rlang::abort(
+      c(
+        paste0("There is no initiative '", initiative, " to be used with theme_reach()."),
+        "i" = paste0("initiative should be either 'reach' or 'default'")
+      )
+    )
 
   # Basic simple theme
   # theme_reach <- ggplot2::theme_bw()
@@ -145,9 +161,13 @@ theme_reach <- function(
       face = axis_title_font_face,
       color = axis_title_color),
     # Wrap title
-    plot.title = ggtext::element_textbox_simple(),
-    plot.subtitle = ggtext::element_textbox_simple(),
-    plot.caption = ggtext::element_textbox_simple(),
+    plot.title = ggtext::element_textbox(
+      hjust = title_hjust
+    ),
+    plot.subtitle = ggtext::element_textbox(
+      hjust = title_hjust
+    ),
+    plot.caption = ggtext::element_textbox(),
     legend.title = ggplot2::element_text(
       size = legend_title_size,
       face = legend_title_font_face,
@@ -244,32 +264,24 @@ theme_reach <- function(
               color = grid_minor_color,
               linewidth = grid_minor_y_size)
               )
+  if (!panel_border) theme_reach <- theme_reach +
+      ggplot2::theme(
+        panel.border = ggplot2::element_blank()
+      ) else theme_reach <- theme_reach +
+          ggplot2::theme(
+            panel.border = ggplot2::element_rect(color = panel_background_color)
+          )
+
 
   # Other parameters
   theme_reach <- theme_reach + ggplot2::theme(...)
-
-
-  # Check if palette is an actual existing palette
-  pal <- pal_reach(palette)
-
-  if(is.null(pal)) {
-    rlang::warn(
-      c(
-        paste0("There is no palette '", palette, "' for initiative 'reach'. Fallback to REACH main palette."),
-        "i" = paste0("Use `pal_reach(show_palettes = TRUE)` to see the list of availabale palettes.")
-        )
-      )
-
-    palette <- "main"
-
-  }
 
   # Add reach color palettes by default
   # (reversed guide is defaulted to TRUE for natural reading)
   theme_reach <- list(
     theme_reach,
-    scale_color(palette = palette, discrete = discrete, reverse = reverse, reverse_guide = legend_reverse),
-    scale_fill(palette = palette, discrete = discrete, reverse = reverse, reverse_guide = legend_reverse)
+    scale_color(initiative = initiative, palette = palette, discrete = discrete, reverse = reverse, reverse_guide = legend_reverse),
+    scale_fill(initiative = initiative, palette = palette, discrete = discrete, reverse = reverse, reverse_guide = legend_reverse)
     )
 
 

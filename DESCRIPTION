@@ -1,7 +1,7 @@
 Package: visualizeR
 Type: Package
 Title: What a color! What a viz!
-Version: 0.7.9000
+Version: 0.8.9000
 Authors@R: c(
         person(
             'Noblet', 'Guillaume',
@@ -20,7 +20,7 @@ LazyData: true
 RoxygenNote: 7.2.3
 Imports: 
     ggplot2,
-    rlang,
+    rlang (>= 0.4.11),
     grDevices,
     glue,
     scales,
@@ -28,6 +28,12 @@ Imports:
     ggrepel,
     tidyr,
     dplyr,
-    ggalluvial
-Suggests: knitr, sf, tmap
+    ggalluvial,
+    viridisLite,
+    waffle
+Suggests: 
+    knitr,
+    roxygen2,
+    sf,
+    tmap
 VignetteBuilder: knitr

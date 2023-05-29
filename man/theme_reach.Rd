@@ -5,6 +5,7 @@
 \title{ggplot2 theme with REACH color palettes}
 \usage{
 theme_reach(
+  initiative = "reach",
   palette = "main",
   discrete = TRUE,
   reverse = FALSE,
@@ -12,11 +13,14 @@ theme_reach(
   title_size = 12,
   title_color = cols_reach("main_grey"),
   title_font_face = "bold",
+  title_hjust = NULL,
   title_position_to_plot = TRUE,
   text_size = 10,
   text_color = cols_reach("main_grey"),
   text_font_face = "plain",
   panel_background_color = "#FFFFFF",
+  panel_border = FALSE,
+  panel_border_color = cols_reach("main_grey"),
   legend_position = "right",
   legend_direction = "vertical",
   legend_reverse = TRUE,
@@ -52,19 +56,23 @@ theme_reach(
 )
 }
 \arguments{
+\item{initiative}{Either "reach" or "default".}
+
 \item{palette}{Palette name from 'pal_reach()'.}
 
 \item{discrete}{Boolean indicating whether color aesthetic is discrete or not.}
 
 \item{reverse}{Boolean indicating whether the palette should be reversed.}
 
-\item{font_family}{The font family for all plot's texts. Default to "Leelawadee".}
+\item{font_family}{The font family for all plot's texts. Default to "Segoe UI".}
 
 \item{title_size}{The size of the legend title. Defaults to 11.}
 
 \item{title_color}{Legend title color.}
 
 \item{title_font_face}{Legend title font face. Default to "plain". Font face ("plain", "italic", "bold", "bold.italic").}
+
+\item{title_hjust}{Title horizontal justification. Default to NULL. Use 0.5 to center the title.}
 
 \item{title_position_to_plot}{TRUE or FALSE. Positioning to plot or to panel?}
 
@@ -75,6 +83,10 @@ theme_reach(
 \item{text_font_face}{Text font face. Default to "bold". Font face ("plain", "italic", "bold", "bold.italic").}
 
 \item{panel_background_color}{The color for the panel background color. Default to white.}
+
+\item{panel_border}{Boolean. Plot a panel border? Default to FALSE.}
+
+\item{panel_border_color}{A color. Default to REACH main grey.}
 
 \item{legend_position}{Position of the legend; Default to "right". Can take "right", "left", "top", "bottom" or "none".}
 

@@ -128,6 +128,7 @@ df <- tibble::tibble(
   dplyr::mutate(stat = round(stat, 0))
 
 # Example, adding a parameter to `theme_reach()` passed on `ggplot2::theme()` to align legend title
+
 dumbbell(df,
          stat,
          setting,
@@ -148,7 +149,7 @@ dumbbell(df,
   )
 ```
 
-### Example 4: donut chart, REACH themed (to used moderately)
+### Example 4: donut chart, REACH themed (to used once, not twice)
 ```{r example-donut-plot, out.width = "65%", warning = FALSE}
 
 # Some summarized data: % of HHs by displacement status
@@ -170,7 +171,15 @@ donut(df,
       theme = theme_reach(legend_reverse = TRUE))
 ```
 
-### Example 5: alluvial chart, REACH themed
+
+### Example 5: waffle chart
+```{r example-waffle-plot, out.width = "65%", warning = FALSE}
+#
+waffle(df, status, percentage, x_title = "A caption", title = "A title", subtitle = "A subtitle")
+```
+
+
+### Example 6: alluvial chart, REACH themed
 ```{r example-alluvial-plot, out.width = "65%", warning = FALSE}
 
 # Some summarized data: % of HHs by self-reported status of displacement in 2021 and in 2022
@@ -200,7 +209,7 @@ alluvial(df,
 
 ```
 
-### Example 6: lollipop chart
+### Example 7: lollipop chart
 ```{r example-lollipop-chart, out.width = "65%", warning = FALSE}
 library(tidyr)
 # Prepare long data
