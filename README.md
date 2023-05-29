@@ -3,7 +3,7 @@
 
 # visualizeR <img src="man/figures/logo.png" align="right" alt="" width="120"/>
 
-> What a color! What a viz!
+> What a color\! What a viz\!
 
 `visualizeR` proposes some utils to get REACH and AGORA colors,
 ready-to-go color palettes, and a few visualization functions
@@ -23,16 +23,16 @@ devtools::install_github("gnoblet/visualizeR", build_vignettes = TRUE)
 
 Roadmap is as follows:
 
--   [x] Add IMPACT’s colors
--   [x] Add all color palettes from the internal documentation
--   [ ] There remains to be added more-than-7-color palettes and black
+  - \[X\] Add IMPACT’s colors
+  - \[X\] Add all color palettes from the internal documentation
+  - \[ \] There remains to be added more-than-7-color palettes and black
     color palettes
--   [x] Add new types of visualization (e.g. dumbbell plot, lollipop
+  - \[X\] Add new types of visualization (e.g. dumbbell plot, lollipop
     plot, etc.)
--   [x] Use examples
--   [ ] Add some ease-map functions
--   [ ] Add some interactive functions (maps and graphs)
--   [ ] Consolidate and make errors transparent
+  - \[X\] Use examples
+  - \[ \] Add some ease-map functions
+  - \[ \] Add some interactive functions (maps and graphs)
+  - \[ \] Consolidate and make errors transparent
 
 ## Request
 
@@ -98,6 +98,7 @@ bar(df, island, mean_bl, species, percent = FALSE, alpha = 0.6, x_title = "Mean 
 <img src="man/figures/README-example-bar-chart-1.png" width="65%" />
 
 ``` r
+
 # Using another color palette through `theme_reach()` and changing scale to percent
 bar(df, island,mean_bl, species, percent = TRUE, theme = theme_reach(palette = "artichoke_3"))
 ```
@@ -105,6 +106,7 @@ bar(df, island,mean_bl, species, percent = TRUE, theme = theme_reach(palette = "
 <img src="man/figures/README-example-bar-chart-2.png" width="65%" />
 
 ``` r
+
 # Not flipped, with text added, group_title, no y-axis and no bold for legend
 bar(df, island, mean_bl, species, group_title = "Species", flip = FALSE, add_text = TRUE, add_text_suffix = "%", percent = FALSE, theme = theme_reach(text_font_face = "plain", axis_y = FALSE))
 ```
@@ -117,6 +119,7 @@ At this stage, `point_reach()` only supports categorical grouping colors
 with the `group` arg.
 
 ``` r
+
 # Simple point chart
 point(penguins, bill_length_mm, flipper_length_mm)
 ```
@@ -124,6 +127,7 @@ point(penguins, bill_length_mm, flipper_length_mm)
 <img src="man/figures/README-example-point-chart-1.png" width="65%" />
 
 ``` r
+
 # Point chart with grouping colors, greater dot size, some transparency, reversed color palette
 point(penguins, bill_length_mm, flipper_length_mm, island, alpha = 0.6, size = 3, theme = theme_reach(reverse = TRUE))
 ```
@@ -131,6 +135,7 @@ point(penguins, bill_length_mm, flipper_length_mm, island, alpha = 0.6, size = 3
 <img src="man/figures/README-example-point-chart-2.png" width="65%" />
 
 ``` r
+
 # Using another color palettes
 point(penguins, bill_length_mm, flipper_length_mm, island, size = 1.5, x_title = "Bill", y_title = "Flipper", title = "Length (mm)", theme = theme_reach(palette = "artichoke_3", text_font_face = , grid_major_x = TRUE,  title_position_to_plot = FALSE))
 ```
@@ -153,6 +158,7 @@ df <- tibble::tibble(
   dplyr::mutate(stat = round(stat, 0))
 
 # Example, adding a parameter to `theme_reach()` passed on `ggplot2::theme()` to align legend title
+
 dumbbell(df,
          stat,
          setting,
@@ -175,9 +181,10 @@ dumbbell(df,
 
 <img src="man/figures/README-example-dumbbell-plot-1.png" width="65%" />
 
-### Example 4: donut chart, REACH themed (to used moderately)
+### Example 4: donut chart, REACH themed (to used once, not twice)
 
 ``` r
+
 # Some summarized data: % of HHs by displacement status
 df <- tibble::tibble(
   status = c("Displaced", "Non displaced", "Returnee", "Don't know/Prefer not to say"),
@@ -199,9 +206,19 @@ donut(df,
 
 <img src="man/figures/README-example-donut-plot-1.png" width="65%" />
 
-### Example 5: alluvial chart, REACH themed
+### Example 5: waffle chart
 
 ``` r
+#
+waffle(df, status, percentage, x_title = "A caption", title = "A title", subtitle = "A subtitle")
+```
+
+<img src="man/figures/README-example-waffle-plot-1.png" width="65%" />
+
+### Example 6: alluvial chart, REACH themed
+
+``` r
+
 # Some summarized data: % of HHs by self-reported status of displacement in 2021 and in 2022
 df <- tibble::tibble(
   status_from = c(rep("Displaced", 4),
@@ -230,7 +247,7 @@ alluvial(df,
 
 <img src="man/figures/README-example-alluvial-plot-1.png" width="65%" />
 
-### Example 6: lollipop chart
+### Example 7: lollipop chart
 
 ``` r
 library(tidyr)
@@ -260,6 +277,7 @@ lollipop(df,
 <img src="man/figures/README-example-lollipop-chart-1.png" width="65%" />
 
 ``` r
+
 # Horizontal, greater point size, arranged by value, no grid, and text labels added
 lollipop(df,
          admin1,
@@ -281,6 +299,7 @@ lollipop(df,
 ## Maps
 
 ``` r
+
 # Add indicator layer 
 # - based on "pretty" classes and title "Proportion (%)" 
 # - buffer to add a 10% around the bounding box
