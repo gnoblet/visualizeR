@@ -94,6 +94,9 @@
     <loc>https://gnoblet.github.io/visualizeR/reference/pal_agora.html</loc>
   </url>
   <url>
+    <loc>https://gnoblet.github.io/visualizeR/reference/pal_fallback.html</loc>
+  </url>
+  <url>
     <loc>https://gnoblet.github.io/visualizeR/reference/pal_impact.html</loc>
   </url>
   <url>
@@ -113,5 +116,11 @@
   </url>
   <url>
     <loc>https://gnoblet.github.io/visualizeR/reference/theme_reach.html</loc>
+  </url>
+  <url>
+    <loc>https://gnoblet.github.io/visualizeR/reference/visualizeR-package.html</loc>
+  </url>
+  <url>
+    <loc>https://gnoblet.github.io/visualizeR/reference/waffle.html</loc>
   </url>
 </urlset>

@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="index.html">visualizeR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.7.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.8.9000</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,23 +86,15 @@
 <h2 id="roadmap">Roadmap<a class="anchor" aria-label="anchor" href="#roadmap"></a>
 </h2>
 <p>Roadmap is as follows:</p>
-<ul class="task-list">
-<li>
-<input type="checkbox" disabled checked>Add IMPACT’s colors</li>
-<li>
-<input type="checkbox" disabled checked>Add all color palettes from the internal documentation</li>
-<li>
-<input type="checkbox" disabled>There remains to be added more-than-7-color palettes and black color palettes</li>
-<li>
-<input type="checkbox" disabled checked>Add new types of visualization (e.g. dumbbell plot, lollipop plot, etc.)</li>
-<li>
-<input type="checkbox" disabled checked>Use examples</li>
-<li>
-<input type="checkbox" disabled>Add some ease-map functions</li>
-<li>
-<input type="checkbox" disabled>Add some interactive functions (maps and graphs)</li>
-<li>
-<input type="checkbox" disabled>Consolidate and make errors transparent</li>
+<ul>
+<li>[X] Add IMPACT’s colors</li>
+<li>[X] Add all color palettes from the internal documentation</li>
+<li>[ ] There remains to be added more-than-7-color palettes and black color palettes</li>
+<li>[X] Add new types of visualization (e.g. dumbbell plot, lollipop plot, etc.)</li>
+<li>[X] Use examples</li>
+<li>[ ] Add some ease-map functions</li>
+<li>[ ] Add some interactive functions (maps and graphs)</li>
+<li>[ ] Consolidate and make errors transparent</li>
 </ul>
 </div>
 <div class="section level2">
@@ -162,11 +154,13 @@
 <span><span class="fu"><a href="reference/bar.html">bar</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">island</span>, <span class="va">mean_bl</span>, <span class="va">species</span>, percent <span class="op">=</span> <span class="cn">FALSE</span>, alpha <span class="op">=</span> <span class="fl">0.6</span>, x_title <span class="op">=</span> <span class="st">"Mean of bill length"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-example-bar-chart-1.png" width="65%"></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Using another color palette through `theme_reach()` and changing scale to percent</span></span>
+<code class="sourceCode R"><span></span>
+<span><span class="co"># Using another color palette through `theme_reach()` and changing scale to percent</span></span>
 <span><span class="fu"><a href="reference/bar.html">bar</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">island</span>,<span class="va">mean_bl</span>, <span class="va">species</span>, percent <span class="op">=</span> <span class="cn">TRUE</span>, theme <span class="op">=</span> <span class="fu"><a href="reference/theme_reach.html">theme_reach</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"artichoke_3"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-example-bar-chart-2.png" width="65%"></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Not flipped, with text added, group_title, no y-axis and no bold for legend</span></span>
+<code class="sourceCode R"><span></span>
+<span><span class="co"># Not flipped, with text added, group_title, no y-axis and no bold for legend</span></span>
 <span><span class="fu"><a href="reference/bar.html">bar</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">island</span>, <span class="va">mean_bl</span>, <span class="va">species</span>, group_title <span class="op">=</span> <span class="st">"Species"</span>, flip <span class="op">=</span> <span class="cn">FALSE</span>, add_text <span class="op">=</span> <span class="cn">TRUE</span>, add_text_suffix <span class="op">=</span> <span class="st">"%"</span>, percent <span class="op">=</span> <span class="cn">FALSE</span>, theme <span class="op">=</span> <span class="fu"><a href="reference/theme_reach.html">theme_reach</a></span><span class="op">(</span>text_font_face <span class="op">=</span> <span class="st">"plain"</span>, axis_y <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-example-bar-chart-3.png" width="65%"></p>
 </div>
@@ -175,15 +169,18 @@
 </h3>
 <p>At this stage, <code>point_reach()</code> only supports categorical grouping colors with the <code>group</code> arg.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Simple point chart</span></span>
+<code class="sourceCode R"><span></span>
+<span><span class="co"># Simple point chart</span></span>
 <span><span class="fu"><a href="reference/point.html">point</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="va">bill_length_mm</span>, <span class="va">flipper_length_mm</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-example-point-chart-1.png" width="65%"></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Point chart with grouping colors, greater dot size, some transparency, reversed color palette</span></span>
+<code class="sourceCode R"><span></span>
+<span><span class="co"># Point chart with grouping colors, greater dot size, some transparency, reversed color palette</span></span>
 <span><span class="fu"><a href="reference/point.html">point</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="va">bill_length_mm</span>, <span class="va">flipper_length_mm</span>, <span class="va">island</span>, alpha <span class="op">=</span> <span class="fl">0.6</span>, size <span class="op">=</span> <span class="fl">3</span>, theme <span class="op">=</span> <span class="fu"><a href="reference/theme_reach.html">theme_reach</a></span><span class="op">(</span>reverse <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-example-point-chart-2.png" width="65%"></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Using another color palettes</span></span>
+<code class="sourceCode R"><span></span>
+<span><span class="co"># Using another color palettes</span></span>
 <span><span class="fu"><a href="reference/point.html">point</a></span><span class="op">(</span><span class="va">penguins</span>, <span class="va">bill_length_mm</span>, <span class="va">flipper_length_mm</span>, <span class="va">island</span>, size <span class="op">=</span> <span class="fl">1.5</span>, x_title <span class="op">=</span> <span class="st">"Bill"</span>, y_title <span class="op">=</span> <span class="st">"Flipper"</span>, title <span class="op">=</span> <span class="st">"Length (mm)"</span>, theme <span class="op">=</span> <span class="fu"><a href="reference/theme_reach.html">theme_reach</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"artichoke_3"</span>, text_font_face <span class="op">=</span> , grid_major_x <span class="op">=</span> <span class="cn">TRUE</span>,  title_position_to_plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-example-point-chart-3.png" width="65%"></p>
 </div>
@@ -201,6 +198,7 @@
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>stat <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">stat</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Example, adding a parameter to `theme_reach()` passed on `ggplot2::theme()` to align legend title</span></span>
+<span></span>
 <span><span class="fu"><a href="reference/dumbbell.html">dumbbell</a></span><span class="op">(</span><span class="va">df</span>,</span>
 <span>         <span class="va">stat</span>,</span>
 <span>         <span class="va">setting</span>,</span>
@@ -222,10 +220,11 @@
 <p><img src="reference/figures/README-example-dumbbell-plot-1.png" width="65%"></p>
 </div>
 <div class="section level3">
-<h3 id="example-4-donut-chart-reach-themed-to-used-moderately">Example 4: donut chart, REACH themed (to used moderately)<a class="anchor" aria-label="anchor" href="#example-4-donut-chart-reach-themed-to-used-moderately"></a>
+<h3 id="example-4-donut-chart-reach-themed-to-used-once-not-twice">Example 4: donut chart, REACH themed (to used once, not twice)<a class="anchor" aria-label="anchor" href="#example-4-donut-chart-reach-themed-to-used-once-not-twice"></a>
 </h3>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Some summarized data: % of HHs by displacement status</span></span>
+<code class="sourceCode R"><span></span>
+<span><span class="co"># Some summarized data: % of HHs by displacement status</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
 <span>  status <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Displaced"</span>, <span class="st">"Non displaced"</span>, <span class="st">"Returnee"</span>, <span class="st">"Don't know/Prefer not to say"</span><span class="op">)</span>,</span>
 <span>  percentage <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">18</span>, <span class="fl">65</span>, <span class="fl">12</span>, <span class="fl">3</span><span class="op">)</span></span>
@@ -245,10 +244,19 @@
 <p><img src="reference/figures/README-example-donut-plot-1.png" width="65%"></p>
 </div>
 <div class="section level3">
-<h3 id="example-5-alluvial-chart-reach-themed">Example 5: alluvial chart, REACH themed<a class="anchor" aria-label="anchor" href="#example-5-alluvial-chart-reach-themed"></a>
+<h3 id="example-5-waffle-chart">Example 5: waffle chart<a class="anchor" aria-label="anchor" href="#example-5-waffle-chart"></a>
 </h3>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Some summarized data: % of HHs by self-reported status of displacement in 2021 and in 2022</span></span>
+<code class="sourceCode R"><span><span class="co">#</span></span>
+<span><span class="fu"><a href="reference/waffle.html">waffle</a></span><span class="op">(</span><span class="va">df</span>, <span class="va">status</span>, <span class="va">percentage</span>, x_title <span class="op">=</span> <span class="st">"A caption"</span>, title <span class="op">=</span> <span class="st">"A title"</span>, subtitle <span class="op">=</span> <span class="st">"A subtitle"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-example-waffle-plot-1.png" width="65%"></p>
+</div>
+<div class="section level3">
+<h3 id="example-6-alluvial-chart-reach-themed">Example 6: alluvial chart, REACH themed<a class="anchor" aria-label="anchor" href="#example-6-alluvial-chart-reach-themed"></a>
+</h3>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="co"># Some summarized data: % of HHs by self-reported status of displacement in 2021 and in 2022</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
 <span>  status_from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Displaced"</span>, <span class="fl">4</span><span class="op">)</span>,</span>
 <span>                  <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"Non displaced"</span>, <span class="fl">4</span><span class="op">)</span>,</span>
@@ -275,9 +283,9 @@
 <p><img src="reference/figures/README-example-alluvial-plot-1.png" width="65%"></p>
 </div>
 <div class="section level3">
-<h3 id="example-6-lollipop-chart">Example 6: lollipop chart<a class="anchor" aria-label="anchor" href="#example-6-lollipop-chart"></a>
+<h3 id="example-7-lollipop-chart">Example 7: lollipop chart<a class="anchor" aria-label="anchor" href="#example-7-lollipop-chart"></a>
 </h3>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
 <span><span class="co"># Prepare long data</span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span></span>
@@ -301,8 +309,9 @@
 <span>                             grid_major_x <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>                             grid_minor_y <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-example-lollipop-chart-1.png" width="65%"></p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Horizontal, greater point size, arranged by value, no grid, and text labels added</span></span>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="co"># Horizontal, greater point size, arranged by value, no grid, and text labels added</span></span>
 <span><span class="fu"><a href="reference/lollipop.html">lollipop</a></span><span class="op">(</span><span class="va">df</span>,</span>
 <span>         <span class="va">admin1</span>,</span>
 <span>         <span class="va">stat</span>,</span>
@@ -322,8 +331,9 @@
 <div class="section level2">
 <h2 id="maps">Maps<a class="anchor" aria-label="anchor" href="#maps"></a>
 </h2>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Add indicator layer </span></span>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="co"># Add indicator layer </span></span>
 <span><span class="co"># - based on "pretty" classes and title "Proportion (%)" </span></span>
 <span><span class="co"># - buffer to add a 10% around the bounding box</span></span>
 <span><span class="va">map</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/add_indicator_layer.html">add_indicator_layer</a></span><span class="op">(</span></span>
@@ -348,7 +358,7 @@
 <span>  <span class="co"># Add credits</span></span>
 <span>  <span class="fu"><a href="reference/add_credits.html">add_credits</a></span><span class="op">(</span><span class="st">"Admin. boundaries. : CNIGS \nCoord. system: GCS WGS 1984"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
-<img src="reference/figures/README-example-map.png" alt=""><p class="caption">Once exported with <code><a href="https://rdrr.io/pkg/tmap/man/tmap_save.html" class="external-link">tmap::tmap_save()</a></code>.</p>
+<img src="reference/figures/README-example-map.png" alt="Once exported with tmap::tmap_save()."><p class="caption">Once exported with <code><a href="https://rdrr.io/pkg/tmap/man/tmap_save.html" class="external-link">tmap::tmap_save()</a></code>.</p>
 </div>
 </div>
 </div>
