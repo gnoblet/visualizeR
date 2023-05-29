@@ -13,15 +13,9 @@ pal_agora <- function(palette = "main", reverse = FALSE, color_ramp_palette = FA
 
 
   palettes_agora <- list(
-    `main`            = cols_agora("main_grey", "main_red", "main_lt_grey", "main_beige"),
-    `primary`         = cols_agora("main_grey", "main_red"),
-    `secondary`       = cols_agora("main_lt_grey", "main_beige"),
-    `two_dots`        = cols_agora("two_dots_1", "two_dots_2"),
-    `two_dots_flashy` = cols_agora("two_dots_flashy_1", "two_dots_flashy_2"),
-    `red_main`        = cols_agora("red_main_1", "red_main_2", "red_main_3", "red_main_4", "red_main_5"),
-    `red_alt`         = cols_agora("red_alt_1", "red_alt_2", "red_alt_3", "red_alt_4", "red_alt_5"),
-    `iroise`          = cols_agora("iroise_1", "iroise_2", "iroise_3", "iroise_4", "iroise_5"),
-    `discrete_6`      = cols_agora("dk_grey", "red_main_1", "main_beige", "red_main_2", "lt_grey_2", "red_4")
+    `main`            = cols_agora("main_bordeaux", "main_dk_beige", "main_lt_grey", "main_lt_beige"),
+    `primary`         = cols_agora("main_bordeaux", "main_dk_beige"),
+    `secondary`       = cols_agora( "main_lt_grey", "main_lt_beige")
   )
 
   if (show_palettes) return(names(palettes_agora))

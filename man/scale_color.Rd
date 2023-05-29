@@ -9,36 +9,27 @@ scale_color(
   palette = "main",
   discrete = TRUE,
   reverse = FALSE,
-  ...
-)
-
-scale_color(
-  initiative = "reach",
-  palette = "main",
-  discrete = TRUE,
-  reverse = FALSE,
+  reverse_guide = TRUE,
   ...
 )
 }
 \arguments{
-\item{initiative}{Either "reach" or "agora}
+\item{initiative}{Either "reach" or "agora" or "default".}
 
-\item{palette}{Character name of palette in drsimonj_palettes}
+\item{palette}{Palette name from `pal_reach()` or `pal_agora()`.}
 
-\item{discrete}{Boolean indicating whether color aesthetic is discrete or not}
+\item{discrete}{Boolean indicating whether color aesthetic is discrete or not.}
 
-\item{reverse}{Boolean indicating whether the palette should be reversed}
+\item{reverse}{Boolean indicating whether the palette should be reversed.}
+
+\item{reverse_guide}{Boolean indicating whether the guide should be reversed.}
 
 \item{...}{Additional arguments passed to discrete_scale() or
-scale_fill_gradientn(), used respectively when discrete is TRUE or FALSE}
+scale_fill_gradient(), used respectively when discrete is TRUE or FALSE.}
 }
 \value{
 A color scale for ggplot
-
-A fill scale for ggplot
 }
 \description{
 Color scale constructor for REACH or AGORA colors
-
-Fill scale constructor for REACH or AGORA colors
 }
