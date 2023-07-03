@@ -60,7 +60,7 @@ donut <- function(df,
   # Add text labels
   if (add_text) {
 
-    df <- dplyr::mutate(df, y_treshold = ifelse({{ y }} >= add_text_treshold_display, {{ y }}, NA ))
+    df <- dplyr::mutate(df, y_treshold = ifelse({{ y }} >= add_text_threshold_display, {{ y }}, NA ))
 
     g <- g +
       ggplot2::geom_text(
