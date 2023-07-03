@@ -11,7 +11,7 @@
 #' @param arrange TRUE or FALSE. Arrange by highest percentage first.
 #' @param hole_size Hole size. Default to 3. If less than 2, back to a pie chart.
 #' @param add_text TRUE or FALSE. Add the value as text.
-#' @param add_text_treshold_display Minimum value to add the text label.
+#' @param add_text_threshold_display Minimum value to add the text label.
 #' @param add_text_color Text color.
 #' @param add_text_suffix If percent is FALSE, should we add a suffix to the text label?
 #' @param theme Whatever theme. Default to theme_reach().
