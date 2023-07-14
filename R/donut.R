@@ -11,7 +11,7 @@
 #' @param arrange TRUE or FALSE. Arrange by highest percentage first.
 #' @param hole_size Hole size. Default to 3. If less than 2, back to a pie chart.
 #' @param add_text TRUE or FALSE. Add the value as text.
-#' @param add_text_treshold_display Minimum value to add the text label.
+#' @param add_text_threshold_display Minimum value to add the text label.
 #' @param add_text_color Text color.
 #' @param add_text_suffix If percent is FALSE, should we add a suffix to the text label?
 #' @param theme Whatever theme. Default to theme_reach().
@@ -30,7 +30,7 @@ donut <- function(df,
                   arrange = TRUE,
                   hole_size = 3,
                   add_text = TRUE,
-                  add_text_treshold_display = 5, add_text_color = "white", add_text_suffix = "", theme = theme_reach(legend_reverse = TRUE)){
+                  add_text_treshold_display = 5, add_text_color = "white", add_text_suffix = "", theme = theme_reach(legend_reverse = TRUE, axis_x = FALSE)){
 
   # Arrange by biggest prop first ?
   if (arrange) df <- dplyr::arrange(
@@ -60,7 +60,7 @@ donut <- function(df,
   # Add text labels
   if (add_text) {
 
-    df <- dplyr::mutate(df, y_treshold = ifelse({{ y }} >= add_text_treshold_display, {{ y }}, NA ))
+    df <- dplyr::mutate(df, y_treshold = ifelse({{ y }} >= add_text_threshold_display, {{ y }}, NA ))
 
     g <- g +
       ggplot2::geom_text(

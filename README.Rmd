@@ -168,7 +168,8 @@ donut(df,
       add_text_treshold_display = 5,
       x_title = "Displacement status", 
       title = "% of HHs by displacement status", 
-      theme = theme_reach(legend_reverse = TRUE))
+      theme = theme_reach(legend_reverse = TRUE,
+                          axis_x = FALSE))
 ```
 
 
