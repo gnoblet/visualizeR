@@ -16,13 +16,15 @@
 #' @param subtitle Plot subtitle. Default to NULL.
 #' @param caption Plot caption. Default to NULL.
 #' @param add_text TRUE or FALSE. Add the value as text.
+#' @param add_text_threshold_display Minimum value to add the text label.
+#' @param add_text_color Text color.
 #' @param add_text_suffix If percent is FALSE, should we add a suffix to the text label?
 #' @param theme Whatever theme. Default to theme_reach().
 #'
 #' @return A bar chart
 #'
 #' @export
-bar <- function(df, x, y, group = NULL, flip = TRUE, percent = TRUE, wrap = NULL, position = "dodge", alpha = 1,  x_title = NULL, y_title = NULL, group_title = NULL, title = NULL, subtitle = NULL, caption = NULL, add_text = FALSE, add_text_suffix = "", theme = theme_reach()){
+bar <- function(df, x, y, group = NULL, flip = TRUE, percent = TRUE, wrap = NULL, position = "dodge", alpha = 1,  x_title = NULL, y_title = NULL, group_title = NULL, title = NULL, subtitle = NULL, caption = NULL, width = 0.9, add_text = FALSE, add_text_threshold_display = 5, add_text_color = "white", add_text_suffix = "", theme = theme_reach()){
 
   # To do :
   # - automate bar width and text size, or at least give the flexibility and still center text
@@ -51,8 +53,8 @@ bar <- function(df, x, y, group = NULL, flip = TRUE, percent = TRUE, wrap = NULL
     fill = group_title
   )
 
-  width <- 0.5
-  dodge_width <- 0.5
+  width <- width
+  dodge_width <- width
 
   # Should the graph use position_fill?
   if (position == "stack"){
@@ -108,27 +110,32 @@ bar <- function(df, x, y, group = NULL, flip = TRUE, percent = TRUE, wrap = NULL
 
   # Add text labels
   if (add_text) {
+
+    df <- dplyr::mutate(df, "y_threshold" = ifelse({{ y }} >= add_text_threshold_display, {{ y }}, NA ))
+
     if (percent) {
       g <- g + ggplot2::geom_text(
+        data = df,
         ggplot2::aes(
           label = scales::label_percent(
             accuracy     = 1,
             decimal.mark = ",",
-            suffix       = " %")({{ y }}),
+            suffix       = " %")(!!rlang::sym("y_threshold")),
           group = {{ group }}),
           hjust = hjust_flip,
           vjust = vjust_flip,
-        color = "white",
+        color = add_text_color,
         fontface = "bold",
         position = ggplot2::position_dodge(width = dodge_width))
     } else {
       g <- g + ggplot2::geom_text(
+        data = df,
         ggplot2::aes(
-          label = paste0(round({{ y }}), add_text_suffix),
+          label = paste0(round(!!rlang::sym("y_threshold")), add_text_suffix),
           group = {{ group }}),
         hjust = hjust_flip,
         vjust = vjust_flip,
-        color = "white",
+        color = add_text_color,
         fontface = "bold",
         position = ggplot2::position_dodge(width = dodge_width))
     }
