@@ -30,7 +30,10 @@ donut <- function(df,
                   arrange = TRUE,
                   hole_size = 3,
                   add_text = TRUE,
-                  add_text_treshold_display = 5, add_text_color = "white", add_text_suffix = "", theme = theme_reach(legend_reverse = TRUE, axis_x = FALSE)){
+                  add_text_threshold_display = 5, 
+                  add_text_color = "white", 
+                  add_text_suffix = "", theme = theme_reach(legend_reverse = TRUE)){
+
 
   # Arrange by biggest prop first ?
   if (arrange) df <- dplyr::arrange(
