@@ -1,46 +1,37 @@
-
-
-#' Wrapper around `tmap::tm_polygons()` with sane defaults for plotting indicator values
+#' Wrapper around `ggplot2::geom_sf()` with sane defaults for plotting choropleth
 #'
 #' @param poly Multipolygon shape defined by sf package.
 #' @param col Numeric attribute to map.
-#' @param buffer A buffer, either one value or a vector of 4 values (left, bottom, right, top).
 #' @param n The desire number of classes.
-#' @param style Method to process the color scale for continuous numerical variables. See `classInt::classIntervals()` for details.
+#' @param initiative One of "reach", "agora", or "default"
 #' @param palette Vector of fill colors as hexadecimal values. For REACH color palettes, it is possible to use `pal_reach()`. For now,'palette' must be changed manually, accordingly to the number of drawn classes.
-#' @param as_count Boolean. When col is a numeric variable, should it be processed as a count variable? For instance, 0, 1-10, 11-20.
-#' @param color_na Fill color for missing data.
-#' @param text_na Legend text for missing data.
+#' @param style Method to process the color scale for continuous numerical variables. See `classInt::classIntervals()` for details.
+#' @param intervals Boolean. TRUE, let's make classes. FALSE, let's use a gradient.
+#' @param font_family Font family.
 #' @param legend_title Legend title.
-#' @param legend_text_separator Text separator for classes. E.g. " to " will give 0, 1 to 10, 11 to 20.
-#' @param border_alpha Transparency of the border.
-#' @param border_col Color of the border.
-#' @param lwd Linewidth of the border.
-#' @param ... Other arguments to pass to `tmap::tm_polygons()`.
+#' @param legend_positin Legend position.
+#' @param drop Boolean. Drop missing data?
+#' @param text_na Legend text for missing data.
+#' @param color_na Fill color for missing data.
 #'
-#' @return A tmap layer.
+#' @return A ggplot base choropleth.
+#'
 #' @export
-#'
-add_indicator_layer <- function(
-    poly,
-    col,
-    buffer = NULL,
-    n = 5,
-    style = "pretty",
-    palette = pal_reach("red_5"),
-    as_count = TRUE,
-    color_na = cols_reach("white"),
-    text_na = "Missing data",
-    legend_title = "Proportion (%)",
-    legend_text_separator = " - ",
-    border_alpha = 1,
-    border_col = cols_reach("lt_grey_1"),
-    lwd = 1,
-    ...){
+add_indicator_layer <- function(poly,
+                                col,
+                                n = 5,
+                                initiative = "reach",
+                                palette = "red_5",
+                                style = "pretty",
+                                intervals = TRUE,
+                                font_family = "segoeui",
+                                legend_title = "Proportion (%)",
+                                legend_position = c(0, 0.95),
+                                drop = FALSE,
+                                text_na = "Missing data",
+                                color_na = cols_reach("white")){
 
   #------ Checks and make valid
-
-  rlang::check_installed("tmap", reason = "Package \"tmap\" needed for `add_indicator_layer()` to work. Please install it.")
 
   poly <- sf::st_make_valid(poly)
 
@@ -54,29 +45,43 @@ add_indicator_layer <- function(
 
   #------ Prepare data
 
-  if(!is.null(buffer)){ buffer <- buffer_bbox(poly, buffer) } else { buffer <- NULL }
+  if (intervals) {
 
+     classes <- classInt::classIntervals(poly[[col_name]], n = n, style = style)
+    col_class_name <- paste0(col_name, "_class")
 
-  #------ Polygon layer
+    poly <- poly |>
+      dplyr::mutate("{col_class_name}" := cut({{ col }}, classes$brks, include.lowest = TRUE))
 
-  layer <- tmap::tm_shape(
-    poly,
-    bbox = buffer
-  ) +
-    tmap::tm_polygons(
-      col = col_name,
-      n = n,
-      style = style,
-      palette = palette,
-      as.count = as_count,
-      colorNA = color_na,
-      textNA = text_na,
-      title = legend_title,
-      legend.format = list(text.separator = legend_text_separator),
-      borderl.col = border_col,
-      border.alpha = border_alpha,
-      lwd = lwd,
-      ...
+    legend_labels <- c(levels(poly[[col_class_name]]), text_na)
+
+    discrete <- TRUE
+
+    layer <- ggplot2::ggplot() +
+      ggplot2::geom_sf(data = poly, ggplot2::aes(fill = !!rlang::sym(col_class_name)), color = "transparent") +
+      scale_fill(initiative = initiative, palette = palette, discrete = discrete, reverse_guide = FALSE, name = legend_title, labels = legend_labels, drop = drop, na.value = color_na)
+
+  } else {
+
+    discrete <- FALSE
+
+    layer <- ggplot2::ggplot() +
+      ggplot2::geom_sf(data = poly, ggplot2::aes(fill = !!rlang::sym(col_name)), color = "transparent") +
+      scale_fill(initiative = initiative, palette = palette, discrete = discrete, reverse_guide = FALSE, name = legend_title, na.value = color_na)
+
+  }
+
+  #------ Make map layer
+
+ layer <- layer +
+    ggplot2::theme_void() +
+    ggplot2::theme(
+      # legend.justification defines the edge of the legend that the legend.position coordinates refer to
+      legend.justification = c(0, 1),
+      # Set the legend flush with the left side of the plot, and just slightly below the top of the plot
+      legend.position = legend_position,
+      # Set fontfamily
+      text = ggplot2::element_text(family = font_family)
     )
 
   return(layer)
@@ -88,6 +93,7 @@ add_indicator_layer <- function(
 
 #' Add admin boundaries (lines) and the legend
 #'
+#' @param map Is there a previous map layer? Default to NULL.
 #' @param lines List of multiline shape defined by sf package.
 #' @param colors Vector of hexadecimal codes. Same order as lines.
 #' @param labels Vector of labels in the legend. Same order as lines.
@@ -99,13 +105,10 @@ add_indicator_layer <- function(
 #' @return A tmap layer.
 #' @export
 #'
-add_admin_boundaries <- function(lines, colors, labels, lwds, title = "", buffer = NULL, ...){
+add_admin_boundaries <- function(map = NULL, lines, colors, labels, lwds, legend_title = ""){
 
 
-  #------ Package check
-
-  rlang::check_installed("tmap", reason = "Package \"tmap\" needed for `add_admin_boundaries()` to work. Please install it.")
-
+  if(is.null(map)) map <- ggplot2::ggplot()
 
   #------ Check that the length of vectors is identical between arguments
 
@@ -120,40 +123,38 @@ add_admin_boundaries <- function(lines, colors, labels, lwds, title = "", buffer
   lines <- lapply(lines, \(x) sf::st_make_valid(x))
 
 
-  #------ Prepare legend
-  legend_lines <- tmap::tm_add_legend("line",
-                                      title = title,
-                                      col = colors,
-                                      lwd = lwds,
-                                      labels = labels)
-
-
   #------ Let's go with all line shapes
 
-  if(!is.null(buffer)){ buffer <- buffer_bbox(lines[[1]], buffer) } else { buffer <- NULL }
+  for (i in 1:length(lines)) {
+    lines[[i]] <- lines[[i]] |>
+      dplyr::mutate(color = colors[[i]],
+                    label = labels[[i]],
+                    lwd = lwds[[i]])
+  }
 
 
-  layers <- tmap::tm_shape(lines[[1]], bbox = buffer) +
-    tmap::tm_lines(lwd = lwds[[1]], col = colors[[1]], ...)
+  layers <- map + ggplot2::geom_sf(data = lines[[1]], ggplot2::aes(color = .data[["label"]], linewidth = .data[["label"]]))
 
-  if (length(lines) == 1) {
-
-    layers <- layers + legend_lines
-
-    return(layers)
-
-  } else {
+  if (length(lines) > 1){
 
     for(i in 2:length(lines)){
 
-      layers <- layers + tmap::tm_shape(shp = lines[[i]]) + tmap::tm_lines(lwd = lwds[[i]], col = colors[[i]], ...)
+      data <- lines[[i]]
+      color <- labels[[i]]
+      size <- labels[[i]]
+
+      layers <- layers + ggplot2::geom_sf(data = data, ggplot2::aes(color = .data[["label"]], linewidth = .data[["label"]]))
+
     }
-
-    layers <- layers + legend_lines
-
-    return(layers)
-
   }
+  #
+  layers <- layers +
+    ggplot2::scale_color_manual(name = legend_title, values = setNames(colors, labels), breaks = labels) +
+    ggplot2::scale_discrete_manual("linewidth", name = legend_title, values = setNames(lwds, labels), breaks = labels)
+
+
+  return(layers)
+
 }
 
 
@@ -225,39 +226,39 @@ add_layout <- function(
 #' @return A tmap layer.
 #' @export
 #'
-add_admin_labels <- function(point,
-                             text,
-                             size = 0.5,
-                             fontface = "bold",
-                             fontfamily = "Leelawadee",
-                             shadow = TRUE,
-                             auto_placement = FALSE,
-                             remove_overlap = FALSE,
-                             ...){
+add_text_labels <- function(map = NULL,
+                            point,
+                            text,
+                            size = 0.5,
+                            fontface = "bold",
+                            fontfamily = "Leelawadee",
+                            halo_radius = 0.15,
+                            halo_color = "white",
+                            angle = 0,
+                            force = 0,
+                            force_pull = 0){
 
+  if(is.null(map)) map <- ggplot()
 
-  #------ Restrictive sf checks (might not be necessary depending on the desired behaviour)
+  col_name <- rlang::as_name(rlang::enquo(text))
 
-  rlang::check_installed("tmap", reason = "Package \"tmap\" needed for `add_indicator_layer()` to work. Please install it.")
+  layer <- map +
+    ggspatial::geom_spatial_text_repel(
+      data = point,
+      ggplot2::aes(
+        x = X,
+        y = Y,
+        label = !!rlang::sym(col_name)),
+      crs = sf::st_crs(point)$input,
+      force = force,
+      force_pull = force_pull,
+      size = 3,
+      angle = angle,
+      fontface = fontface,
+      family = fontfamily,
+      bg.r = halo_radius,
+      bg.color = halo_color)
 
-  point <- sf::st_make_valid(point)
-
-  #------ Other checks
-
-  text_name <- rlang::as_name(rlang::enquo(text))
-  if_not_in_stop(point, text_name, "point", "text")
-
-  #------ Point text layer
-
-  layer <- tmap::tm_shape(point) +
-    tmap::tm_text(text = text_name,
-                  size = size,
-                  fontface = fontface,
-                  fontfamily = fontfamily,
-                  shadow = shadow,
-                  auto.placement = auto_placement,
-                  remove.overlap = remove_overlap,
-                  ...)
 
   return(layer)
 
