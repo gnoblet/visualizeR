@@ -8,17 +8,22 @@ point(
   df,
   x,
   y,
-  group = NULL,
+  group = "",
+  add_color = color("branding_reach_red"),
   flip = TRUE,
   alpha = 1,
-  size = 1,
+  size = 2,
   x_title = NULL,
   y_title = NULL,
   group_title = NULL,
   title = NULL,
   subtitle = NULL,
   caption = NULL,
-  theme = theme_reach()
+  theme_fun = theme_reach(grid_major_y = TRUE),
+  palette = "cat_5_ibm",
+  scale_impact = TRUE,
+  direction = 1,
+  reverse_guide = TRUE
 )
 }
 \arguments{
@@ -26,9 +31,11 @@ point(
 
 \item{x}{A numeric column.}
 
-\item{y}{A character column or coercible as a character column.}
+\item{y}{Another numeric column.}
 
 \item{group}{Some grouping categorical column, e.g. administrative areas or population groups.}
+
+\item{add_color}{Add a color to bars (if no grouping).}
 
 \item{flip}{TRUE or FALSE. Default to TRUE or horizontal bar plot.}
 
@@ -48,10 +55,9 @@ point(
 
 \item{caption}{Plot caption. Default to NULL.}
 
-\item{theme}{Whatever theme. Default to theme_reach().}
-}
-\value{
-A bar chart
+\item{theme_fun}{Whatever theme. Default to theme_reach(). NULL if no theming needed.}
+
+\item{scale_impact}{Use the package custom scales for fill and color.}
 }
 \description{
 Simple point chart

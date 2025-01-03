@@ -1,11 +1,11 @@
-#' @title Simple bar chart
+#' Simple bar chart
 #'
 #' @param df A data frame.
-#' @param x A numeric column.
-#' @param y A character column or coercible as a character column.
-#' @param group Some grouping categorical column, e.g. administrative areas or population groups.
+#' @param x A quoted numeric column.
+#' @param y A quoted character column or coercible as a character column.
+#' @param group Some quoted grouping categorical column, e.g. administrative areas or population groups.
+#' @param add_color Add a color to bars (if no grouping).
 #' @param flip TRUE or FALSE. Default to TRUE or horizontal bar plot.
-#' @param percent TRUE or FALSE. Should the x-labels (and text labels if present) be displayed as percentages? Default to TRUE.
 #' @param wrap Should x-labels be wrapped? Number of characters.
 #' @param position Should the chart be stacked? Default to "dodge". Can take "dodge" and "stack".
 #' @param alpha Fill transparency.
@@ -15,46 +15,96 @@
 #' @param title Plot title. Default to NULL.
 #' @param subtitle Plot subtitle. Default to NULL.
 #' @param caption Plot caption. Default to NULL.
-#' @param add_text TRUE or FALSE. Add the value as text.
+#' @param width Bar width.
+#' @param add_text TRUE or FALSE. Add values as text.
+#' @param add_text_size Text size.
+#' @param add_text_color Text color.
+#' @param add_text_font_face Text font_face.
+#' @param add_text_threshold_display Minimum value to add the text label.
 #' @param add_text_suffix If percent is FALSE, should we add a suffix to the text label?
-#' @param theme Whatever theme. Default to theme_reach().
+#' @param add_text_expand_limit Default to adding 10% on top of the bar.
+#' @param add_text_round Round the text label.
+#' @param theme_fun Whatever theme function. For no custom theme, use theme_fun = NULL.
+#' @param scale_impact Use the package custom scales for fill and color.
 #'
-#' @return A bar chart
+#' @inheritParams scale_color_impact_discrete
+#'
+#' @importFrom rlang `%||%`
 #'
 #' @export
-bar <- function(df, x, y, group = NULL, flip = TRUE, percent = TRUE, wrap = NULL, position = "dodge", alpha = 1,  x_title = NULL, y_title = NULL, group_title = NULL, title = NULL, subtitle = NULL, caption = NULL, add_text = FALSE, add_text_suffix = "", theme = theme_reach()){
+bar <- function(
+  df,
+  x,
+  y,
+  group = "",
+  add_color = color("dark_grey"),
+  flip = TRUE,
+  wrap = NULL,
+  position = "dodge",
+  alpha = 1,
+  x_title = NULL,
+  y_title = NULL,
+  group_title = NULL,
+  title = NULL,
+  subtitle = NULL,
+  caption = NULL,
+  width = 0.5,
+  add_text = TRUE,
+  add_text_size = 5,
+  add_text_color = color("dark_grey"),
+  add_text_font_face = "plain",
+  add_text_threshold_display = 0.05,
+  add_text_suffix = "%",
+  add_text_expand_limit = 1.2,
+  add_text_round = 1){
 
-  # To do :
-  # - automate bar width and text size, or at least give the flexibility and still center text
-  # - add facet possibility
+# Check if numeric and character
+if (class(df[[y]]) %notin% c("integer", "numeric")) rlang::abort(paste0(y, " must be numeric."))
+if (!any(class(df[[x]]) %in% c("character", "factor"))) rlang::abort(paste0(x, " must be character or factor"))
 
-  # Prepare group, x and y names
-  # if (is.null(x_title)) x_title <- rlang::as_name(rlang::enquo(x))
-  # if (is.null(y_title)) y_title <- rlang::as_name(rlang::enquo(y))
-  # if (is.null(group_title)) group_title <- rlang::as_name(rlang::enquo(group))
+# Check if position is stack or dodge
+if (position %notin% c("stack", "dodge")) rlang::abort("Position should be either 'stack' or 'dodge'.")
 
-  # Mapping
+if(group != "") {
+
   g <- ggplot2::ggplot(
-      df,
-      mapping = ggplot2::aes(x = {{ x }}, y = {{ y }}, fill = {{ group }}, color = {{ group }}
-        )
-      )
-
-  # Add title, subtitle, caption, x_title, y_title
-  g <- g + ggplot2::labs(
-    title = title,
-    subtitle = subtitle,
-    caption = caption,
-    x = x_title,
-    y = y_title,
-    color = group_title,
-    fill = group_title
+    df,
+    mapping = ggplot2::aes(
+      x = !!rlang::sym(x),
+      y = !!rlang::sym(y),
+      fill = !!rlang::sym(group),
+      color = !!rlang::sym(group)
+    )
   )
 
-  width <- 0.5
-  dodge_width <- 0.5
+} else {
 
-  # Should the graph use position_fill?
+  g <- ggplot2::ggplot(
+    df,
+    mapping = ggplot2::aes(
+      x = !!rlang::sym(x),
+      y = !!rlang::sym(y)
+    )
+  )
+}
+
+# Add title, subtitle, caption, x_title, y_title
+g <- g + ggplot2::labs(
+  title = title,
+  subtitle = subtitle,
+  caption = caption,
+  x = y_title,
+  y = x_title,
+  color = group_title,
+  fill = group_title
+)
+
+width <- width
+dodge_width <- width
+
+# Should the graph use position_fill?
+if(group != "") {
+
   if (position == "stack"){
     g <- g + ggplot2::geom_col(
       alpha    = alpha,
@@ -75,67 +125,97 @@ bar <- function(df, x, y, group = NULL, flip = TRUE, percent = TRUE, wrap = NULL
       width = width
     )
   }
-  #
-  # Labels to percent and expand scale
-  if (percent) {
-    g <- g + ggplot2::scale_y_continuous(
-      labels         = scales::label_percent(
-        accuracy     = 1,
-        decimal.mark = ",",
-        suffix       = " %"),
-      expand = c(0.01, 0.1)
+
+} else {
+
+  if (position == "stack"){
+    g <- g + ggplot2::geom_col(
+      alpha    = alpha,
+      width    = width,
+      position = ggplot2::position_stack(),
+      fill = add_color,
+      color = add_color
+    )
+  } else if (position == "dodge"){
+    g <- g + ggplot2::geom_col(
+      alpha    = alpha,
+      width    = width,
+      position = ggplot2::position_dodge2(
+        width = dodge_width,
+        preserve = "single"),
+      fill = add_color,
+      color = add_color
     )
   } else {
-    g <- g + ggplot2::scale_y_continuous(expand = c(0.01, 0.1))
+    g <- g + ggplot2::geom_col(
+      alpha = alpha,
+      width = width,
+      fill = add_color,
+      color = add_color
+    )
   }
+}
 
-  if (!is.null(wrap)) {
-    g <- g + ggplot2::scale_x_discrete(labels = scales::label_wrap(wrap))
-  }
+# Expand scale
+g <- g + ggplot2::scale_y_continuous(expand = c(0, 0))
 
-  # Because a text legend should always be horizontal, especially for an horizontal bar graph
-  if (flip){
-      g <- g + ggplot2::coord_flip()
-    }
+if (!is.null(wrap)) {
+  g <- g + ggplot2::scale_x_discrete(labels = scales::label_wrap(wrap))
+}
 
-  # Add text to bars
-  if (flip) hjust_flip <- 1.5 else hjust_flip <- 0.5
-  if (flip) vjust_flip <- 0.5 else vjust_flip <- 1.5
 
-  if (add_text & position != "dodge") {
-    rlang::abort("Adding text labels and positions different than dodges as not been implemented yet")
-  }
+# Because a text legend should always be horizontal, especially for an horizontal bar graph
+if (flip) g <- g + ggplot2::coord_flip()
+# Add text to bars
+if (flip) hjust_flip <- -0.5 else hjust_flip <- 0.5
+if (flip) vjust_flip <- 0.5 else vjust_flip <- -0.5
 
-  # Add text labels
-  if (add_text) {
-    if (percent) {
-      g <- g + ggplot2::geom_text(
-        ggplot2::aes(
-          label = scales::label_percent(
-            accuracy     = 1,
-            decimal.mark = ",",
-            suffix       = " %")({{ y }}),
-          group = {{ group }}),
-          hjust = hjust_flip,
-          vjust = vjust_flip,
-        color = "white",
-        fontface = "bold",
-        position = ggplot2::position_dodge(width = dodge_width))
-    } else {
-      g <- g + ggplot2::geom_text(
-        ggplot2::aes(
-          label = paste0(round({{ y }}), add_text_suffix),
-          group = {{ group }}),
-        hjust = hjust_flip,
-        vjust = vjust_flip,
-        color = "white",
-        fontface = "bold",
-        position = ggplot2::position_dodge(width = dodge_width))
-    }
-  }
 
-  # Add theme
-  g <- g + theme
+# Add text labels
+if (add_text & position == "dodge") {
 
-  return(g)
+  df <- dplyr::mutate(df, "y_threshold" := ifelse(!!rlang::sym(y) >= add_text_threshold_display, !!rlang::sym(y), NA ))
+
+  # Expand limits
+  g <- g + ggplot2::geom_blank(
+    data = df,
+    ggplot2::aes(x = !!rlang::sym(x), y = !!rlang::sym(y) * add_text_expand_limit, group = !!rlang::sym(group))
+  )
+
+  g <- g + ggplot2::geom_text(
+    data = df,
+    ggplot2::aes(
+      label = ifelse(is.na(!!rlang::sym("y_threshold")), NA, paste0(round(!!rlang::sym("y_threshold"), add_text_round), add_text_suffix)),
+      group = !!rlang::sym(group)),
+    hjust = hjust_flip,
+    vjust = vjust_flip,
+    color = add_text_color,
+    fontface = add_text_font_face,
+    size = add_text_size,
+    position = ggplot2::position_dodge2(width = dodge_width)
+  )
+
+
+} else if (add_text & position == "stack") {
+
+  df <- dplyr::mutate(df, "y_threshold" := ifelse(!!rlang::sym(y) >= add_text_threshold_display, !!rlang::sym(y), NA ))
+
+  g <- g + ggplot2::geom_text(
+    data = df,
+    ggplot2::aes(
+      label = ifelse(is.na(!!rlang::sym("y_threshold")), NA, paste0(round(!!rlang::sym("y_threshold"), add_text_round), add_text_suffix)),
+      group = !!rlang::sym(group)),
+    color = add_text_color,
+    fontface = add_text_font_face,
+    size = add_text_size,
+    position = ggplot2::position_stack(vjust = 0.5)
+  )
+
+}
+
+# Remove trailing 0
+  ! no applicable method for 'round_any' applied to an object of class "character"
+
+
+return(g)
 }

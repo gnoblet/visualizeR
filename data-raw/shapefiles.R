@@ -1,4 +1,3 @@
-
 #------ Border - admin 0
 border_admin0 <- sf::st_read("data-raw/border_admin0.shp")
 usethis::use_data(border_admin0, overwrite = TRUE)

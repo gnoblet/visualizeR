@@ -8,9 +8,9 @@ bar(
   df,
   x,
   y,
-  group = NULL,
+  group = "",
+  add_color = color("dark_grey"),
   flip = TRUE,
-  percent = TRUE,
   wrap = NULL,
   position = "dodge",
   alpha = 1,
@@ -20,23 +20,28 @@ bar(
   title = NULL,
   subtitle = NULL,
   caption = NULL,
-  add_text = FALSE,
-  add_text_suffix = "",
-  theme = theme_reach()
+  width = 0.5,
+  add_text = TRUE,
+  add_text_size = 5,
+  add_text_color = color("dark_grey"),
+  add_text_font_face = "plain",
+  add_text_threshold_display = 0.05,
+  add_text_suffix = "\%",
+  add_text_expand_limit = 1.1
 )
 }
 \arguments{
 \item{df}{A data frame.}
 
-\item{x}{A numeric column.}
+\item{x}{A quoted numeric column.}
 
-\item{y}{A character column or coercible as a character column.}
+\item{y}{A quoted character column or coercible as a character column.}
 
-\item{group}{Some grouping categorical column, e.g. administrative areas or population groups.}
+\item{group}{Some quoted grouping categorical column, e.g. administrative areas or population groups.}
+
+\item{add_color}{Add a color to bars (if no grouping).}
 
 \item{flip}{TRUE or FALSE. Default to TRUE or horizontal bar plot.}
-
-\item{percent}{TRUE or FALSE. Should the x-labels (and text labels if present) be displayed as percentages? Default to TRUE.}
 
 \item{wrap}{Should x-labels be wrapped? Number of characters.}
 
@@ -56,14 +61,21 @@ bar(
 
 \item{caption}{Plot caption. Default to NULL.}
 
-\item{add_text}{TRUE or FALSE. Add the value as text.}
+\item{width}{Bar width.}
+
+\item{add_text}{TRUE or FALSE. Add values as text.}
+
+\item{add_text_size}{Text size.}
+
+\item{add_text_color}{Text color.}
+
+\item{add_text_font_face}{Text font_face.}
+
+\item{add_text_threshold_display}{Minimum value to add the text label.}
 
 \item{add_text_suffix}{If percent is FALSE, should we add a suffix to the text label?}
 
-\item{theme}{Whatever theme. Default to theme_reach().}
-}
-\value{
-A bar chart
+\item{add_text_expand_limit}{Default to adding 10% on top of the bar.}
 }
 \description{
 Simple bar chart

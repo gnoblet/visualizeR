@@ -2,8 +2,9 @@
 #'
 #' @param df A data frame.
 #' @param x A numeric column.
-#' @param y A character column or coercible as a character column.
+#' @param y Another numeric column.
 #' @param group Some grouping categorical column, e.g. administrative areas or population groups.
+#' @param add_color Add a color to bars (if no grouping).
 #' @param flip TRUE or FALSE. Default to TRUE or horizontal bar plot.
 #' @param alpha Fill transparency.
 #' @param size Point size.
@@ -13,28 +14,38 @@
 #' @param title Plot title. Default to NULL.
 #' @param subtitle Plot subtitle. Default to NULL.
 #' @param caption Plot caption. Default to NULL.
-#' @param theme Whatever theme. Default to theme_reach().
+#' @param theme_fun Whatever theme. Default to theme_reach(). NULL if no theming needed.
+#' @param scale_impact Use the package custom scales for fill and color.
 #'
-#' @return A bar chart
+#' @inheritParams scale_color_impact_discrete
 #'
 #' @export
-point <- function(df, x, y, group = NULL, flip = TRUE, alpha = 1, size = 1, x_title = NULL, y_title = NULL, group_title = NULL, title = NULL, subtitle = NULL, caption = NULL, theme = theme_reach()){
-
-  # To do :
-  # - automate bar width and text size, or at least give the flexibility and still center text
-  # - add facet possibility
-
-  # Prepare group, x and y names
-  # if (is.null(x_title)) x_title <- rlang::as_name(rlang::enquo(x))
-  # if (is.null(y_title)) y_title <- rlang::as_name(rlang::enquo(y))
-  # if (is.null(group_title)) group_title <- rlang::as_name(rlang::enquo(group))
+point <- function(df, x, y, group = "", add_color = color("branding_reach_red"), flip = TRUE, alpha = 1, size = 2, x_title = NULL, y_title = NULL, group_title = NULL, title = NULL, subtitle = NULL, caption = NULL, theme_fun = theme_reach(grid_major_y = TRUE), palette = "cat_5_ibm", scale_impact = TRUE, direction = 1, reverse_guide = TRUE) {
+  # # Check if numeric and character
+  if (!any(c("numeric", "integer") %in% class(df[[x]]))) rlang::abort(paste0(x, " must be numeric."))
+  if (!any(c("numeric", "integer") %in% class(df[[y]]))) rlang::abort(paste0(x, " must be numeric."))
 
   # Mapping
-  g <- ggplot2::ggplot(
-    df,
-    mapping = ggplot2::aes(x = {{ x }}, y = {{ y }}, fill = {{ group }}, color = {{ group }}
+  if (group != "") {
+    g <- ggplot2::ggplot(
+      df,
+      mapping = ggplot2::aes(
+        x = !!rlang::sym(x),
+        y = !!rlang::sym(y),
+        fill = !!rlang::sym(group),
+        color = !!rlang::sym(group)
+      )
     )
-  )
+  } else {
+    g <- ggplot2::ggplot(
+      df,
+      mapping = ggplot2::aes(
+        x = !!rlang::sym(x),
+        y = !!rlang::sym(y)
+      )
+    )
+  }
+
 
   # Add title, subtitle, caption, x_title, y_title
   g <- g + ggplot2::labs(
@@ -47,35 +58,33 @@ point <- function(df, x, y, group = NULL, flip = TRUE, alpha = 1, size = 1, x_ti
     fill = group_title
   )
 
-  width <- 0.5
-  dodge_width <- 0.5
-
   # Should the graph use position_fill?
-  g <- g + ggplot2::geom_point(
+  if (group != "") {
+    g <- g + ggplot2::geom_point(
       alpha = alpha,
       size = size
     )
+  } else {
+    g <- g + ggplot2::geom_point(
+      alpha = alpha,
+      size = size,
+      color = add_color
+    )
+  }
 
-  # Labels to percent and expand scale
-  # if (percent) {
-  #   g <- g + ggplot2::scale_y_continuous(
-  #     labels         = scales::label_percent(
-  #       accuracy     = 1,
-  #       decimal.mark = ",",
-  #       suffix       = " %"),
-  #     expand = c(0.01, 0.1)
-  #   )
-  # } else {
-  #   g <- g + ggplot2::scale_y_continuous(expand = c(0.01, 0.1))
-  # }
-
-  # # Because a text legend should always be horizontal, especially for an horizontal bar graph
-  if (flip){
+  if (flip) {
     g <- g + ggplot2::coord_flip()
   }
 
   # Add theme
-  g <- g + theme
+  g <- g + theme_fun
+
+
+  # Add theme
+  if (!is.null(theme_fun)) g <- g + theme_fun
+
+  # Add scale
+  if (scale_impact) g <- g + scale_fill_impact_discrete(palette, direction, reverse_guide) + scale_color_impact_discrete(palette, direction, reverse_guide)
 
   return(g)
 }

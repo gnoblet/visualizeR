@@ -12,12 +12,12 @@ knitr::opts_chunk$set(
   out.width = "100%",
   warning = FALSE,
   message = FALSE,
-  dpi = 300, 
+  dpi = 300,
   dev.args = list(type = "cairo")
 )
 
-desc = read.dcf('DESCRIPTION')
-desc = setNames(as.list(desc), colnames(desc))
+desc <- read.dcf("DESCRIPTION")
+desc <- setNames(as.list(desc), colnames(desc))
 ```
 
 # `r desc$Package` <img src="man/figures/logo.png" align="right" alt="" width="120"/>
@@ -79,22 +79,22 @@ library(visualizeR)
 library(palmerpenguins)
 library(dplyr)
 
-df <- penguins |> 
-  group_by(island, species) |> 
+df <- penguins |>
+  group_by(island, species) |>
   summarize(
     mean_bl = mean(bill_length_mm, na.rm = T),
-    mean_fl = mean(flipper_length_mm, na.rm = T)) |> 
+    mean_fl = mean(flipper_length_mm, na.rm = T)
+  ) |>
   ungroup()
 
 # Simple bar chart by group with some alpha transparency
 bar(df, island, mean_bl, species, percent = FALSE, alpha = 0.6, x_title = "Mean of bill length")
 
 # Using another color palette through `theme_reach()` and changing scale to percent
-bar(df, island,mean_bl, species, percent = TRUE, theme = theme_reach(palette = "artichoke_3"))
+bar(df, island, mean_bl, species, percent = TRUE, theme = theme_reach(palette = "artichoke_3"))
 
 # Not flipped, with text added, group_title, no y-axis and no bold for legend
 bar(df, island, mean_bl, species, group_title = "Species", flip = FALSE, add_text = TRUE, add_text_suffix = "%", percent = FALSE, theme = theme_reach(text_font_face = "plain", axis_y = FALSE))
-
 ```
 
 ### Example 2: Point chart, already REACH themed
@@ -102,7 +102,6 @@ bar(df, island, mean_bl, species, group_title = "Species", flip = FALSE, add_tex
 At this stage, `point_reach()` only supports categorical grouping colors with the `group` arg.
 
 ```{r example-point-chart, out.width = "65%", eval = TRUE}
-
 # Simple point chart
 point(penguins, bill_length_mm, flipper_length_mm)
 
@@ -110,7 +109,7 @@ point(penguins, bill_length_mm, flipper_length_mm)
 point(penguins, bill_length_mm, flipper_length_mm, island, alpha = 0.6, size = 3, theme = theme_reach(reverse = TRUE))
 
 # Using another color palettes
-point(penguins, bill_length_mm, flipper_length_mm, island, size = 1.5, x_title = "Bill", y_title = "Flipper", title = "Length (mm)", theme = theme_reach(palette = "artichoke_3", text_font_face = , grid_major_x = TRUE,  title_position_to_plot = FALSE))
+point(penguins, bill_length_mm, flipper_length_mm, island, size = 1.5, x_title = "Bill", y_title = "Flipper", title = "Length (mm)", theme = theme_reach(palette = "artichoke_3", text_font_face = , grid_major_x = TRUE, title_position_to_plot = FALSE))
 ```
 
 
@@ -130,20 +129,23 @@ df <- tibble::tibble(
 # Example, adding a parameter to `theme_reach()` passed on `ggplot2::theme()` to align legend title
 
 dumbbell(df,
-         stat,
-         setting,
-         admin1,
-         title = "% of HHs that reported open defecation as sanitation facility",
-         group_y_title = "Admin 1",
-         group_x_title = "Setting",
-         theme = theme_reach(legend_position =  "bottom",
-                             legend_direction = "horizontal",
-                             legend_title_font_face = "bold",
-                             palette = "primary",
-                             title_position_to_plot = FALSE,
-                             legend.title.align = 0.5)) +
+  stat,
+  setting,
+  admin1,
+  title = "% of HHs that reported open defecation as sanitation facility",
+  group_y_title = "Admin 1",
+  group_x_title = "Setting",
+  theme = theme_reach(
+    legend_position = "bottom",
+    legend_direction = "horizontal",
+    legend_title_font_face = "bold",
+    palette = "primary",
+    title_position_to_plot = FALSE,
+    legend.title.align = 0.5
+  )
+) +
   # Change legend title position (could be included as part of the function)
-  ggplot2::guides(  
+  ggplot2::guides(
     color = ggplot2::guide_legend(title.position = "left"),
     fill =  ggplot2::guide_legend(title.position = "left")
   )
@@ -151,7 +153,6 @@ dumbbell(df,
 
 ### Example 4: donut chart, REACH themed (to used once, not twice)
 ```{r example-donut-plot, out.width = "65%", warning = FALSE}
-
 # Some summarized data: % of HHs by displacement status
 df <- tibble::tibble(
   status = c("Displaced", "Non displaced", "Returnee", "Don't know/Prefer not to say"),
@@ -159,16 +160,17 @@ df <- tibble::tibble(
 )
 
 # Donut
-donut(df, 
-      status, 
-      percentage, 
-      hole_size  = 3, 
-      add_text_suffix = "%", 
-      add_text_color = cols_reach("dk_grey"), 
-      add_text_treshold_display = 5,
-      x_title = "Displacement status", 
-      title = "% of HHs by displacement status", 
-      theme = theme_reach(legend_reverse = TRUE))
+donut(df,
+  status,
+  percentage,
+  hole_size = 3,
+  add_text_suffix = "%",
+  add_text_color = cols_reach("dk_grey"),
+  add_text_treshold_display = 5,
+  x_title = "Displacement status",
+  title = "% of HHs by displacement status",
+  theme = theme_reach(legend_reverse = TRUE)
+)
 ```
 
 
@@ -181,32 +183,34 @@ waffle(df, status, percentage, x_title = "A caption", title = "A title", subtitl
 
 ### Example 6: alluvial chart, REACH themed
 ```{r example-alluvial-plot, out.width = "65%", warning = FALSE}
-
 # Some summarized data: % of HHs by self-reported status of displacement in 2021 and in 2022
 df <- tibble::tibble(
-  status_from = c(rep("Displaced", 4),
-                  rep("Non displaced", 4),
-                  rep("Returnee", 4),
-                  rep("Dnk/Pnts", 4)),
+  status_from = c(
+    rep("Displaced", 4),
+    rep("Non displaced", 4),
+    rep("Returnee", 4),
+    rep("Dnk/Pnts", 4)
+  ),
   status_to = c("Displaced", "Non displaced", "Returnee", "Dnk/Pnts", "Displaced", "Non displaced", "Returnee", "Dnk/Pnts", "Displaced", "Non displaced", "Returnee", "Dnk/Pnts", "Displaced", "Non displaced", "Returnee", "Dnk/Pnts"),
   percentage = c(20, 8, 18, 1, 12, 21, 0, 2, 0, 3, 12, 1, 0, 0, 1, 1)
 )
 
 # Alluvial, here the group is the status for 2021
 
-alluvial(df, 
-         status_from, 
-         status_to,
-         percentage, 
-         status_from,
-         from_levels = c("Displaced", "Non displaced", "Returnee", "Dnk/Pnts"), 
-         alpha = 0.8, 
-         group_title = "Status for 2021",
-         title = "% of HHs by self-reported status from 2021 to 2022", 
-         theme = theme_reach(
-           axis_y = FALSE, 
-           legend_position = "none"))
-
+alluvial(df,
+  status_from,
+  status_to,
+  percentage,
+  status_from,
+  from_levels = c("Displaced", "Non displaced", "Returnee", "Dnk/Pnts"),
+  alpha = 0.8,
+  group_title = "Status for 2021",
+  title = "% of HHs by self-reported status from 2021 to 2022",
+  theme = theme_reach(
+    axis_y = FALSE,
+    legend_position = "none"
+  )
+)
 ```
 
 ### Example 7: lollipop chart
@@ -214,65 +218,69 @@ alluvial(df,
 library(tidyr)
 # Prepare long data
 df <- tibble::tibble(
- admin1 = replicate(15, sample(letters, 8)) |> t() |> as.data.frame() |> unite("admin1", sep = "") |> dplyr::pull(admin1),  
- stat = rnorm(15, mean = 50, sd = 15)) |>
+  admin1 = replicate(15, sample(letters, 8)) |> t() |> as.data.frame() |> unite("admin1", sep = "") |> dplyr::pull(admin1),
+  stat = rnorm(15, mean = 50, sd = 15)
+) |>
   dplyr::mutate(stat = round(stat, 0))
 
 # Make lollipop plot, REACH themed, vertical with 45 degrees angle X-labels
 lollipop(df,
-         admin1,
-         stat,
-         arrange = FALSE,
-         add_text = FALSE,
-         flip = FALSE,
-         y_title = "% of HHs",
-         x_title = "Admin 1",
-         title = "% of HHs that reported having received a humanitarian assistance",
-         theme = theme_reach(axis_text_x_angle = 45, 
-                             grid_major_y = TRUE, 
-                             grid_major_y_size = 0.2, 
-                             grid_major_x = TRUE, 
-                             grid_minor_y = TRUE))
+  admin1,
+  stat,
+  arrange = FALSE,
+  add_text = FALSE,
+  flip = FALSE,
+  y_title = "% of HHs",
+  x_title = "Admin 1",
+  title = "% of HHs that reported having received a humanitarian assistance",
+  theme = theme_reach(
+    axis_text_x_angle = 45,
+    grid_major_y = TRUE,
+    grid_major_y_size = 0.2,
+    grid_major_x = TRUE,
+    grid_minor_y = TRUE
+  )
+)
 
 # Horizontal, greater point size, arranged by value, no grid, and text labels added
 lollipop(df,
-         admin1,
-         stat,
-         arrange = TRUE,
-         point_size = 10,
-         point_color = cols_reach("main_beige"),
-         segment_size = 2,
-         add_text = TRUE,
-         add_text_suffix = "%",
-         y_title = "% of HHs",
-         x_title = "Admin 1",
-         title = "% of HHs that reported having received a humanitarian assistance in the 12 months prior to the assessment",
-         theme = theme_reach(title_position_to_plot = FALSE))
-
-
+  admin1,
+  stat,
+  arrange = TRUE,
+  point_size = 10,
+  point_color = cols_reach("main_beige"),
+  segment_size = 2,
+  add_text = TRUE,
+  add_text_suffix = "%",
+  y_title = "% of HHs",
+  x_title = "Admin 1",
+  title = "% of HHs that reported having received a humanitarian assistance in the 12 months prior to the assessment",
+  theme = theme_reach(title_position_to_plot = FALSE)
+)
 ```
 
 
 ## Maps
 
 ```{r example-map, out.width = "50%"}
-
-# Add indicator layer 
-# - based on "pretty" classes and title "Proportion (%)" 
+# Add indicator layer
+# - based on "pretty" classes and title "Proportion (%)"
 # - buffer to add a 10% around the bounding box
 map <- add_indicator_layer(
-  indicator_admin1, 
+  indicator_admin1,
   opn_dfc,
-  buffer = 0.1) + 
+  buffer = 0.1
+) +
   # Layout - some defaults - add the map title
-  add_layout("% of HH that reported open defecation as sanitation facility") + 
+  add_layout("% of HH that reported open defecation as sanitation facility") +
   # Admin boundaries as list of shape files (lines) and colors, line widths and labels as vectors
   add_admin_boundaries(
     lines = list(line_admin1, border_admin0, frontier_admin0),
     colors = cols_reach("main_lt_grey", "dk_grey", "black"),
     lwds = c(0.5, 2, 3),
     labels = c("Department", "Country", "Dominican Rep. frontier"),
-    title = "Administrative boundaries") + 
+    title = "Administrative boundaries"
+  ) +
   # Add text labels - centered on admin 1 centroids
   add_admin_labels(centroid_admin1, ADM1_FR_UPPER) +
   # Add a compass
@@ -285,10 +293,10 @@ map <- add_indicator_layer(
 
 ```{r map-save, eval = TRUE, include = FALSE, echo = TRUE}
 tmap::tmap_save(map,
-                "man/figures/README-example-map.png",
-                height = 4.5,
-                width = 6
-                )
+  "man/figures/README-example-map.png",
+  height = 4.5,
+  width = 6
+)
 ```
 
 ![Once exported with `tmap::tmap_save()`.](man/figures/README-example-map.png)
