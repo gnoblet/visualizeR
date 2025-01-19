@@ -27,7 +27,8 @@ bar(
   add_text_font_face = "plain",
   add_text_threshold_display = 0.05,
   add_text_suffix = "\%",
-  add_text_expand_limit = 1.1
+  add_text_expand_limit = 1.2,
+  add_text_round = 1
 )
 }
 \arguments{
@@ -76,6 +77,12 @@ bar(
 \item{add_text_suffix}{If percent is FALSE, should we add a suffix to the text label?}
 
 \item{add_text_expand_limit}{Default to adding 10% on top of the bar.}
+
+\item{add_text_round}{Round the text label.}
+
+\item{theme_fun}{Whatever theme function. For no custom theme, use theme_fun = NULL.}
+
+\item{scale_impact}{Use the package custom scales for fill and color.}
 }
 \description{
 Simple bar chart

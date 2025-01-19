@@ -31,7 +31,9 @@ Imports:
     ggalluvial,
     viridisLite,
     waffle,
-    stringr
+    stringr,
+    checkmate,
+    data.table
 Suggests: 
     knitr,
     roxygen2,

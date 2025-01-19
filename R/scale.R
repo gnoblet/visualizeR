@@ -9,7 +9,7 @@
 #' @param ... Additional arguments passed to [ggplot2::discrete_scale()] if discrete or [ggplot2::scale_fill_gradient()] if continuous.
 #'
 #' @export
-scale_visualizer_discrete <- function(palette = "cat_5_main", direction = 1, reverse_guide = TRUE, ...) {
+scale_visualizer_discrete <- function(palette = "cat_5_main", direction = 1, reverse_guide = TRUE, title_position = NULL, ...) {
 
   s <- scale_color_visualizer_discrete(palette, direction, reverse_guide, ...) +  
     scale_fill_visualizer_discrete(palette, direction, reverse_guide, ...)
@@ -21,7 +21,7 @@ scale_visualizer_discrete <- function(palette = "cat_5_main", direction = 1, rev
 #' @rdname scale_visualizer_dicscrete
 #' 
 #' @export
-scale_visualizer_continuous <- function(palette = "seq_5_main", direction = 1, reverse_guide = TRUE, ...) {
+scale_visualizer_continuous <- function(palette = "seq_5_main", direction = 1, reverse_guide = TRUE, title_position = NULL, ...) {
 
   s <- scale_color_visualizer_continuous(palette, direction, reverse_guide, ...) +  
     scale_fill_visualizer_continuous(palette, direction, reverse_guide, ...)
@@ -40,14 +40,14 @@ scale_visualizer_continuous <- function(palette = "seq_5_main", direction = 1, r
 #' @param ... Additional arguments passed to [ggplot2::discrete_scale()] if discrete or [ggplot2::scale_fill_gradient()] if continuous.
 #'
 #' @export
-scale_color_visualizer_discrete <- function(palette = "cat_5_main", direction = 1, reverse_guide = TRUE, ...) {
+scale_color_visualizer_discrete <- function(palette = "cat_5_main", direction = 1, reverse_guide = TRUE, title_position = NULL, ...) {
 
   if (!(is.null(palette))) {
     ggplot2::discrete_scale(
       "color",
       palette = palette_gen(palette, "categorical", direction),
       guide = ggplot2::guide_legend(
-        title.position = "top",
+        title.position = title_position,
         draw.ulim = TRUE,
         draw.llim = TRUE,
         # ticks.colour = "#F1F3F5",
@@ -56,11 +56,10 @@ scale_color_visualizer_discrete <- function(palette = "cat_5_main", direction = 
       ...
     )
   } else {
-
     ggplot2::scale_colour_viridis_d(
       direction = direction,
       guide = ggplot2::guide_legend(
-        title.position = "top",
+        title.position = title_position,
         draw.ulim = TRUE,
         draw.llim = TRUE,
         # ticks.colour = "#F1F3F5",
@@ -68,23 +67,20 @@ scale_color_visualizer_discrete <- function(palette = "cat_5_main", direction = 
       ),
       ...
     )
-
   }
-
 }
 
 #' @rdname scale_color_visualizer_discrete
 #'
 #' @export
-scale_fill_visualizer_discrete <- function(palette = "cat_5_main", direction = 1, reverse_guide = TRUE, ...) {
+scale_fill_visualizer_discrete <- function(palette = "cat_5_main", direction = 1, reverse_guide = TRUE, title_position = NULL, ...) {
 
   if (!(is.null(palette))) {
-
     ggplot2::discrete_scale(
       "fill",
       palette = palette_gen(palette, "categorical", direction),
       guide = ggplot2::guide_legend(
-        title.position = "top",
+        title.position = title_position,
         draw.ulim = TRUE,
         draw.llim = TRUE,
         # ticks.colour = "#F1F3F5",
@@ -93,11 +89,10 @@ scale_fill_visualizer_discrete <- function(palette = "cat_5_main", direction = 1
       ...
     )
   } else {
-
     ggplot2::scale_fill_viridis_d(
       direction = direction,
       guide = ggplot2::guide_legend(
-        title.position = "top",
+        title.position = title_position,
         draw.ulim = TRUE,
         draw.llim = TRUE,
         # ticks.colour = "#F1F3F5",
@@ -105,24 +100,21 @@ scale_fill_visualizer_discrete <- function(palette = "cat_5_main", direction = 1
       ),
       ...
     )
-
   }
-
 }
 
 #' @rdname scale_color_visualizer_discrete
 #'
 #' @export
-scale_fill_visualizer_continuous <- function(palette = "seq_5_main", direction = 1, reverse_guide = TRUE, ...) {
+scale_fill_visualizer_continuous <- function(palette = "seq_5_main", direction = 1, reverse_guide = TRUE, title_position = NULL, ...) {
 
   if (!(is.null(palette))) {
-
     pal <- palette_gen(palette, "continuous", direction)
 
     ggplot2::scale_fill_gradientn(
       colors = pal(256),
       guide = ggplot2::guide_colorbar(
-        title.position = "top",
+        title.position = title_position,
         draw.ulim = TRUE,
         draw.llim = TRUE,
         # ticks.colour = "#F1F3F5",
@@ -130,37 +122,32 @@ scale_fill_visualizer_continuous <- function(palette = "seq_5_main", direction =
       ),
       ...
     )
-
   } else {
-
     ggplot2::scale_fill_viridis_c(
       option = "magma",
       guide = ggplot2::guide_colorbar(
-        title.position = "top",
+        title.position = title_position,
         draw.ulim = TRUE,
         draw.llim = TRUE,
         # ticks.colour = "#F1F3F5",
         reverse = reverse_guide
       ),
       ...)
-
   }
-
 }
 
 #' @rdname scale_color_visualizer_discrete
 #'
 #' @export
-scale_color_visualizer_continuous <- function(palette = "seq_5_main", direction = 1, reverse_guide = TRUE, ...) {
+scale_color_visualizer_continuous <- function(palette = "seq_5_main", direction = 1, reverse_guide = TRUE, title_position = NULL, ...) {
 
   if (!(is.null(palette))) {
-
     pal <- palette_gen(palette, "continuous", direction)
 
     ggplot2::scale_fill_gradientn(
       colors = pal(256),
       guide = ggplot2::guide_colorbar(
-        title.position = "top",
+        title.position = title_position,
         draw.ulim = TRUE,
         draw.llim = TRUE,
         # ticks.colour = "#F1F3F5",
@@ -168,20 +155,16 @@ scale_color_visualizer_continuous <- function(palette = "seq_5_main", direction 
       ),
       ...
     )
-
   } else {
-
     ggplot2::scale_colour_viridis_c(
       option = "magma",
       guide = ggplot2::guide_colorbar(
-        title.position = "top",
+        title.position = title_position,
         draw.ulim = TRUE,
         draw.llim = TRUE,
         # ticks.colour = "#F1F3F5",
         reverse = reverse_guide
       ),
       ....)
-
   }
-
 }

@@ -1,22 +1,3 @@
-#' ggplot2 theme for bar charts with sane defaults
-#' 
-#' @rdname theme_visualizer
-#' @inheritParams theme_visualizer
-#' 
-#' @export
-theme_visualizer_bar <- function(...) {
-
-  theme_visualizer_default(
-    grid_major_y = TRUE
-    , axis_line_y = FALSE
-    , axis_ticks_y = FALSE
-    , grid_major_x = FALSE
-    , ...
-  )
-
-}
-
-
 #' ggplot2 theme wrapper with fonts and colors
 #'
 #' @param font_family The font family for all plot's texts. Default to "Segoe UI".
@@ -79,42 +60,51 @@ theme_visualizer_bar <- function(...) {
 #' @description Give some reach colors and fonts to a ggplot.
 #'
 #' @export
-theme_visualizer_default <- function(
-  font_family = "Carlito",
-  title_size = 14,
+theme_default <- function(
+  title_font_family = "Carlito",
+  title_size = 16,
   title_color = color("dark_grey"),
   title_font_face = "bold",
   title_hjust = NULL,
   title_position_to_plot = TRUE,
-  title_font_family = "Carlito",
-  subtitle_size = 13,
-  subtitle_font_face = "plain",
   subtitle_font_family = "Carlito",
-  text_size = 12,
+  subtitle_size = 15,
+  subtitle_color = color("dark_grey"),
+  subtitle_font_face = "plain",
+  subtitle_hjust = NULL,
+  text_font_family = "Carlito",
+  text_size = 13,
   text_color = color("dark_grey"),
   text_font_face = "plain",
   panel_background_color = "#FFFFFF",
   panel_border = FALSE,
   panel_border_color = color("dark_grey"),
-  legend_position = "bottom",
+  legend_position = "top",
   legend_direction = "horizontal",
   legend_justification = "center",
   legend_reverse = TRUE,
-  legend_title_size = 12,
+  legend_title_size = 13,
   legend_title_color = color("dark_grey"),
   legend_title_font_face = "plain",
-  legend_text_size = 12,
+  legend_text_size = 13,
   legend_text_color = color("dark_grey"),
   legend_text_font_face = "plain",
+  facet_title_size = 13,
+  facet_title_color = color("dark_grey"),
+  facet_title_font_face = "bold",
+  facet_title_font_family = "Carlito",
+  facet_title_position = "bottom",
+  facet_background_color = color("light_grey"),
   axis_x = TRUE,
   axis_y = TRUE,
   axis_text_x = TRUE,
-  axis_line_x = TRUE,
-  axis_ticks_x = TRUE,
+  axis_line_x = FALSE,
+  axis_ticks_x = FALSE,
   axis_text_y = TRUE,
   axis_line_y = TRUE,
   axis_ticks_y = TRUE,
-  axis_text_size = 12,
+  axis_text_font_family = "Carlito",
+  axis_text_size = 13,
   axis_text_color = color("dark_grey"),
   axis_text_font_face = "plain",
   axis_title_size = 15,
@@ -128,29 +118,24 @@ theme_visualizer_default <- function(
   grid_major_color = color("dark_grey"),
   grid_major_x_size = 0.1,
   grid_major_y_size = 0.1,
-  grid_minor_x = FALSE,
+  grid_minor_x = TRUE,
   grid_minor_y = FALSE,
   grid_minor_color = color("dark_grey"),
   grid_minor_x_size = 0.05,
   grid_minor_y_size = 0.05,
+  caption_font_family = "Carlito",
+  caption_font_face = "plain",
   caption_position_to_plot = TRUE,
-  caption_text_size = 10,
-  caption_text_color = color("dark_grey"),
+  caption_size = 11,
+  caption_color = color("dark_grey"),
   ...) {
   # Basic simple theme
-  # theme <- ggplot2::theme_bw()
+  theme <- ggplot2::theme_minimal()
 
-  theme <- ggplot2::theme(
-    # Title - design
-    title = ggtext::element_textbox_simple(
-      family = title_font_family,
-      color = title_color,
-      size = title_size,
-      face = title_font_face
-    ),
-    # Text - design
+  theme <- theme + ggplot2::theme(
+    # # Text - design
     text = ggplot2::element_text(
-      family = font_family,
+      family = text_font_family,
       color = text_color,
       size = text_size,
       face = text_font_face
@@ -159,58 +144,58 @@ theme_visualizer_default <- function(
     legend.position = legend_position,
     # Defaut legend to vertical direction
     legend.direction = legend_direction,
-    # Default legend to left justified
-    legend.justification = legend_justification,
-    # set panel background color
-    panel.background = ggplot2::element_rect(
-      fill = panel_background_color
-    ),
-    # Remove background for legend key
-    legend.key = ggplot2::element_blank(),
     # Text sizes
     axis.text = ggplot2::element_text(
       size = axis_text_size,
-      family = font_family,
+      family = axis_text_font_family,
       face = axis_text_font_face,
       color = axis_text_color
     ),
     axis.title = ggplot2::element_text(
       size = axis_title_size,
-      family = font_family,
+      family = axis_text_font_family,
       face = axis_title_font_face,
       color = axis_title_color
     ),
-    # Wrap title
+    # # Wrap title
     plot.title = ggtext::element_textbox_simple(
       hjust = title_hjust,
-      width = grid::unit(0.8, "npc"),
+      family = title_font_family,
+      color = title_color,
+      size = title_size,
+      face = title_font_face,
+      width = grid::unit(0.9, "npc"),
       margin = ggplot2::margin(b = 5)
     ),
     plot.subtitle = ggtext::element_textbox_simple(
       hjust = title_hjust,
       family = subtitle_font_family,
-      color = text_color,
+      color = subtitle_color,
       size = subtitle_size,
       face = subtitle_font_face,
       margin = ggplot2::margin(t = 5, b = 5)
     ),
     plot.caption = ggtext::element_textbox_simple(
-      size = caption_text_size,
-      family = font_family,
-      color = caption_text_color
+      size = caption_size,
+      face = caption_font_face,
+      family = caption_font_family,
+      color = caption_color,
+      margin = ggplot2::margin(t = 5)
     ),
-    legend.title = ggplot2::element_text(
-      size = legend_title_size,
-      face = legend_title_font_face,
-      family = font_family,
-      color = legend_title_color
-    ),
-    legend.text = ggplot2::element_text(
-      size = legend_text_size,
-      face = legend_text_font_face,
-      family = font_family,
-      color = legend_text_color
-    ),
+    # legend.title = ggplot2::element_text(
+    #   size = legend_title_size,
+    #   face = legend_title_font_face,
+    #   family = font_family,
+    #   color = legend_title_color
+    #   #, vjust = 0.5
+    # ),
+    # legend.text = ggplot2::element_text(
+    #   size = legend_text_size,
+    #   face = legend_text_font_face,
+    #   family = font_family,
+    #   color = legend_text_color
+  #   #   #, hjust = 0.5
+  #   # ),
     axis.text.x = ggplot2::element_text(
       angle = axis_text_x_angle,
       vjust = axis_text_x_vjust,
@@ -377,6 +362,20 @@ theme_visualizer_default <- function(
       )
   }
 
+  # Add facet title text size
+  theme <- theme + ggplot2::theme(
+    strip.text = ggplot2::element_text(
+      size = facet_title_size,
+      family = facet_title_font_family,
+      face = facet_title_font_face,
+      color = facet_title_color
+    ),
+    strip.background = ggplot2::element_rect(
+      fill = facet_background_color,
+      linewidth = 0
+    )
+  )
+  
   # Other parameters
   theme <- theme + ggplot2::theme(...)
 
