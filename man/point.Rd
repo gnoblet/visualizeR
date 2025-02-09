@@ -2,14 +2,21 @@
 % Please edit documentation in R/point.R
 \name{point}
 \alias{point}
-\title{Simple point chart}
+\title{Simple scatterplot}
 \usage{
 point(
   df,
   x,
   y,
   group = "",
-  add_color = color("branding_reach_red"),
+  facet = "",
+  facet_scales = "free",
+  x_rm_na = TRUE,
+  y_rm_na = TRUE,
+  group_rm_na = TRUE,
+  facet_rm_na = TRUE,
+  add_color = color("cat_5_main_1"),
+  add_color_guide = TRUE,
   flip = TRUE,
   alpha = 1,
   size = 2,
@@ -19,25 +26,37 @@ point(
   title = NULL,
   subtitle = NULL,
   caption = NULL,
-  theme_fun = theme_reach(grid_major_y = TRUE),
-  palette = "cat_5_ibm",
-  scale_impact = TRUE,
-  direction = 1,
-  reverse_guide = TRUE
+  theme_fun = theme_point(),
+  scale_fill_fun = scale_fill_visualizer_discrete(),
+  scale_color_fun = scale_color_visualizer_discrete()
 )
 }
 \arguments{
 \item{df}{A data frame.}
 
-\item{x}{A numeric column.}
+\item{x}{A quoted numeric column.}
 
-\item{y}{Another numeric column.}
+\item{y}{A quoted numeric column.}
 
-\item{group}{Some grouping categorical column, e.g. administrative areas or population groups.}
+\item{group}{Some quoted grouping categorical column, e.g. administrative areas or population groups.}
 
-\item{add_color}{Add a color to bars (if no grouping).}
+\item{facet}{Some quoted grouping categorical column.}
 
-\item{flip}{TRUE or FALSE. Default to TRUE or horizontal bar plot.}
+\item{facet_scales}{Character. Either "free" (default) or "fixed" for facet scales.}
+
+\item{x_rm_na}{Remove NAs in x?}
+
+\item{y_rm_na}{Remove NAs in y?}
+
+\item{group_rm_na}{Remove NAs in group?}
+
+\item{facet_rm_na}{Remove NAs in facet?}
+
+\item{add_color}{Add a color to points (if no grouping).}
+
+\item{add_color_guide}{Should a legend be added?}
+
+\item{flip}{TRUE or FALSE.}
 
 \item{alpha}{Fill transparency.}
 
@@ -55,10 +74,8 @@ point(
 
 \item{caption}{Plot caption. Default to NULL.}
 
-\item{theme_fun}{Whatever theme. Default to theme_reach(). NULL if no theming needed.}
-
-\item{scale_impact}{Use the package custom scales for fill and color.}
+\item{theme_fun}{Whatever theme. Default to theme_point(). NULL if no theming needed.}
 }
 \description{
-Simple point chart
+Simple scatterplot
 }

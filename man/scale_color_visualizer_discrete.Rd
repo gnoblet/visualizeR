@@ -11,6 +11,7 @@ scale_color_visualizer_discrete(
   palette = "cat_5_main",
   direction = 1,
   reverse_guide = TRUE,
+  title_position = NULL,
   ...
 )
 
@@ -18,6 +19,7 @@ scale_fill_visualizer_discrete(
   palette = "cat_5_main",
   direction = 1,
   reverse_guide = TRUE,
+  title_position = NULL,
   ...
 )
 
@@ -25,6 +27,7 @@ scale_fill_visualizer_continuous(
   palette = "seq_5_main",
   direction = 1,
   reverse_guide = TRUE,
+  title_position = NULL,
   ...
 )
 
@@ -32,6 +35,7 @@ scale_color_visualizer_continuous(
   palette = "seq_5_main",
   direction = 1,
   reverse_guide = TRUE,
+  title_position = NULL,
   ...
 )
 }

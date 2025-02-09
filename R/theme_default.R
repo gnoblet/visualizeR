@@ -86,15 +86,16 @@ theme_default <- function(
   legend_title_size = 13,
   legend_title_color = color("dark_grey"),
   legend_title_font_face = "plain",
+  legend_title_font_family = "Carlito",
   legend_text_size = 13,
   legend_text_color = color("dark_grey"),
   legend_text_font_face = "plain",
-  facet_title_size = 13,
-  facet_title_color = color("dark_grey"),
-  facet_title_font_face = "bold",
-  facet_title_font_family = "Carlito",
-  facet_title_position = "bottom",
-  facet_background_color = color("light_grey"),
+  legend_text_font_family = "Carlito",
+  facet_size = 14,
+  facet_color = color("dark_grey"),
+  facet_font_face = "bold",
+  facet_font_family = "Carlito",
+  facet_bg_color = color("lighter_grey"),
   axis_x = TRUE,
   axis_y = TRUE,
   axis_text_x = TRUE,
@@ -182,20 +183,18 @@ theme_default <- function(
       color = caption_color,
       margin = ggplot2::margin(t = 5)
     ),
-    # legend.title = ggplot2::element_text(
-    #   size = legend_title_size,
-    #   face = legend_title_font_face,
-    #   family = font_family,
-    #   color = legend_title_color
-    #   #, vjust = 0.5
-    # ),
-    # legend.text = ggplot2::element_text(
-    #   size = legend_text_size,
-    #   face = legend_text_font_face,
-    #   family = font_family,
-    #   color = legend_text_color
-  #   #   #, hjust = 0.5
-  #   # ),
+    legend.title = ggplot2::element_text(
+      size = legend_title_size,
+      face = legend_title_font_face,
+      family = legend_title_font_family,
+      color = legend_title_color
+    ),
+    legend.text = ggplot2::element_text(
+      size = legend_text_size,
+      face = legend_text_font_face,
+      family = legend_text_font_family,
+      color = legend_text_color
+    ),
     axis.text.x = ggplot2::element_text(
       angle = axis_text_x_angle,
       vjust = axis_text_x_vjust,
@@ -365,13 +364,13 @@ theme_default <- function(
   # Add facet title text size
   theme <- theme + ggplot2::theme(
     strip.text = ggplot2::element_text(
-      size = facet_title_size,
-      family = facet_title_font_family,
-      face = facet_title_font_face,
-      color = facet_title_color
+      size = facet_size,
+      family = facet_font_family,
+      face = facet_font_face,
+      color = facet_color
     ),
     strip.background = ggplot2::element_rect(
-      fill = facet_background_color,
+      fill = facet_bg_color,
       linewidth = 0
     )
   )

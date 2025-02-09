@@ -3,11 +3,13 @@
 #' @inheritParams bar
 #' 
 #' @export
-hbar <- function(...) bar(flip = TRUE, theme_fun = theme_bar(flip = TRUE, add_text = FALSE), ...)
+hbar <- function(..., flip = TRUE, add_text = FALSE, theme_fun = theme_bar(flip = flip, add_text = add_text)) {
+  bar(flip = flip, add_text = add_text, theme_fun = theme_fun, ...)
+}
 
 #' Simple bar chart
 #' 
-#' [bar()] is a simple bar chart with some customization allowed, in particular the `theme_fun` argument for theming. [hbar()] uses [bar()] with sane defaults for a horizontal bar chart.
+#' `bar()` is a simple bar chart with some customization allowed, in particular the `theme_fun` argument for theming. `hbar()` uses `bar()` with sane defaults for a horizontal bar chart.
 #'
 #' @param df A data frame.
 #' @param x A quoted numeric column.
@@ -18,7 +20,10 @@ hbar <- function(...) bar(flip = TRUE, theme_fun = theme_bar(flip = TRUE, add_te
 #' @param x_rm_na Remove NAs in x?
 #' @param y_rm_na Remove NAs in y?
 #' @param group_rm_na Remove NAs in group?
+#' @param facet_rm_na Remove NAs in facet?
+#' @param y_expand Multiplier to expand the y axis.
 #' @param add_color Add a color to bars (if no grouping).
+#' @param add_color_guide Should a legend be added?
 #' @param flip TRUE or FALSE (default). Default to TRUE or horizontal bar plot.
 #' @param wrap Should x-labels be wrapped? Number of characters.
 #' @param position Should the chart be stacked? Default to "dodge". Can take "dodge" and "stack".
@@ -36,11 +41,13 @@ hbar <- function(...) bar(flip = TRUE, theme_fun = theme_bar(flip = TRUE, add_te
 #' @param add_text_font_face Text font_face.
 #' @param add_text_threshold_display Minimum value to add the text label.
 #' @param add_text_suffix If percent is FALSE, should we add a suffix to the text label?
-#' @param add_text_expand_limit Default to adding 10% on top of the bar.
+#' @param add_text_expand_limit Default to adding 10\% on top of the bar.
 #' @param add_text_round Round the text label.
 #' @param theme_fun Whatever theme function. For no custom theme, use theme_fun = NULL.
 #'
-#' @inheritParams reorder
+#' @inheritParams reorder_by
+#' 
+#' @importFrom rlang `:=`
 #'
 #' @export
 bar <- function(
@@ -54,7 +61,9 @@ bar <- function(
   y_rm_na = TRUE,
   group_rm_na = TRUE,
   facet_rm_na = TRUE,
+  y_expand = 0.1,
   add_color = color("cat_5_main_1"),
+  add_color_guide = TRUE,
   flip = FALSE,
   wrap = NULL,
   position = "dodge",
@@ -65,24 +74,24 @@ bar <- function(
   title = NULL,
   subtitle = NULL,
   caption = NULL,
-  width = 0.7,
+  width = 0.8,
   add_text = FALSE,
-  add_text_size = 4,
+  add_text_size = 4.5,
   add_text_color = color("dark_grey"),
-  add_text_font_face = "plain",
+  add_text_font_face = "bold",
   add_text_threshold_display = 0.05,
   add_text_suffix = "%",
   add_text_expand_limit = 1.2,
   add_text_round = 1,
   theme_fun = theme_bar(
-    flip = FALSE,
-    add_text = FALSE,
-    axis_text_x_angle = 45,
-    axis_text_x_vjust = 1,
-    axis_text_x_hjust = 1
+    flip = flip,
+    add_text = add_text,
+    axis_text_x_angle = 0,
+    axis_text_x_vjust = 0.5,
+    axis_text_x_hjust = 0.5
   ),
-  scale_fill_fun = scale_fill_impact_discrete,
-  scale_color_fun = scale_color_impact_discrete
+  scale_fill_fun = scale_fill_visualizer_discrete(),
+  scale_color_fun = scale_color_visualizer_discrete()
 ){
 
   
@@ -105,9 +114,25 @@ if (group != "") checkmate::assert_choice(group, colnames(df))
 checkmate::assert_logical(x_rm_na, len = 1)
 checkmate::assert_logical(y_rm_na, len = 1)
 checkmate::assert_logical(group_rm_na, len = 1)
+checkmate::assert_logical(facet_rm_na, len = 1)
   
 # flip is a logical scalar
 checkmate::assert_logical(flip, len = 1)
+  
+# wrap is a numeric scalar or NULL
+if (!is.null(wrap)) checkmate::assert_numeric(wrap, len = 1, null.ok = TRUE)
+
+# alpha is a numeric scalar between 0 and 1
+checkmate::assert_numeric(alpha, lower = 0, upper = 1, len = 1)
+  
+# add_text is a logical scalar
+checkmate::assert_logical(add_text, len = 1)
+  
+# add_text_size is a numeric scalar
+checkmate::assert_numeric(add_text_size, len = 1)
+   
+# add_text_font_face is a character scalar in bold plain or italic
+checkmate::assert_choice(add_text_font_face, c("bold", "plain", "italic"))
   
 # add_text_threshold_display is a numeric scalar
 checkmate::assert_numeric(add_text_threshold_display, len = 1)
@@ -121,8 +146,7 @@ checkmate::assert_numeric(add_text_expand_limit, len = 1)
 # add_text_round is a numeric scalar
 checkmate::assert_numeric(add_text_round, len = 1)
   
-  
-# Check if numeric and character
+# x and y are numeric or character
 if (class(df[[y]]) %notin% c("integer", "numeric")) rlang::abort(paste0(y, " must be numeric."))
 if (!any(class(df[[x]]) %in% c("character", "factor"))) rlang::abort(paste0(x, " must be character or factor"))
 
@@ -131,22 +155,36 @@ if (position %notin% c("stack", "dodge")) rlang::abort("Position should be eithe
 
 #----- Data wrangling
   
-# want to use df as a data.table
-if (!checkmate::test_data_table(df)) {
-  rlang::warn("Converting df to data.table.")
-  data.table::setDT(df)
+# facets over group
+if (group != "" && facet != "" && group == facet) {
+  rlang::warn("'group' and 'facet' are the same identical.")
 }
+
+# remove NAs using base R
+if (x_rm_na) df <- df[!(is.na(df[[x]])),]
+if (y_rm_na) df <- df[!(is.na(df[[y]])),]
+if (group != "" && group_rm_na) df <- df[!(is.na(df[[group]])),]
+if (facet != "" && facet_rm_na) df <- df[!(is.na(df[[facet]])),]
+
   
-# Remove NAs using data.table
-if (x_rm_na) df[, (x) := na.omit(get(x))]
-if (y_rm_na) df[, (y) := na.omit(get(y))]
-if (group != "" && group_rm_na) df[, (group) := na.omit(get(group))]
+# reorder
+dir_order <- if(flip && order %in% c("x", "grouped_x")) {
+  -1 
+} else if (!flip && order %in% c("x", "grouped_x")) {
+  1
+} else if (flip) {
+  1
+} else {
+  -1
+}
+group_order <- if (group != "" || (group == "" && facet == "")) {
+  group 
+} else if (group == "" && facet != "") {
+  facet
+}
+df <- reorder_by(df = df, x = x, y = y, group = group_order, order = order, dir_order = dir_order)
   
-# Reorder
-dir_order = ifelse(flip, 1, -1)
-df <- reorder(df, x, y, group, order, dir_order)
-  
-# Prepare aes
+# prepare aes
 if(group != "") {
 
   g <- ggplot2::ggplot(
@@ -170,7 +208,7 @@ if(group != "") {
   )
 }
 
-# Add title, subtitle, caption, x_title, y_title
+# add title, subtitle, caption, x_title, y_title
 g <- g + ggplot2::labs(
   title = title,
   subtitle = subtitle,
@@ -181,14 +219,19 @@ g <- g + ggplot2::labs(
   fill = group_title
 )
 
-# Width
+# width
 width <- width
 dodge_width <- width
 
-#Facets
+# facets
 if (facet != "") {
-  g <- g + ggforce::facet_row(facet, scales = "free_x", space = "free")
+  if (flip) {
+    g <- g + ggplot2::facet_grid(rows = ggplot2::vars(!!rlang::sym(facet)), scales = "free", space = "free_y")
+  } else {
+    g <- g + ggplot2::facet_grid(cols = ggplot2::vars(!!rlang::sym(facet)), scales = "free", space = "free_x")
+  }
 }
+
   
 # Guides for legend
 # g <- g + ggplot2::guides(
@@ -206,7 +249,7 @@ if (facet != "") {
 #     direction = "horizontal")
 # )
 
-# Should the graph use position_fill?
+# should the graph use position_fill?
 if(group != "") {
 
   if (position == "stack"){
@@ -260,35 +303,53 @@ if(group != "") {
   }
 }
 
-# Wrap labels on the x scale?
+# wrap labels on the x scale?
 if (!is.null(wrap)) {
   g <- g + ggplot2::scale_x_discrete(labels = scales::label_wrap(wrap))
 }
 
 
-# Because a text legend should always be horizontal, especially for an horizontal bar graph
+# because a text legend should always be horizontal, especially for an horizontal bar graph
 if (flip) g <- g + ggplot2::coord_flip()
 # Add text to bars
 if (flip) hjust_flip <- -0.5 else hjust_flip <- 0.5
 if (flip) vjust_flip <- 0.5 else vjust_flip <- -0.5
 
+# Function for interaction
+interaction_f <- function(group, facet, data) {
+  if (group == "" && facet == "") {
+    return(NULL)
+  } else if (group != "" && facet != "") {
+    return(interaction(data[[group]], data[[facet]]))
+  } else if (group != "") {
+    return(data[[group]])
+  } else if (facet != "") {
+    return(data[[facet]])
+  } else {
+    return(NULL)
+  }
+}
 
-# Add text labels
+
+# add text labels
 if (add_text & position == "dodge") {
 
   df <- dplyr::mutate(df, "y_threshold" := ifelse(!!rlang::sym(y) >= add_text_threshold_display, !!rlang::sym(y), NA ))
 
-  # Expand limits
+  # expand limits
   g <- g + ggplot2::geom_blank(
     data = df,
-    ggplot2::aes(x = !!rlang::sym(x), y = !!rlang::sym(y) * add_text_expand_limit, group = !!rlang::sym(group))
+    ggplot2::aes(
+      x = !!rlang::sym(x), 
+      y = !!rlang::sym(y) * add_text_expand_limit, 
+      group = interaction_f(group, facet, df)
+    )
   )
-
   g <- g + ggplot2::geom_text(
     data = df,
     ggplot2::aes(
       label = ifelse(is.na(!!rlang::sym("y_threshold")), NA, paste0(round(!!rlang::sym("y_threshold"), add_text_round), add_text_suffix)),
-      group = !!rlang::sym(group)),
+      group = interaction_f(group, facet, df)),
     hjust = hjust_flip,
     vjust = vjust_flip,
     color = add_text_color,
@@ -304,12 +365,16 @@ if (add_text & position == "dodge") {
   g <- g + ggplot2::geom_text(
     data = df,
     ggplot2::aes(
-      label = ifelse(is.na(!!rlang::sym("y_threshold")), NA, paste0(round(!!rlang::sym("y_threshold"), add_text_round), add_text_suffix)),
-      group = !!rlang::sym(group)),
+      label = ifelse(is.na(!!rlang::sym("y_threshold")), NA, 
+                     paste0(round(!!rlang::sym("y_threshold"), add_text_round), add_text_suffix)),
+      group = interaction_f(group, facet, df)
+    ),
+    hjust = hjust_flip,
+    vjust = vjust_flip,
     color = add_text_color,
     fontface = add_text_font_face,
     size = add_text_size,
-    position = ggplot2::position_stack(vjust = 0.5)
+    position = ggplot2::position_dodge2(width = dodge_width)
   )
 
   }
@@ -318,7 +383,7 @@ if (add_text & position == "dodge") {
   g <- g +
     ggplot2::scale_y_continuous(
       # start at 0
-      expand = c(0, 0),
+      expand = ggplot2::expansion(mult = c(0, y_expand)),
       # remove trailing 0 and choose accuracy of y labels
       labels =  scales::label_number(
         accuracy = 0.1,
@@ -327,9 +392,16 @@ if (add_text & position == "dodge") {
         decimal.mark = "."),
     ) 
 
+  # Remove guides for legend if !add_color_guide
+  if (!add_color_guide) g <- g + ggplot2::guides(fill = "none", color = "none")
+
   # Add theme fun
   if (!is.null(theme_fun)) g <- g + theme_fun
 
-return(g)
-}
+  # Add scale fun
+  if (!is.null(scale_fill_fun)) g <- g + scale_fill_fun
   
+  if (!is.null(scale_color_fun)) g <- g + scale_color_fun
+
+  return(g)
+}

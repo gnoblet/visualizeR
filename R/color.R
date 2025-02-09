@@ -25,8 +25,11 @@ color <- function(..., unname = TRUE) {
   # Defined colors
   colors <- c(
     white = "#FFFFFF"
+    , lighter_grey = "#F5F5F5"
     , light_grey = "#E3E3E3"
     , dark_grey = "#464647"
+    , light_blue_grey = "#B3C6D1"
+    , grey = "#71716F"
     , black = "#000000"
     , cat_2_yellow_1 = "#ffc20a"
     , cat_2_yellow_2 = "#0c7bdc"
@@ -46,7 +49,7 @@ color <- function(..., unname = TRUE) {
     , seq_5_main_3 = "#6b8bad"
     , seq_5_main_4 = "#9cb1c9"
     , seq_5_main_5 = "#ced8e4"
-    , cat_5_ibm_1 = "#648fff" 
+    , cat_5_ibm_1 = "#648fff"
     , cat_5_ibm_2 = "#785ef0"
     , cat_5_ibm_3 = "#dc267f"
     , cat_5_ibm_4 = "#fe6100"
@@ -96,7 +99,7 @@ color <- function(..., unname = TRUE) {
 
   if (is.null(cols)) {
     cols_to_return <- colors
-  } else { 
+  } else {
     cols_to_return <- colors[cols]
   }
 

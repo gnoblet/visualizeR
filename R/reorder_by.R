@@ -1,6 +1,5 @@
-
-#' Reorder a Data Frame Factoring Column x
-#'
+#' Reorder a Data Frame
+#' 
 #' @param df A data frame to be reordered.
 #' @param x A character scalar specifying the column to be reordered.
 #' @param y A character scalar specifying the column to order by if ordering by values.
@@ -22,20 +21,15 @@
 #' @examples
 #' # Example usage
 #' df <- data.frame(col1 = c("b", "a", "c"), col2 = c(10, 25, 3))
-#' reorder(df, "col1", "col2")
+#' reorder_by(df, "col1", "col2")
+#' 
 #' @export
-reorder <- function(df, x, y, group = "", order = "y", dir_order = 1){
+reorder_by <- function(df, x, y, group = "", order = "y", dir_order = 1){
 
   #------ Checks
 
   # df is a data frame
   checkmate::assert_data_frame(df)
-
-  # df is data.table, if not convert
-  if (!checkmate::test_data_table(df)) {
-    rlang::warn("Converting df to data.table.")
-    data.table::setDT(df)
-  }
 
   # x and y are character scalar and in df
   checkmate::assert_character(x, len = 1)
@@ -53,52 +47,44 @@ reorder <- function(df, x, y, group = "", order = "y", dir_order = 1){
   # dir_order is 1 or -1 (numeric scalar)
   checkmate::assert_subset(dir_order, c(1, -1))
 
-
-  #------ Reorder
+ #------ Reorder
 
   # droplevels first
   if (is.factor(df[[x]])) {
-    df[, (x) := droplevels(get(x))]
+    df[[x]] <- droplevels(df[[x]])
   }
 
   # reording options
   if (order == "y") {
-
-    data.table::setorderv(df, y, order = dir_order)
-    df[, (x) := forcats::fct_inorder(get(x))]
-    
-  } else if (order == "grouped" && group == "") {
-
-    rlang::warn("Group is empty. Ordering by y only.")
-    
-    data.table::setorderv(df, y, order = dir_order)
-    df[, (x) := forcats::fct_inorder(get(x))]
-    
+    # Order by values of y
+    df <- df[order(df[[y]] * dir_order), ]
+    df[[x]] <- forcats::fct_inorder(df[[x]])
   } else if (order == "grouped_y" && group != "") {
-
-    data.table::setorderv(df, c(group, y), order = dir_order)
-    df[, (x) := forcats::fct_inorder(get(x))]
-    
+    # Order by group first, then by values of y
+    df <- df[order(df[[group]], df[[y]] * dir_order), ]
+    df[[x]] <- forcats::fct_inorder(df[[x]])
+  } else if (order == "grouped_y" && group == "") {
+    # Fallback to ordering by y if group is empty
+    rlang::warn("Group is empty. Ordering by y only.")
+    df <- df[order(df[[y]] * dir_order), ]
+    df[[x]] <- forcats::fct_inorder(df[[x]])
   } else if (order == "x") {
-
-    data.table::setorderv(df, x, order = dir_order)
-    df[, (x) := forcats::fct_inorder(get(x))]
-    
+    # Order alphabetically by x
+    df <- df[order(df[[x]] * dir_order), ]
+    df[[x]] <- forcats::fct_inorder(df[[x]])
   } else if (order == "grouped_x" && group != "") {
-
-    data.table::setorderv(df, c(group, x), order = dir_order)
-    df[, (x) := forcats::fct_inorder(get(x))]
-    
+    # Order by group first, then alphabetically by x
+    df <- df[order(df[[group]], df[[x]] * dir_order), ]
+    df[[x]] <- forcats::fct_inorder(df[[x]])
   } else if (order == "grouped_x" && group == "") {
-
+    # Fallback to ordering by x if group is empty
     rlang::warn("Group is empty. Ordering by x only.")
-    
-    data.table::setorderv(df, x, order = dir_order)
-    df[, (x) := forcats::fct_inorder(get(x))]
-    
+    df <- df[order(df[[x]] * dir_order), ]
+    df[[x]] <- forcats::fct_inorder(df[[x]])
   }
 
-  return(df)
+  # Reset row names
+  rownames(df) <- NULL
 
+  return(df)
 }
-  

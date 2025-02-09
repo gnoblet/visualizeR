@@ -1,35 +1,3 @@
-
-#' One scale for all
-#' 
-#' This function is based on [palette()]. If palette is NULL, the used palette will be magma from gpplot2's viridis scale constructors.
-#'
-#' @inheritParams palette_gen
-#'
-#' @param reverse_guide Boolean indicating whether the guide should be reversed.
-#' @param ... Additional arguments passed to [ggplot2::discrete_scale()] if discrete or [ggplot2::scale_fill_gradient()] if continuous.
-#'
-#' @export
-scale_visualizer_discrete <- function(palette = "cat_5_main", direction = 1, reverse_guide = TRUE, title_position = NULL, ...) {
-
-  s <- scale_color_visualizer_discrete(palette, direction, reverse_guide, ...) +  
-    scale_fill_visualizer_discrete(palette, direction, reverse_guide, ...)
-
-  return(s)
-
-}
-
-#' @rdname scale_visualizer_dicscrete
-#' 
-#' @export
-scale_visualizer_continuous <- function(palette = "seq_5_main", direction = 1, reverse_guide = TRUE, title_position = NULL, ...) {
-
-  s <- scale_color_visualizer_continuous(palette, direction, reverse_guide, ...) +  
-    scale_fill_visualizer_continuous(palette, direction, reverse_guide, ...)
-
-  return(s)
-
-}
-
 #' Scale constructors for fill and colors
 #'
 #' This function is based on [palette()]. If palette is NULL, the used palette will be magma from gpplot2's viridis scale constructors.

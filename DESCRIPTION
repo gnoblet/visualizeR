@@ -1,7 +1,7 @@
 Package: visualizeR
 Type: Package
 Title: What a color! What a viz!
-Version: 0.8.9000
+Version: 1.0
 Authors@R: c(
         person(
             'Noblet', 'Guillaume',
@@ -32,11 +32,13 @@ Imports:
     viridisLite,
     waffle,
     stringr,
-    checkmate,
-    data.table
+    checkmate
 Suggests: 
     knitr,
+    rmarkdown,
     roxygen2,
-    sf,
-    tmap
+    rio,
+    testthat (>= 3.0.0),
+    vdiffr
 VignetteBuilder: knitr
+Config/testthat/edition: 3
