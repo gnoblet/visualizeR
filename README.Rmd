@@ -32,7 +32,7 @@ You can install the last version of visualizeR from [GitHub](https://github.com/
 
 ```{r, eval = FALSE}
 # install.packages("devtools")
-devtools::install_github("gnoblet/visualizeR", build_vignettes = TRUE)
+devtools::install_github('gnoblet/visualizeR', build_vignettes = TRUE)
 ```
 
 ## Roadmap
@@ -52,7 +52,7 @@ library(visualizeR)
 color(unname = F)[1:10]
 
 # Extract a color palette as hexadecimal codes and reversed
-palette(palette = "cat_5_main", reversed = TRUE, color_ramp_palette = FALSE)
+palette(palette = 'cat_5_main', reversed = TRUE, color_ramp_palette = FALSE)
 
 # Get all color palettes names
 palette(show_palettes = TRUE)
@@ -62,7 +62,7 @@ palette(show_palettes = TRUE)
 
 ### Example 1: Bar chart
 
-```{r example-bar-chart, out.width = "65%", eval = TRUE}
+```{r example-bar-chart, out.width = '65%', eval = TRUE}
 library(palmerpenguins)
 library(dplyr)
 
@@ -83,40 +83,40 @@ df_island <- penguins |>
   ungroup()
 
 # Simple bar chart by group with some alpha transparency
-bar(df, "island", "mean_bl", "species", x_title = "Mean of bill length", title = "Mean of bill length by island and species")
+bar(df, 'island', 'mean_bl', 'species', x_title = 'Mean of bill length', title = 'Mean of bill length by island and species')
 
 # Flipped / Horizontal
-hbar(df, "island", "mean_bl", "species", x_title = "Mean of bill length", title = "Mean of bill length by island and species")
+hbar(df, 'island', 'mean_bl', 'species', x_title = 'Mean of bill length', title = 'Mean of bill length by island and species')
 
 # Facetted
-bar(df, "island", "mean_bl", "species", facet = "species", x_title = "Mean of bill length", title = "Mean of bill length by island and species", add_color_guide = FALSE)
+bar(df, 'island', 'mean_bl', facet = 'species', x_title = 'Mean of bill length', title = 'Mean of bill length by island and species', add_color_guide = FALSE)
 
-#  Flipped, with text, smaller width
-hbar(df = df_island, x = "island", y = "mean_bl", group = "island", title = "Mean of bill length by island", add_text = T, width = 0.6, add_text_suffix = "mm", add_text_expand_limit = 1.3, add_color_guide = FALSE)
+#  Flipped, with text, smaller width, and caption
+hbar(df = df_island, x = 'island', y = 'mean_bl', title = 'Mean of bill length by island', add_text = T, width = 0.6, add_text_suffix = 'mm', add_text_expand_limit = 1.3, add_color_guide = FALSE, caption = "Data: palmerpenguins package.")
 ```
 
 ### Example 2: Scatterplot
 
-```{r example-point-chart, out.width = "65%", eval = TRUE}
+```{r example-point-chart, out.width = '65%', eval = TRUE}
 # Simple scatterplot
-point(penguins, "bill_length_mm", "flipper_length_mm")
+point(penguins, 'bill_length_mm', 'flipper_length_mm')
 
 # Scatterplot with grouping colors, greater dot size, some transparency
-point(penguins, "bill_length_mm", "flipper_length_mm", "island", group_title = "Island", alpha = 0.6, size = 3, title = "Bill vs. flipper length", , add_color_guide = FALSE)
+point(penguins, 'bill_length_mm', 'flipper_length_mm', 'island', group_title = 'Island', alpha = 0.6, size = 3, title = 'Bill vs. flipper length', , add_color_guide = FALSE)
 
 # Facetted scatterplot by island
-point(penguins, "bill_length_mm", "flipper_length_mm", "species", "island", "fixed", group_title = "Species", title = "Bill vs. flipper length by species and island", add_color_guide = FALSE)
+point(penguins, 'bill_length_mm', 'flipper_length_mm', 'species', 'island', 'fixed', group_title = 'Species', title = 'Bill vs. flipper length by species and island', add_color_guide = FALSE)
 ```
 
 ### Example 3: Dumbbell plot
 
 Remember to ensure that your data are in the long format and you only have two groups on the x-axis; for instance, IDP and returnee and no NA values.
 
-```{r example-dumbbell-plot, out.width = "65%", eval = TRUE}
+```{r example-dumbbell-plot, out.width = '65%', eval = TRUE}
 # Prepare long data
 df <- tibble::tibble(
   admin1 = rep(letters[1:8], 2),
-  setting = c(rep(c("Rural", "Urban"), 4), rep(c("Urban", "Rural"), 4)),
+  setting = c(rep(c('Rural', 'Urban'), 4), rep(c('Urban', 'Rural'), 4)),
   stat = rnorm(16, mean = 50, sd = 18)
 ) |>
   dplyr::mutate(stat = round(stat, 0))
@@ -126,21 +126,21 @@ df <- tibble::tibble(
 
 # dumbbell(
 #   df,
-#   "stat",
-#   "setting",
-#   "admin1",
-#   title = "% of HHs that reported open defecation as sanitation facility",
-#   group_y_title = "Admin 1",
-#   group_x_title = "Setting"
+#   'stat',
+#   'setting',
+#   'admin1',
+#   title = '% of HHs that reported open defecation as sanitation facility',
+#   group_y_title = 'Admin 1',
+#   group_x_title = 'Setting'
 # )
 ```
 
 ### Example 4: donut chart
 
-```{r example-donut-plot, out.width = "65%", warning = FALSE}
+```{r example-donut-plot, out.width = '65%', warning = FALSE}
 # Some summarized data: % of HHs by displacement status
 df <- tibble::tibble(
-  status = c("Displaced", "Non displaced", "Returnee", "Don't know/Prefer not to say"),
+  status = c('Displaced', 'Non displaced', 'Returnee', 'Don\'t know/Prefer not to say'),
   percentage = c(18, 65, 12, 3)
 )
 
@@ -149,33 +149,33 @@ df <- tibble::tibble(
 #   status,
 #   percentage,
 #   hole_size = 3,
-#   add_text_suffix = "%",
-#   add_text_color = color("dark_grey"),
+#   add_text_suffix = '%',
+#   add_text_color = color('dark_grey'),
 #   add_text_treshold_display = 5,
-#   x_title = "Displacement status",
-#   title = "% of HHs by displacement status"
+#   x_title = 'Displacement status',
+#   title = '% of HHs by displacement status'
 # )
 ```
 
 ### Example 5: Waffle chart
 
-```{r example-waffle-plot, out.width = "65%", warning = FALSE}
+```{r example-waffle-plot, out.width = '65%', warning = FALSE}
 #
-# waffle(df, status, percentage, x_title = "A caption", title = "A title", subtitle = "A subtitle")
+# waffle(df, status, percentage, x_title = 'A caption', title = 'A title', subtitle = 'A subtitle')
 ```
 
 ### Example 6: Alluvial chart
 
-```{r example-alluvial-plot, out.width = "65%", warning = FALSE}
+```{r example-alluvial-plot, out.width = '65%', warning = FALSE}
 # Some summarized data: % of HHs by self-reported status of displacement in 2021 and in 2022
 df <- tibble::tibble(
   status_from = c(
-    rep("Displaced", 4),
-    rep("Non displaced", 4),
-    rep("Returnee", 4),
-    rep("Dnk/Pnts", 4)
+    rep('Displaced', 4),
+    rep('Non displaced', 4),
+    rep('Returnee', 4),
+    rep('Dnk/Pnts', 4)
   ),
-  status_to = c("Displaced", "Non displaced", "Returnee", "Dnk/Pnts", "Displaced", "Non displaced", "Returnee", "Dnk/Pnts", "Displaced", "Non displaced", "Returnee", "Dnk/Pnts", "Displaced", "Non displaced", "Returnee", "Dnk/Pnts"),
+  status_to = c('Displaced', 'Non displaced', 'Returnee', 'Dnk/Pnts', 'Displaced', 'Non displaced', 'Returnee', 'Dnk/Pnts', 'Displaced', 'Non displaced', 'Returnee', 'Dnk/Pnts', 'Displaced', 'Non displaced', 'Returnee', 'Dnk/Pnts'),
   percentage = c(20, 8, 18, 1, 12, 21, 0, 2, 0, 3, 12, 1, 0, 0, 1, 1)
 )
 
