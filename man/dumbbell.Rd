@@ -12,22 +12,24 @@ dumbbell(
   point_size = 5,
   point_alpha = 1,
   segment_size = 2.5,
-  segment_color = cols_reach("main_lt_grey"),
+  segment_color = color("light_blue_grey"),
   group_x_title = NULL,
   group_y_title = NULL,
   x_title = NULL,
   title = NULL,
   subtitle = NULL,
   caption = NULL,
-  line_to_y_axis = TRUE,
+  line_to_y_axis = FALSE,
   line_to_y_axis_type = 3,
   line_to_y_axis_width = 0.5,
-  line_to_y_axis_color = cols_reach("main_grey"),
-  add_text = TRUE,
+  line_to_y_axis_color = color("dark_grey"),
+  add_text = FALSE,
   add_text_vjust = 2,
   add_text_size = 3.5,
-  add_text_color = cols_reach("main_grey"),
-  theme = theme_reach(palette = "primary")
+  add_text_color = color("dark_grey"),
+  theme_fun = theme_dumbbell(),
+  scale_fill_fun = scale_fill_visualizer_discrete(),
+  scale_color_fun = scale_color_visualizer_discrete()
 )
 }
 \arguments{
@@ -75,7 +77,11 @@ dumbbell(
 
 \item{add_text_color}{Text color.}
 
-\item{theme}{A ggplot2 theme, default to `theme_reach()`}
+\item{theme_fun}{A ggplot2 theme, default to `theme_dumbbell()`}
+
+\item{scale_fill_fun}{A ggplot2 scale_fill function, default to `scale_fill_visualizer_discrete()`}
+
+\item{scale_color_fun}{A ggplot2 scale_color function, default to `scale_color_visualizer_discrete()`}
 }
 \value{
 A dumbbell chart.
