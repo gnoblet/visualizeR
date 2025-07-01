@@ -52,22 +52,23 @@ point <- function(
   scale_fill_fun = scale_fill_visualizer_discrete(),
   scale_color_fun = scale_color_visualizer_discrete()
 ) {
-  
   #------ Checks
-  
+
   # df is a data frame
   checkmate::assert_data_frame(df)
-  
+
   # x and y and group are character
   checkmate::assert_character(x, len = 1)
   checkmate::assert_character(y, len = 1)
   checkmate::assert_character(group, len = 1)
-  
+
   # x and y are columns in df
   checkmate::assert_choice(x, colnames(df))
   checkmate::assert_choice(y, colnames(df))
-  if (group != "") checkmate::assert_choice(group, colnames(df))
-  
+  if (group != "") {
+    checkmate::assert_choice(group, colnames(df))
+  }
+
   # x_rm_na, y_rm_na and group_rm_na are logical scalar
   checkmate::assert_logical(x_rm_na, len = 1)
   checkmate::assert_logical(y_rm_na, len = 1)
@@ -76,57 +77,69 @@ point <- function(
 
   # facet_scales is a character scalar in c("free", "fixed")
   checkmate::assert_choice(facet_scales, c("free", "fixed"))
-  
+
   # flip is a logical scalar
   checkmate::assert_logical(flip, len = 1)
-  
+
   # alpha is a numeric scalar between 0 and 1
   checkmate::assert_numeric(alpha, lower = 0, upper = 1, len = 1)
-  
+
   # size is a numeric scalar
   checkmate::assert_numeric(size, len = 1)
-  
+
   # x and y are numeric
-  if (!any(c("numeric", "integer") %in% class(df[[x]]))) rlang::abort(paste0(x, " must be numeric."))
-  if (!any(c("numeric", "integer") %in% class(df[[y]]))) rlang::abort(paste0(y, " must be numeric."))
-  
-  
+  if (!any(c("numeric", "integer") %in% class(df[[x]]))) {
+    rlang::abort(paste0(x, " must be numeric."))
+  }
+  if (!any(c("numeric", "integer") %in% class(df[[y]]))) {
+    rlang::abort(paste0(y, " must be numeric."))
+  }
+
   #----- Data wrangling
-  
+
   # facets over group
   if (group != "" && facet != "" && group == facet) {
-      rlang::warn("'group' and 'facet' are the same identical.")
+    rlang::warn("'group' and 'facet' are the same identical.")
   }
-  
+
   # remove NAs using base R
-  if (x_rm_na) df <- df[!(is.na(df[[x]])),]
-  if (y_rm_na) df <- df[!(is.na(df[[y]])),]
-  if (group != "" && group_rm_na) df <- df[!(is.na(df[[group]])),]
-  if (facet != "" && facet_rm_na) df <- df[!(is.na(df[[facet]])),]
+  if (x_rm_na) {
+    df <- df[!(is.na(df[[x]])), ]
+  }
+  if (y_rm_na) {
+    df <- df[!(is.na(df[[y]])), ]
+  }
+  if (group != "" && group_rm_na) {
+    df <- df[!(is.na(df[[group]])), ]
+  }
+  if (facet != "" && facet_rm_na) {
+    df <- df[!(is.na(df[[facet]])), ]
+  }
 
   # prepare aes
   if (group != "") {
-      g <- ggplot2::ggplot(
-          df,
-          mapping = ggplot2::aes(
-              x = !!rlang::sym(x),
-              y = !!rlang::sym(y),
-              fill = !!rlang::sym(group),
-              color = !!rlang::sym(group)
-          )
+    g <- ggplot2::ggplot(
+      df,
+      mapping = ggplot2::aes(
+        x = !!rlang::sym(x),
+        y = !!rlang::sym(y),
+        fill = !!rlang::sym(group),
+        color = !!rlang::sym(group)
       )
+    )
   } else {
-      g <- ggplot2::ggplot(
-          df,
-          mapping = ggplot2::aes(
-              x = !!rlang::sym(x),
-              y = !!rlang::sym(y)
-          )
+    g <- ggplot2::ggplot(
+      df,
+      mapping = ggplot2::aes(
+        x = !!rlang::sym(x),
+        y = !!rlang::sym(y)
       )
+    )
   }
-  
+
   # add title, subtitle, caption, x_title, y_title
-  g <- g + ggplot2::labs(
+  g <- g +
+    ggplot2::labs(
       title = title,
       subtitle = subtitle,
       caption = caption,
@@ -134,54 +147,66 @@ point <- function(
       y = y_title,
       color = group_title,
       fill = group_title
-  )
-  
+    )
+
   # facets
-# facets
-if (facet != "") {
-  if (flip) {
-    g <- g + ggplot2::facet_grid(
-      rows = ggplot2::vars(!!rlang::sym(facet)), 
-      scales = facet_scales, 
-      space = if(facet_scales == "free") "free_y" else "fixed"
-    )
-  } else {
-    g <- g + ggplot2::facet_grid(
-      cols = ggplot2::vars(!!rlang::sym(facet)), 
-      scales = facet_scales, 
-      space = if(facet_scales == "free") "free_x" else "fixed"
-    )
+  # facets
+  if (facet != "") {
+    if (flip) {
+      g <- g +
+        ggplot2::facet_grid(
+          rows = ggplot2::vars(!!rlang::sym(facet)),
+          scales = facet_scales,
+          space = if (facet_scales == "free") "free_y" else "fixed"
+        )
+    } else {
+      g <- g +
+        ggplot2::facet_grid(
+          cols = ggplot2::vars(!!rlang::sym(facet)),
+          scales = facet_scales,
+          space = if (facet_scales == "free") "free_x" else "fixed"
+        )
+    }
   }
-}
-  
+
   # Should the graph use position_fill?
   if (group != "") {
-      g <- g + ggplot2::geom_point(
-          alpha = alpha,
-          size = size
+    g <- g +
+      ggplot2::geom_point(
+        alpha = alpha,
+        size = size
       )
   } else {
-      g <- g + ggplot2::geom_point(
-          alpha = alpha,
-          size = size,
-          color = add_color
+    g <- g +
+      ggplot2::geom_point(
+        alpha = alpha,
+        size = size,
+        color = add_color
       )
   }
-  
+
   if (flip) {
-      g <- g + ggplot2::coord_flip()
+    g <- g + ggplot2::coord_flip()
   }
-  
+
   # Remove guides for legend if !add_color_guide
-  if (!add_color_guide) g <- g + ggplot2::guides(fill = "none", color = "none")
-  
+  if (!add_color_guide) {
+    g <- g + ggplot2::guides(fill = "none", color = "none")
+  }
+
   # Add theme
-  if (!is.null(theme_fun)) g <- g + theme_fun
-  
+  if (!is.null(theme_fun)) {
+    g <- g + theme_fun
+  }
+
   # Add scale fun
-  if (!is.null(scale_fill_fun)) g <- g + scale_fill_fun
-  
-  if (!is.null(scale_color_fun)) g <- g + scale_color_fun
-  
+  if (!is.null(scale_fill_fun)) {
+    g <- g + scale_fill_fun
+  }
+
+  if (!is.null(scale_color_fun)) {
+    g <- g + scale_color_fun
+  }
+
   return(g)
 }

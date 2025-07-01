@@ -8,8 +8,13 @@
 #' @param ... Additional arguments passed to [ggplot2::discrete_scale()] if discrete or [ggplot2::scale_fill_gradient()] if continuous.
 #'
 #' @export
-scale_color_visualizer_discrete <- function(palette = "cat_5_main", direction = 1, reverse_guide = TRUE, title_position = NULL, ...) {
-
+scale_color_visualizer_discrete <- function(
+  palette = "cat_5_main",
+  direction = 1,
+  reverse_guide = TRUE,
+  title_position = NULL,
+  ...
+) {
   if (!(is.null(palette))) {
     ggplot2::discrete_scale(
       "color",
@@ -41,8 +46,13 @@ scale_color_visualizer_discrete <- function(palette = "cat_5_main", direction = 
 #' @rdname scale_color_visualizer_discrete
 #'
 #' @export
-scale_fill_visualizer_discrete <- function(palette = "cat_5_main", direction = 1, reverse_guide = TRUE, title_position = NULL, ...) {
-
+scale_fill_visualizer_discrete <- function(
+  palette = "cat_5_main",
+  direction = 1,
+  reverse_guide = TRUE,
+  title_position = NULL,
+  ...
+) {
   if (!(is.null(palette))) {
     ggplot2::discrete_scale(
       "fill",
@@ -74,8 +84,13 @@ scale_fill_visualizer_discrete <- function(palette = "cat_5_main", direction = 1
 #' @rdname scale_color_visualizer_discrete
 #'
 #' @export
-scale_fill_visualizer_continuous <- function(palette = "seq_5_main", direction = 1, reverse_guide = TRUE, title_position = NULL, ...) {
-
+scale_fill_visualizer_continuous <- function(
+  palette = "seq_5_main",
+  direction = 1,
+  reverse_guide = TRUE,
+  title_position = NULL,
+  ...
+) {
   if (!(is.null(palette))) {
     pal <- palette_gen(palette, "continuous", direction)
 
@@ -100,15 +115,21 @@ scale_fill_visualizer_continuous <- function(palette = "seq_5_main", direction =
         # ticks.colour = "#F1F3F5",
         reverse = reverse_guide
       ),
-      ...)
+      ...
+    )
   }
 }
 
 #' @rdname scale_color_visualizer_discrete
 #'
 #' @export
-scale_color_visualizer_continuous <- function(palette = "seq_5_main", direction = 1, reverse_guide = TRUE, title_position = NULL, ...) {
-
+scale_color_visualizer_continuous <- function(
+  palette = "seq_5_main",
+  direction = 1,
+  reverse_guide = TRUE,
+  title_position = NULL,
+  ...
+) {
   if (!(is.null(palette))) {
     pal <- palette_gen(palette, "continuous", direction)
 
@@ -133,6 +154,7 @@ scale_color_visualizer_continuous <- function(palette = "seq_5_main", direction 
         # ticks.colour = "#F1F3F5",
         reverse = reverse_guide
       ),
-      ....)
+      ....
+    )
   }
 }

@@ -1,31 +1,30 @@
 #' Reorder a Data Frame
-#' 
+#'
 #' @param df A data frame to be reordered.
 #' @param x A character scalar specifying the column to be reordered.
 #' @param y A character scalar specifying the column to order by if ordering by values.
 #' @param group A character scalar specifying the grouping column (optional).
 #' @param order A character scalar specifying the order type (one of "none", "y", "grouped"). See details.
 #' @param dir_order A logical scalar specifying whether to flip the order.
-#' 
+#'
 #' @details Ordering takes the following possible values:
-#' 
+#'
 #' * "none": No reordering.
 #' * "y": Order by values of y.
 #' * "grouped_y": Order by values of y and group.
 #' * "x": Order alphabetically by x.
 #' * "grouped_x": Order alphabetically by x and group.
-#' 
-#' 
+#'
+#'
 #' @return The reordered data frame.
 #'
 #' @examples
 #' # Example usage
 #' df <- data.frame(col1 = c("b", "a", "c"), col2 = c(10, 25, 3))
 #' reorder_by(df, "col1", "col2")
-#' 
+#'
 #' @export
-reorder_by <- function(df, x, y, group = "", order = "y", dir_order = 1){
-
+reorder_by <- function(df, x, y, group = "", order = "y", dir_order = 1) {
   #------ Checks
 
   # df is a data frame
@@ -39,15 +38,17 @@ reorder_by <- function(df, x, y, group = "", order = "y", dir_order = 1){
 
   # group is character scalar and in df if not empty
   checkmate::assert_character(group, len = 1)
-  if (group != "")  checkmate::assert_subset(group, colnames(df))
-  
+  if (group != "") {
+    checkmate::assert_subset(group, colnames(df))
+  }
+
   # order is a character scalar in c("none", "y", "grouped")
   checkmate::assert_choice(order, c("none", "y", "grouped_y", "x", "grouped_x"))
 
   # dir_order is 1 or -1 (numeric scalar)
   checkmate::assert_subset(dir_order, c(1, -1))
 
- #------ Reorder
+  #------ Reorder
 
   # droplevels first
   if (is.factor(df[[x]])) {

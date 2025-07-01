@@ -8,8 +8,12 @@
 #' @return A color palette
 #'
 #' @export
-palette <- function(palette = "cat_5_main", reverse = FALSE, show_palettes = FALSE, ...) {
-
+palette <- function(
+  palette = "cat_5_main",
+  reverse = FALSE,
+  show_palettes = FALSE,
+  ...
+) {
   #------ Checks
 
   # Check that palette is a character scalar
@@ -25,21 +29,28 @@ palette <- function(palette = "cat_5_main", reverse = FALSE, show_palettes = FAL
 
   # Define palettes
   pals <- list(
-    cat_2_yellow = color_pattern("cat_2_yellow")
-    , cat_2_light = color_pattern("cat_2_light")
-    , cat_2_green = color_pattern("cat_2_green")
-    , cat_2_blue = color_pattern("cat_2_blue")
-    , cat_5_main = color_pattern("cat_5_main")
-    , cat_5_ibm = color_pattern("cat_5_ibm")
-    , cat_3_aquamarine = color_pattern("cat_3_aquamarine")
-    , cat_3_tol_high_contrast = color_pattern("cat_3_tol_high_contrast")
-    , cat_8_tol_adapted = color_pattern("cat_8_tol_adapted")
-    , cat_3_custom_1 = c("#003F5C", "#58508D", "#FFA600")
-    , cat_4_custom_1 = c("#003F5C", "#7a5195", "#ef5675", "#ffa600")
-    , cat_5_custom_1 = c("#003F5C", "#58508d", "#bc5090", "#ff6361", "#ffa600")
-    , cat_6_custom_1 = c("#003F5C", "#444e86", "#955196", "#dd5182", "#ff6e54", "#ffa600")
-    , div_5_orange_blue = color_pattern("div_5_orange_blue")
-    , div_5_green_purple = color_pattern("div_5_green_purple")
+    cat_2_yellow = color_pattern("cat_2_yellow"),
+    cat_2_light = color_pattern("cat_2_light"),
+    cat_2_green = color_pattern("cat_2_green"),
+    cat_2_blue = color_pattern("cat_2_blue"),
+    cat_5_main = color_pattern("cat_5_main"),
+    cat_5_ibm = color_pattern("cat_5_ibm"),
+    cat_3_aquamarine = color_pattern("cat_3_aquamarine"),
+    cat_3_tol_high_contrast = color_pattern("cat_3_tol_high_contrast"),
+    cat_8_tol_adapted = color_pattern("cat_8_tol_adapted"),
+    cat_3_custom_1 = c("#003F5C", "#58508D", "#FFA600"),
+    cat_4_custom_1 = c("#003F5C", "#7a5195", "#ef5675", "#ffa600"),
+    cat_5_custom_1 = c("#003F5C", "#58508d", "#bc5090", "#ff6361", "#ffa600"),
+    cat_6_custom_1 = c(
+      "#003F5C",
+      "#444e86",
+      "#955196",
+      "#dd5182",
+      "#ff6e54",
+      "#ffa600"
+    ),
+    div_5_orange_blue = color_pattern("div_5_orange_blue"),
+    div_5_green_purple = color_pattern("div_5_green_purple")
   )
 
   # Return if show palettes
@@ -51,7 +62,9 @@ palette <- function(palette = "cat_5_main", reverse = FALSE, show_palettes = FAL
   if (palette %notin% names(pals)) {
     rlang::abort(c(
       "Palette not defined",
-      "*" = glue::glue("Palette `{palette}` is not defined in the `palettes` list."),
+      "*" = glue::glue(
+        "Palette `{palette}` is not defined in the `palettes` list."
+      ),
       "i" = "Use `palette(show_palettes = TRUE)` to see all available palettes."
     ))
   }
@@ -60,7 +73,9 @@ palette <- function(palette = "cat_5_main", reverse = FALSE, show_palettes = FAL
 
   pal <- pals[[palette]]
 
-  if (reverse) pal <- rev(pal)
+  if (reverse) {
+    pal <- rev(pal)
+  }
 
   return(pal)
 }

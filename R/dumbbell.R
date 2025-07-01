@@ -29,32 +29,33 @@
 #' @return A dumbbell chart.
 #' @export
 #'
-dumbbell <- function(df,
-                     col,
-                     group_x,
-                     group_y,
-                     point_size = 5,
-                     point_alpha = 1,
-                     segment_size = 2.5,
-                     segment_color = color("light_blue_grey"),
-                     group_x_title = NULL,
-                     group_y_title = NULL,
-                     x_title = NULL,
-                     title = NULL,
-                     subtitle = NULL,
-                     caption = NULL,
-                     line_to_y_axis = FALSE,
-                     line_to_y_axis_type = 3,
-                     line_to_y_axis_width = 0.5,
-                     line_to_y_axis_color = color("dark_grey"),
-                     add_text = FALSE,
-                     add_text_vjust = 2,
-                     add_text_size = 3.5,
-                     add_text_color = color("dark_grey"),
-                     theme_fun = theme_dumbbell(),
-                     scale_fill_fun = scale_fill_visualizer_discrete(),
-                     scale_color_fun = scale_color_visualizer_discrete()){
-
+dumbbell <- function(
+  df,
+  col,
+  group_x,
+  group_y,
+  point_size = 5,
+  point_alpha = 1,
+  segment_size = 2.5,
+  segment_color = color("light_blue_grey"),
+  group_x_title = NULL,
+  group_y_title = NULL,
+  x_title = NULL,
+  title = NULL,
+  subtitle = NULL,
+  caption = NULL,
+  line_to_y_axis = FALSE,
+  line_to_y_axis_type = 3,
+  line_to_y_axis_width = 0.5,
+  line_to_y_axis_color = color("dark_grey"),
+  add_text = FALSE,
+  add_text_vjust = 2,
+  add_text_size = 3.5,
+  add_text_color = color("dark_grey"),
+  theme_fun = theme_dumbbell(),
+  scale_fill_fun = scale_fill_visualizer_discrete(),
+  scale_color_fun = scale_color_visualizer_discrete()
+) {
   #------ Checks
 
   # df is a data frame
@@ -88,7 +89,11 @@ dumbbell <- function(df,
     dplyr::pull()
 
   # Check if only two groups
-  if (length(group_x_keys) > 2) rlang::abort("Cannot draw a dumbbell plot for `group_x` with more than 2 groups")
+  if (length(group_x_keys) > 2) {
+    rlang::abort(
+      "Cannot draw a dumbbell plot for `group_x` with more than 2 groups"
+    )
+  }
 
   # Pivot long data
   df_pivot <- df |>
@@ -101,16 +106,24 @@ dumbbell <- function(df,
   df_pivot <- df_pivot |>
     dplyr::rowwise() |>
     dplyr::mutate(
-      min = min(!!rlang::sym(group_x_keys[[1]]), !!rlang::sym(group_x_keys[[2]]), na.rm = T),
-      max = max(!!rlang::sym(group_x_keys[[1]]), !!rlang::sym(group_x_keys[[2]]), na.rm = T)) |>
+      min = min(
+        !!rlang::sym(group_x_keys[[1]]),
+        !!rlang::sym(group_x_keys[[2]]),
+        na.rm = T
+      ),
+      max = max(
+        !!rlang::sym(group_x_keys[[1]]),
+        !!rlang::sym(group_x_keys[[2]]),
+        na.rm = T
+      )
+    ) |>
     dplyr::ungroup() |>
     dplyr::mutate(diff = max - min)
 
   g <- ggplot2::ggplot(df_pivot)
 
   # Add line
-  if(line_to_y_axis) {
-
+  if (line_to_y_axis) {
     xend <- min(dplyr::pull(df, !!rlang::sym(col)))
 
     g <- g +
@@ -118,21 +131,24 @@ dumbbell <- function(df,
         ggplot2::aes(
           x = min,
           y = !!rlang::sym(group_y),
-          yend = !!rlang::sym(group_y)),
+          yend = !!rlang::sym(group_y)
+        ),
         xend = xend,
         linetype = line_to_y_axis_type,
         linewidth = line_to_y_axis_width,
-        color = line_to_y_axis_color)
+        color = line_to_y_axis_color
+      )
   }
 
   # Add segment
-  g <-  g +
+  g <- g +
     ggplot2::geom_segment(
       ggplot2::aes(
         x = !!rlang::sym(group_x_keys[[1]]),
         y = !!rlang::sym(group_y),
         xend = !!rlang::sym(group_x_keys[[2]]),
-        yend = !!rlang::sym(group_y)),
+        yend = !!rlang::sym(group_y)
+      ),
       linewidth = segment_size,
       color = segment_color
     )
@@ -152,38 +168,44 @@ dumbbell <- function(df,
     )
 
   # Add title, subtitle, caption, x_title, y_title
-  g <- g + ggplot2::labs(
-    title = title,
-    subtitle = subtitle,
-    caption = caption,
-    x = x_title,
-    y = group_y_title,
-    color = group_x_title,
-    fill = group_x_title
-  )
+  g <- g +
+    ggplot2::labs(
+      title = title,
+      subtitle = subtitle,
+      caption = caption,
+      x = x_title,
+      y = group_y_title,
+      color = group_x_title,
+      fill = group_x_title
+    )
 
   # Add stat labels to points
-  if(add_text) g <- g +
-    ggrepel::geom_text_repel(
-      data = df,
-      ggplot2::aes(
-        x = !!rlang::sym(col),
-        y = !!rlang::sym(group_y),
-        label = !!rlang::sym(col)
-      ),
-      vjust = add_text_vjust,
-      size = add_text_size,
-      color = add_text_color
-    )
+  if (add_text) {
+    g <- g +
+      ggrepel::geom_text_repel(
+        data = df,
+        ggplot2::aes(
+          x = !!rlang::sym(col),
+          y = !!rlang::sym(group_y),
+          label = !!rlang::sym(col)
+        ),
+        vjust = add_text_vjust,
+        size = add_text_size,
+        color = add_text_color
+      )
+  }
 
   # Add theme
   g <- g + theme_fun
 
   # Add scale fun
-  if (!is.null(scale_fill_fun)) g <- g + scale_fill_fun
+  if (!is.null(scale_fill_fun)) {
+    g <- g + scale_fill_fun
+  }
 
-  if (!is.null(scale_color_fun)) g <- g + scale_color_fun
+  if (!is.null(scale_color_fun)) {
+    g <- g + scale_color_fun
+  }
 
   return(g)
-
 }

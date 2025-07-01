@@ -129,78 +129,80 @@ theme_default <- function(
   caption_position_to_plot = TRUE,
   caption_size = 12,
   caption_color = color("dark_grey"),
-  ...) {
+  ...
+) {
   # Basic simple theme
   theme <- ggplot2::theme_minimal()
 
-  theme <- theme + ggplot2::theme(
-    # # Text - design
-    text = ggplot2::element_text(
-      family = text_font_family,
-      color = text_color,
-      size = text_size,
-      face = text_font_face
-    ),
-    # Default legend to right position
-    legend.position = legend_position,
-    # Defaut legend to vertical direction
-    legend.direction = legend_direction,
-    # Text sizes
-    axis.text = ggplot2::element_text(
-      size = axis_text_size,
-      family = axis_text_font_family,
-      face = axis_text_font_face,
-      color = axis_text_color
-    ),
-    axis.title = ggplot2::element_text(
-      size = axis_title_size,
-      family = axis_text_font_family,
-      face = axis_title_font_face,
-      color = axis_title_color
-    ),
-    # # Wrap title
-    plot.title = ggtext::element_textbox_simple(
-      hjust = title_hjust,
-      family = title_font_family,
-      color = title_color,
-      size = title_size,
-      face = title_font_face,
-      width = grid::unit(0.9, "npc"),
-      margin = ggplot2::margin(b = 10)
-    ),
-    plot.subtitle = ggtext::element_textbox_simple(
-      hjust = title_hjust,
-      family = subtitle_font_family,
-      color = subtitle_color,
-      size = subtitle_size,
-      face = subtitle_font_face,
-      margin = ggplot2::margin(t = 5, b = 10)
-    ),
-    plot.caption = ggtext::element_textbox_simple(
-      size = caption_size,
-      face = caption_font_face,
-      family = caption_font_family,
-      color = caption_color,
-      margin = ggplot2::margin(t = 10)
-    ),
-    legend.title = ggplot2::element_text(
-      size = legend_title_size,
-      face = legend_title_font_face,
-      family = legend_title_font_family,
-      color = legend_title_color
-    ),
-    legend.text = ggplot2::element_text(
-      size = legend_text_size,
-      face = legend_text_font_face,
-      family = legend_text_font_family,
-      color = legend_text_color
-    ),
-    axis.text.x = ggplot2::element_text(
-      angle = axis_text_x_angle,
-      vjust = axis_text_x_vjust,
-      hjust = axis_text_x_hjust
+  theme <- theme +
+    ggplot2::theme(
+      # # Text - design
+      text = ggplot2::element_text(
+        family = text_font_family,
+        color = text_color,
+        size = text_size,
+        face = text_font_face
+      ),
+      # Default legend to right position
+      legend.position = legend_position,
+      # Defaut legend to vertical direction
+      legend.direction = legend_direction,
+      # Text sizes
+      axis.text = ggplot2::element_text(
+        size = axis_text_size,
+        family = axis_text_font_family,
+        face = axis_text_font_face,
+        color = axis_text_color
+      ),
+      axis.title = ggplot2::element_text(
+        size = axis_title_size,
+        family = axis_text_font_family,
+        face = axis_title_font_face,
+        color = axis_title_color
+      ),
+      # # Wrap title
+      plot.title = ggtext::element_textbox_simple(
+        hjust = title_hjust,
+        family = title_font_family,
+        color = title_color,
+        size = title_size,
+        face = title_font_face,
+        width = grid::unit(0.9, "npc"),
+        margin = ggplot2::margin(b = 10)
+      ),
+      plot.subtitle = ggtext::element_textbox_simple(
+        hjust = title_hjust,
+        family = subtitle_font_family,
+        color = subtitle_color,
+        size = subtitle_size,
+        face = subtitle_font_face,
+        margin = ggplot2::margin(t = 5, b = 10)
+      ),
+      plot.caption = ggtext::element_textbox_simple(
+        size = caption_size,
+        face = caption_font_face,
+        family = caption_font_family,
+        color = caption_color,
+        margin = ggplot2::margin(t = 10)
+      ),
+      legend.title = ggplot2::element_text(
+        size = legend_title_size,
+        face = legend_title_font_face,
+        family = legend_title_font_family,
+        color = legend_title_color
+      ),
+      legend.text = ggplot2::element_text(
+        size = legend_text_size,
+        face = legend_text_font_face,
+        family = legend_text_font_family,
+        color = legend_text_color
+      ),
+      axis.text.x = ggplot2::element_text(
+        angle = axis_text_x_angle,
+        vjust = axis_text_x_vjust,
+        hjust = axis_text_x_hjust
+      )
     )
-  )
 
   # Position of title
   if (title_position_to_plot) {
@@ -362,22 +364,22 @@ theme_default <- function(
   }
 
   # Add facet title text size
-  theme <- theme + ggplot2::theme(
-    strip.text = ggplot2::element_text(
-      size = facet_size,
-      family = facet_font_family,
-      face = facet_font_face,
-      color = facet_color
-    ),
-    strip.background = ggplot2::element_rect(
-      fill = facet_bg_color,
-      linewidth = 0
+  theme <- theme +
+    ggplot2::theme(
+      strip.text = ggplot2::element_text(
+        size = facet_size,
+        family = facet_font_family,
+        face = facet_font_face,
+        color = facet_color
+      ),
+      strip.background = ggplot2::element_rect(
+        fill = facet_bg_color,
+        linewidth = 0
+      )
     )
-  )
-  
+
   # Other parameters
   theme <- theme + ggplot2::theme(...)
-
 
   return(theme)
 }

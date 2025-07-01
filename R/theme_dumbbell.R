@@ -8,6 +8,6 @@
 theme_dumbbell <- function() {
   theme_default(
     axis_line_x = TRUE,
-    grid_)
+    grid_
+  )
 }
-
