@@ -9,9 +9,12 @@
 #'
 #' @export
 palette_gen <- function(palette, type, direction = 1, ...) {
-  if (type %notin% c("categorical", "sequential", "divergent")) {
-    rlang::abort("'type' must be categorical or continuous or divergent.")
-  }
+  #------ Checks
+
+  checkmate::assert_string(palette)
+  checkmate::assert_choice(type, c("categorical", "sequential", "divergent"))
+  checkmate::assert_number(direction, lower = -1, upper = 1)
+  checkmate::assert_true(abs(direction) == 1)
 
   if (type == "categorical") {
     return(palette_gen_categorical(palette = palette, direction = direction))
@@ -31,9 +34,11 @@ palette_gen <- function(palette, type, direction = 1, ...) {
 #'
 #' @export
 palette_gen_categorical <- function(palette = "cat_5_main", direction = 1) {
-  if (abs(direction) != 1) {
-    rlang::abort("Direction must be either 1 or -1.")
-  }
+  #------ Checks
+
+  checkmate::assert_string(palette)
+  checkmate::assert_number(direction, lower = -1, upper = 1)
+  checkmate::assert_true(abs(direction) == 1)
 
   pal <- palette(palette)
 
@@ -59,10 +64,12 @@ palette_gen_categorical <- function(palette = "cat_5_main", direction = 1) {
 #' @rdname palette_gen
 #'
 #' @export
-palette_gen_sequential <- function(palette = "seq_5_main", direction = 1, ...) {
-  if (abs(direction) != 1) {
-    rlang::abort("Direction must be either 1 or -1.")
-  }
+palette_gen_sequential <- function(palette = "cat_5_main", direction = 1, ...) {
+  #------ Checks
+
+  checkmate::assert_string(palette)
+  checkmate::assert_number(direction, lower = -1, upper = 1)
+  checkmate::assert_true(abs(direction) == 1)
 
   pal <- palette(palette)
 

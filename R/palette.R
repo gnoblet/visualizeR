@@ -16,13 +16,13 @@ palette <- function(
 ) {
   #------ Checks
 
-  # Check that palette is a character scalar
+  # palette is a character scalar
   checkmate::assert_character(palette, len = 1)
 
-  # Check that reverse is a logical scalar
+  # reverse is a logical scalar
   checkmate::assert_logical(reverse, len = 1)
 
-  # Check that show_palettes is a logical scalar
+  # show_palettes is a logical scalar
   checkmate::assert_logical(show_palettes, len = 1)
 
   #------ Get colors
