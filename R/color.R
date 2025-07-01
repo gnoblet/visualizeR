@@ -9,19 +9,33 @@
 #' * All , categorical colors start with ", cat_";
 #' * All sequential colors start with "seq_";
 #'
-#' Then, a number indi, cates the number of colors that belong to the palettes, a string the name of the palette, and, finally, a number the position of the color. E.g., "seq_5_red_4" would be the 4th color of a continuous palettes of 5 colors in the red band. Exception is made for white, light_grey, dark_grey, and black.
+#' Then, a number indicates the number of colors that belong to the palettes, a string the name of the palette, and, finally, a number the position of the color. E.g., "seq_5_red_4" would be the 4th color of a continuous palettes of 5 colors in the red band. Exception is made for white, light_grey, dark_grey, and black.
 #'
 #'
 #' @return Hex codes named or unnamed.
 #'
 #' @export
 color <- function(..., unname = TRUE) {
+  #------ Checks
+
+  # unname is a logical scalar
+  checkmate::assert_logical(unname, len = 1)
+
+  # all elements in ... are character strings
+  dots <- list(...)
+  if (length(dots) > 0) {
+    # Check each argument is a single character string
+    for (i in seq_along(dots)) {
+      checkmate::assert_string(dots[[i]], .var.name = paste0("Argument #", i))
+    }
+  }
+
   #------ Prep
 
-  # Retrieve colors
+  # retrieve colors
   cols <- c(...)
 
-  # Defined colors
+  # define color vector
   colors <- c(
     white = "#FFFFFF",
     lighter_grey = "#F5F5F5",
