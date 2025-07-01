@@ -62,18 +62,18 @@
 #' @export
 theme_default <- function(
   title_font_family = "Carlito",
-  title_size = 16,
+  title_size = 20,
   title_color = color("dark_grey"),
   title_font_face = "bold",
   title_hjust = NULL,
   title_position_to_plot = TRUE,
   subtitle_font_family = "Carlito",
-  subtitle_size = 15,
+  subtitle_size = 16,
   subtitle_color = color("dark_grey"),
   subtitle_font_face = "plain",
   subtitle_hjust = NULL,
   text_font_family = "Carlito",
-  text_size = 13,
+  text_size = 14,
   text_color = color("dark_grey"),
   text_font_face = "plain",
   panel_background_color = "#FFFFFF",
@@ -83,15 +83,15 @@ theme_default <- function(
   legend_direction = "horizontal",
   legend_justification = "center",
   legend_reverse = TRUE,
-  legend_title_size = 13,
+  legend_title_size = 14,
   legend_title_color = color("dark_grey"),
   legend_title_font_face = "plain",
   legend_title_font_family = "Carlito",
-  legend_text_size = 13,
+  legend_text_size = 14,
   legend_text_color = color("dark_grey"),
   legend_text_font_face = "plain",
   legend_text_font_family = "Carlito",
-  facet_size = 14,
+  facet_size = 15,
   facet_color = color("dark_grey"),
   facet_font_face = "bold",
   facet_font_family = "Carlito",
@@ -105,7 +105,7 @@ theme_default <- function(
   axis_line_y = TRUE,
   axis_ticks_y = TRUE,
   axis_text_font_family = "Carlito",
-  axis_text_size = 13,
+  axis_text_size = 14,
   axis_text_color = color("dark_grey"),
   axis_text_font_face = "plain",
   axis_title_size = 15,
@@ -127,7 +127,7 @@ theme_default <- function(
   caption_font_family = "Carlito",
   caption_font_face = "plain",
   caption_position_to_plot = TRUE,
-  caption_size = 11,
+  caption_size = 12,
   caption_color = color("dark_grey"),
   ...) {
   # Basic simple theme
@@ -166,7 +166,7 @@ theme_default <- function(
       size = title_size,
       face = title_font_face,
       width = grid::unit(0.9, "npc"),
-      margin = ggplot2::margin(b = 5)
+      margin = ggplot2::margin(b = 10)
     ),
     plot.subtitle = ggtext::element_textbox_simple(
       hjust = title_hjust,
@@ -174,14 +174,14 @@ theme_default <- function(
       color = subtitle_color,
       size = subtitle_size,
       face = subtitle_font_face,
-      margin = ggplot2::margin(t = 5, b = 5)
+      margin = ggplot2::margin(t = 5, b = 10)
     ),
     plot.caption = ggtext::element_textbox_simple(
       size = caption_size,
       face = caption_font_face,
       family = caption_font_family,
       color = caption_color,
-      margin = ggplot2::margin(t = 5)
+      margin = ggplot2::margin(t = 10)
     ),
     legend.title = ggplot2::element_text(
       size = legend_title_size,
