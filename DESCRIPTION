@@ -36,7 +36,7 @@ Suggests:
     roxygen2,
     testthat (>= 3.0.0),
     vdiffr,
-    mockery
+    withr
 VignetteBuilder:
     knitr
 Config/testthat/edition: 3

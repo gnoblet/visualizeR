@@ -47,41 +47,28 @@ test_that("palette_gen returns appropriate function types", {
   expect_true(is.function(div_fn))
 })
 
-test_that("palette_gen forwards arguments to appropriate function", {
-  # Skip the test if mockery is not available
-  skip_if_not_installed("mockery")
-  skip_if_not(exists("with_mocked_bindings"))
+test_that("palette_gen dispatches to correct function types", {
+  # Test for categorical type
+  cat_result <- palette_gen("cat_5_main", "categorical", direction = -1)
+  expect_true(is.function(cat_result))
 
-  # Create a mock for palette_gen_categorical
-  mockery::with_mocked_bindings(
-    palette_gen_categorical = function(palette, direction) {
-      return(list(
-        palette = palette,
-        direction = direction,
-        type = "categorical"
-      ))
-    },
-    palette_gen_sequential = function(palette, direction, ...) {
-      return(list(
-        palette = palette,
-        direction = direction,
-        type = "sequential"
-      ))
-    },
-    code = {
-      # Test categorical forwarding
-      result <- palette_gen("cat_palette", "categorical", direction = -1)
-      expect_equal(result$palette, "cat_palette")
-      expect_equal(result$direction, -1)
-      expect_equal(result$type, "categorical")
+  # Verify it behaves like a categorical palette function
+  expect_equal(length(cat_result(3)), 3)
+  expect_type(cat_result(3), "character")
 
-      # Test sequential forwarding
-      result <- palette_gen("seq_palette", "sequential", direction = -1)
-      expect_equal(result$palette, "seq_palette")
-      expect_equal(result$direction, -1)
-      expect_equal(result$type, "sequential")
-    }
-  )
+  # Test for sequential type
+  seq_result <- palette_gen("cat_5_main", "sequential", direction = -1)
+  expect_true(is.function(seq_result))
+
+  # Verify it behaves like a sequential palette function
+  expect_equal(length(seq_result(5)), 5)
+  expect_type(seq_result(5), "character")
+
+  # Test for divergent type - should work like sequential
+  div_result <- palette_gen("div_5_orange_blue", "divergent", direction = -1)
+  expect_true(is.function(div_result))
+  expect_equal(length(div_result(7)), 7)
+  expect_type(div_result(7), "character")
 })
 
 test_that("palette_gen_categorical validates parameters", {
