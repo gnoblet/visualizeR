@@ -28,6 +28,6 @@ Hex codes named or unnamed.
 * All , categorical colors start with ", cat_";
 * All sequential colors start with "seq_";
 
-Then, a number indi, cates the number of colors that belong to the palettes, a string the name of the palette, and, finally, a number the position of the color. E.g., "seq_5_red_4" would be the 4th color of a continuous palettes of 5 colors in the red band. Exception is made for white, light_grey, dark_grey, and black.
+Then, a number indicates the number of colors that belong to the palettes, a string the name of the palette, and, finally, a number the position of the color. E.g., "seq_5_red_4" would be the 4th color of a continuous palettes of 5 colors in the red band. Exception is made for white, light_grey, dark_grey, and black.
 }
 

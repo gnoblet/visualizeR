@@ -10,7 +10,7 @@ palette_gen(palette, type, direction = 1, ...)
 
 palette_gen_categorical(palette = "cat_5_main", direction = 1)
 
-palette_gen_sequential(palette = "seq_5_main", direction = 1, ...)
+palette_gen_sequential(palette = "cat_5_main", direction = 1, ...)
 }
 \arguments{
 \item{palette}{Palette name from [palette()].}
