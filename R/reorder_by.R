@@ -66,7 +66,12 @@ reorder_by <- function(df, x, y, group = "", order = "y", dir_order = 1) {
   } else if (order == "grouped_y" && group != "") {
     # Order by group first, then by values of y
     df <- df[
-      order(df[[group]], df[[y]], decreasing = c(FALSE, dir_order_lgl)),
+      order(
+        df[[group]],
+        df[[y]],
+        decreasing = c(FALSE, dir_order_lgl),
+        method = "radix"
+      ),
     ]
     df[[x]] <- forcats::fct_inorder(df[[x]])
   } else if (order == "grouped_y" && group == "") {
@@ -81,7 +86,12 @@ reorder_by <- function(df, x, y, group = "", order = "y", dir_order = 1) {
   } else if (order == "grouped_x" && group != "") {
     # Order by group first, then alphabetically by x
     df <- df[
-      order(df[[group]], df[[x]], decreasing = c(FALSE, dir_order_lgl)),
+      order(
+        df[[group]],
+        df[[x]],
+        decreasing = c(FALSE, dir_order_lgl),
+        method = "radix"
+      ),
     ]
     df[[x]] <- forcats::fct_inorder(df[[x]])
   } else if (order == "grouped_x" && group == "") {
