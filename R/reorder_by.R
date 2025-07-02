@@ -48,6 +48,9 @@ reorder_by <- function(df, x, y, group = "", order = "y", dir_order = 1) {
   # dir_order is 1 or -1 (numeric scalar)
   checkmate::assert_subset(dir_order, c(1, -1))
 
+  # Convert dir_order to decreasing logical flag
+  dir_order_lgl <- (dir_order == -1)
+
   #------ Reorder
 
   # droplevels first
@@ -58,29 +61,33 @@ reorder_by <- function(df, x, y, group = "", order = "y", dir_order = 1) {
   # reording options
   if (order == "y") {
     # Order by values of y
-    df <- df[order(df[[y]] * dir_order), ]
+    df <- df[order(df[[y]], decreasing = dir_order_lgl), ]
     df[[x]] <- forcats::fct_inorder(df[[x]])
   } else if (order == "grouped_y" && group != "") {
     # Order by group first, then by values of y
-    df <- df[order(df[[group]], df[[y]] * dir_order), ]
+    df <- df[
+      order(df[[group]], df[[y]], decreasing = c(FALSE, dir_order_lgl)),
+    ]
     df[[x]] <- forcats::fct_inorder(df[[x]])
   } else if (order == "grouped_y" && group == "") {
     # Fallback to ordering by y if group is empty
     rlang::warn("Group is empty. Ordering by y only.")
-    df <- df[order(df[[y]] * dir_order), ]
+    df <- df[order(df[[y]], decreasing = dir_order_lgl), ]
     df[[x]] <- forcats::fct_inorder(df[[x]])
   } else if (order == "x") {
     # Order alphabetically by x
-    df <- df[order(df[[x]] * dir_order), ]
+    df <- df[order(df[[x]], decreasing = dir_order_lgl), ]
     df[[x]] <- forcats::fct_inorder(df[[x]])
   } else if (order == "grouped_x" && group != "") {
     # Order by group first, then alphabetically by x
-    df <- df[order(df[[group]], df[[x]] * dir_order), ]
+    df <- df[
+      order(df[[group]], df[[x]], decreasing = c(FALSE, dir_order_lgl)),
+    ]
     df[[x]] <- forcats::fct_inorder(df[[x]])
   } else if (order == "grouped_x" && group == "") {
     # Fallback to ordering by x if group is empty
     rlang::warn("Group is empty. Ordering by x only.")
-    df <- df[order(df[[x]] * dir_order), ]
+    df <- df[order(df[[x]], decreasing = dir_order_lgl), ]
     df[[x]] <- forcats::fct_inorder(df[[x]])
   }
 

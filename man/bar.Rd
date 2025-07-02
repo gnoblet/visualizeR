@@ -68,7 +68,7 @@ bar(
 
 \item{facet}{Some quoted grouping categorical column, e.g. administrative areas or population groups.}
 
-\item{order}{Should bars be ordered? "none" if no, "y" if yes based on y, "grouped" if yes based on y and group.}
+\item{order}{A character scalar specifying the order type (one of "none", "y", "grouped"). See details.}
 
 \item{x_rm_na}{Remove NAs in x?}
 

@@ -21,7 +21,6 @@ hbar <- function(
 #' @param y A quoted character column or coercible as a character column.
 #' @param group Some quoted grouping categorical column, e.g. administrative areas or population groups.
 #' @param facet Some quoted grouping categorical column, e.g. administrative areas or population groups.
-#' @param order Should bars be ordered? "none" if no, "y" if yes based on y, "grouped" if yes based on y and group.
 #' @param x_rm_na Remove NAs in x?
 #' @param y_rm_na Remove NAs in y?
 #' @param group_rm_na Remove NAs in group?
