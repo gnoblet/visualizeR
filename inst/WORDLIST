@@ -1,4 +1,5 @@
 aut
+coercible
 Config
 cre
 dplyr
@@ -10,7 +11,9 @@ ggtext
 github
 gnoblet
 grDevices
+grey
 Guillaume
+hlollipop
 https
 io
 knitr
@@ -19,11 +22,14 @@ Noblet
 rio
 rlang
 rmarkdown
+Roboto
 roxygen
 RoxygenNote
+Segoe
 stringr
 testthat
 tidyr
+UI
 vdiffr
 VignetteBuilder
 viridisLite
