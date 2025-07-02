@@ -1,7 +1,10 @@
 aut
 CMD
+codecov
+Codecov
 coercible
 Config
+covr
 cre
 Customizable
 donut
@@ -27,6 +30,7 @@ knitr
 LazyData
 Noblet
 pre
+README
 rio
 rlang
 rmarkdown

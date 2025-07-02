@@ -22,9 +22,14 @@ desc <- setNames(as.list(desc), colnames(desc))
 
 # `r desc$Package` <img src="man/figures/logo.png" align="right" width="120"/>
 
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/gnoblet/visualizeR/actions/workflows/R-CMD-check.yml/badge.svg)](https://github.com/gnoblet/visualizeR/actions/workflows/R-CMD-check.yml)
+[![Codecov test coverage](https://codecov.io/gh/gnoblet/visualizeR/branch/main/graph/badge.svg)](https://app.codecov.io/gh/gnoblet/visualizeR?branch=main)
+<!-- badges: end -->
+
 > `r desc$Title`
 
-`visualizeR` proposes some utils to sane colors, ready-to-go color palettes, and a few visualization functions.
+`visualizeR` proposes some utils to sane colors, ready-to-go color palettes, and a few visualization functions. The package is thoroughly tested with comprehensive code coverage.
 
 ## Installation
 
@@ -40,6 +45,8 @@ devtools::install_github("gnoblet/visualizeR", build_vignettes = TRUE)
 Roadmap is as follows:
 
 - [ ] Full revamp of core functions (colors, pattern, incl. adding test and pre-commit structures)
+- [x] Add test coverage reporting via codecov
+- [ ] Maintain >80% test coverage across all functions
 - [ ] Add other types of plots:
   - [ ] Dumbell
   - [ ] Waffle
@@ -49,6 +56,10 @@ Roadmap is as follows:
 ## Request
 
 Please, do not hesitate to pull request any new viz or colors or color palettes, or to email request any change ([gnoblet\@zaclys.net](mailto:gnoblet@zaclys.net){.email}).
+
+## Code Coverage
+
+`visualizeR` uses [codecov](https://codecov.io/) for test coverage reporting. You can see the current coverage status by clicking on the codecov badge at the top of this README. We aim to maintain high test coverage to ensure code reliability and stability.
 
 ## Colors
 

@@ -1,29 +1,39 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+
+
 # visualizeR <img src="man/figures/logo.png" align="right" width="120"/>
+
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/gnoblet/visualizeR/actions/workflows/R-CMD-check.yml/badge.svg)](https://github.com/gnoblet/visualizeR/actions/workflows/R-CMD-check.yml)
+[![Codecov test coverage](https://codecov.io/gh/gnoblet/visualizeR/branch/main/graph/badge.svg)](https://app.codecov.io/gh/gnoblet/visualizeR?branch=main)
+<!-- badges: end -->
 
 > What a color! What a viz!
 
-`visualizeR` proposes some utils to sane colors, ready-to-go color
-palettes, and a few visualization functions.
+`visualizeR` proposes some utils to sane colors, ready-to-go color palettes, and a few visualization functions. The package is thoroughly tested with comprehensive code coverage.
 
 ## Installation
 
-You can install the last version of visualizeR from
-[GitHub](https://github.com/) with:
+You can install the last version of visualizeR from [GitHub](https://github.com/) with:
+
 
 ``` r
 # install.packages("devtools")
-devtools::install_github('gnoblet/visualizeR', build_vignettes = TRUE)
+devtools::install_github("gnoblet/visualizeR", build_vignettes = TRUE)
 ```
 
 ## Roadmap
 
 Roadmap is as follows:
 
-- [ ] Full revamp of core functions (colors, pattern, incl. adding test
-  and pre-commit structures)
+- [ ] Full revamp of core functions (colors, pattern, incl. adding test and pre-commit structures)
+- [x] Add test coverage reporting via codecov
+- [ ] Maintain >80% test coverage across all functions
 - [ ] Add other types of plots:
   - [ ] Dumbell
   - [ ] Waffle
@@ -32,13 +42,16 @@ Roadmap is as follows:
 
 ## Request
 
-Please, do not hesitate to pull request any new viz or colors or color
-palettes, or to email request any change (<gnoblet@zaclys.net>).
+Please, do not hesitate to pull request any new viz or colors or color palettes, or to email request any change ([gnoblet\@zaclys.net](mailto:gnoblet@zaclys.net){.email}).
+
+## Code Coverage
+
+`visualizeR` uses [codecov](https://codecov.io/) for test coverage reporting. You can see the current coverage status by clicking on the codecov badge at the top of this README. We aim to maintain high test coverage to ensure code reliability and stability.
 
 ## Colors
 
-Functions to access colors and palettes are `color()` or `palette()`.
-Feel free to pull request new colors.
+Functions to access colors and palettes are `color()` or `palette()`. Feel free to pull request new colors.
+
 
 ``` r
 library(visualizeR)
@@ -51,7 +64,7 @@ color(unname = F)[1:10]
 #>       "#71716F"       "#000000"       "#ffc20a"       "#0c7bdc"       "#fefe62"
 
 # Extract a color palette as hexadecimal codes and reversed
-palette(palette = 'cat_5_main', reversed = TRUE, color_ramp_palette = FALSE)
+palette(palette = "cat_5_main", reversed = TRUE, color_ramp_palette = FALSE)
 #> [1] "#083d77" "#4ecdc4" "#f4c095" "#b47eb3" "#ffd5ff"
 
 # Get all color palettes names
@@ -69,6 +82,7 @@ palette(show_palettes = TRUE)
 ## Charts
 
 ### Example 1: Bar chart
+
 
 ``` r
 library(palmerpenguins)
@@ -91,71 +105,92 @@ df_island <- penguins |>
   ungroup()
 
 # Simple bar chart by group with some alpha transparency
-bar(df, 'island', 'mean_bl', 'species', x_title = 'Mean of bill length', title = 'Mean of bill length by island and species')
+bar(df, "island", "mean_bl", "species", x_title = "Mean of bill length", title = "Mean of bill length by island and species")
 ```
 
-<img src="man/figures/README-example-bar-chart-1.png" width="65%" />
+<div class="figure">
+<img src="man/figures/README-example-bar-chart-1.png" alt="plot of chunk example-bar-chart" width="65%" />
+<p class="caption">plot of chunk example-bar-chart</p>
+</div>
 
 ``` r
 
 # Flipped / Horizontal
-hbar(df, 'island', 'mean_bl', 'species', x_title = 'Mean of bill length', title = 'Mean of bill length by island and species')
+hbar(df, "island", "mean_bl", "species", x_title = "Mean of bill length", title = "Mean of bill length by island and species")
 ```
 
-<img src="man/figures/README-example-bar-chart-2.png" width="65%" />
+<div class="figure">
+<img src="man/figures/README-example-bar-chart-2.png" alt="plot of chunk example-bar-chart" width="65%" />
+<p class="caption">plot of chunk example-bar-chart</p>
+</div>
 
 ``` r
 
 # Facetted
-bar(df, 'island', 'mean_bl', facet = 'species', x_title = 'Mean of bill length', title = 'Mean of bill length by island and species', add_color_guide = FALSE)
+bar(df, "island", "mean_bl", facet = "species", x_title = "Mean of bill length", title = "Mean of bill length by island and species", add_color_guide = FALSE)
 ```
 
-<img src="man/figures/README-example-bar-chart-3.png" width="65%" />
+<div class="figure">
+<img src="man/figures/README-example-bar-chart-3.png" alt="plot of chunk example-bar-chart" width="65%" />
+<p class="caption">plot of chunk example-bar-chart</p>
+</div>
 
 ``` r
 
 #  Flipped, with text, smaller width, and caption
-hbar(df = df_island, x = 'island', y = 'mean_bl', title = 'Mean of bill length by island', add_text = T, width = 0.6, add_text_suffix = 'mm', add_text_expand_limit = 1.3, add_color_guide = FALSE, caption = "Data: palmerpenguins package.")
+hbar(df = df_island, x = "island", y = "mean_bl", title = "Mean of bill length by island", add_text = T, width = 0.6, add_text_suffix = "mm", add_text_expand_limit = 1.3, add_color_guide = FALSE, caption = "Data: palmerpenguins package.")
 ```
 
-<img src="man/figures/README-example-bar-chart-4.png" width="65%" />
+<div class="figure">
+<img src="man/figures/README-example-bar-chart-4.png" alt="plot of chunk example-bar-chart" width="65%" />
+<p class="caption">plot of chunk example-bar-chart</p>
+</div>
 
 ### Example 2: Scatterplot
 
+
 ``` r
 # Simple scatterplot
-point(penguins, 'bill_length_mm', 'flipper_length_mm')
+point(penguins, "bill_length_mm", "flipper_length_mm")
 ```
 
-<img src="man/figures/README-example-point-chart-1.png" width="65%" />
+<div class="figure">
+<img src="man/figures/README-example-point-chart-1.png" alt="plot of chunk example-point-chart" width="65%" />
+<p class="caption">plot of chunk example-point-chart</p>
+</div>
 
 ``` r
 
 # Scatterplot with grouping colors, greater dot size, some transparency
-point(penguins, 'bill_length_mm', 'flipper_length_mm', 'island', group_title = 'Island', alpha = 0.6, size = 3, title = 'Bill vs. flipper length', , add_color_guide = FALSE)
+point(penguins, "bill_length_mm", "flipper_length_mm", "island", group_title = "Island", alpha = 0.6, size = 3, title = "Bill vs. flipper length", , add_color_guide = FALSE)
 ```
 
-<img src="man/figures/README-example-point-chart-2.png" width="65%" />
+<div class="figure">
+<img src="man/figures/README-example-point-chart-2.png" alt="plot of chunk example-point-chart" width="65%" />
+<p class="caption">plot of chunk example-point-chart</p>
+</div>
 
 ``` r
 
 # Facetted scatterplot by island
-point(penguins, 'bill_length_mm', 'flipper_length_mm', 'species', 'island', 'fixed', group_title = 'Species', title = 'Bill vs. flipper length by species and island', add_color_guide = FALSE)
+point(penguins, "bill_length_mm", "flipper_length_mm", "species", "island", "fixed", group_title = "Species", title = "Bill vs. flipper length by species and island", add_color_guide = FALSE)
 ```
 
-<img src="man/figures/README-example-point-chart-3.png" width="65%" />
+<div class="figure">
+<img src="man/figures/README-example-point-chart-3.png" alt="plot of chunk example-point-chart" width="65%" />
+<p class="caption">plot of chunk example-point-chart</p>
+</div>
 
 ### Example 3: Dumbbell plot
 
-Remember to ensure that your data are in the long format and you only
-have two groups on the x-axis; for instance, IDP and returnee and no NA
-values.
+Remember to ensure that your data are in the long format and you only have two groups on the x-axis; for instance, IDP and returnee and no NA values.
+
 
 ``` r
 # Prepare long data
 df <- tibble::tibble(
   admin1 = rep(letters[1:8], 2),
-  setting = c(rep(c('Rural', 'Urban'), 4), rep(c('Urban', 'Rural'), 4)),
+  setting = c(rep(c("Rural", "Urban"), 4), rep(c("Urban", "Rural"), 4)),
   stat = rnorm(16, mean = 50, sd = 18)
 ) |>
   dplyr::mutate(stat = round(stat, 0))
@@ -176,10 +211,11 @@ df <- tibble::tibble(
 
 ### Example 4: donut chart
 
+
 ``` r
 # Some summarized data: % of HHs by displacement status
 df <- tibble::tibble(
-  status = c('Displaced', 'Non displaced', 'Returnee', 'Don\'t know/Prefer not to say'),
+  status = c("Displaced", "Non displaced", "Returnee", "Don't know/Prefer not to say"),
   percentage = c(18, 65, 12, 3)
 )
 
@@ -198,6 +234,7 @@ df <- tibble::tibble(
 
 ### Example 5: Waffle chart
 
+
 ``` r
 #
 # waffle(df, status, percentage, x_title = 'A caption', title = 'A title', subtitle = 'A subtitle')
@@ -205,16 +242,17 @@ df <- tibble::tibble(
 
 ### Example 6: Alluvial chart
 
+
 ``` r
 # Some summarized data: % of HHs by self-reported status of displacement in 2021 and in 2022
 df <- tibble::tibble(
   status_from = c(
-    rep('Displaced', 4),
-    rep('Non displaced', 4),
-    rep('Returnee', 4),
-    rep('Dnk/Pnts', 4)
+    rep("Displaced", 4),
+    rep("Non displaced", 4),
+    rep("Returnee", 4),
+    rep("Dnk/Pnts", 4)
   ),
-  status_to = c('Displaced', 'Non displaced', 'Returnee', 'Dnk/Pnts', 'Displaced', 'Non displaced', 'Returnee', 'Dnk/Pnts', 'Displaced', 'Non displaced', 'Returnee', 'Dnk/Pnts', 'Displaced', 'Non displaced', 'Returnee', 'Dnk/Pnts'),
+  status_to = c("Displaced", "Non displaced", "Returnee", "Dnk/Pnts", "Displaced", "Non displaced", "Returnee", "Dnk/Pnts", "Displaced", "Non displaced", "Returnee", "Dnk/Pnts", "Displaced", "Non displaced", "Returnee", "Dnk/Pnts"),
   percentage = c(20, 8, 18, 1, 12, 21, 0, 2, 0, 3, 12, 1, 0, 0, 1, 1)
 )
 
@@ -233,6 +271,7 @@ df <- tibble::tibble(
 ```
 
 ### Example 7: Lollipop chart
+
 
 ``` r
 library(tidyr)
@@ -256,7 +295,10 @@ lollipop(
 )
 ```
 
-<img src="man/figures/README-example-lollipop-chart-1.png" width="65%" />
+<div class="figure">
+<img src="man/figures/README-example-lollipop-chart-1.png" alt="plot of chunk example-lollipop-chart" width="65%" />
+<p class="caption">plot of chunk example-lollipop-chart</p>
+</div>
 
 ``` r
 
@@ -275,7 +317,10 @@ hlollipop(
 )
 ```
 
-<img src="man/figures/README-example-lollipop-chart-2.png" width="65%" />
+<div class="figure">
+<img src="man/figures/README-example-lollipop-chart-2.png" alt="plot of chunk example-lollipop-chart" width="65%" />
+<p class="caption">plot of chunk example-lollipop-chart</p>
+</div>
 
 ``` r
 
@@ -294,7 +339,8 @@ lollipop(
   x = "admin1",
   y = "stat",
   group = "group",
-  dodge_width = 0.8,  # Control spacing between grouped lollipops
+  order = "grouped_y",
+  dodge_width = 0.8, # Control spacing between grouped lollipops
   dot_size = 3.5,
   line_size = 0.8,
   y_title = "Value",
@@ -303,7 +349,10 @@ lollipop(
 )
 ```
 
-<img src="man/figures/README-example-lollipop-chart-3.png" width="65%" />
+<div class="figure">
+<img src="man/figures/README-example-lollipop-chart-3.png" alt="plot of chunk example-lollipop-chart" width="65%" />
+<p class="caption">plot of chunk example-lollipop-chart</p>
+</div>
 
 ``` r
 
@@ -313,7 +362,7 @@ hlollipop(
   x = "admin1",
   y = "stat",
   group = "group",
-  dodge_width = 0.7,  # Narrower spacing for horizontal orientation
+  dodge_width = 0.7, # Narrower spacing for horizontal orientation
   dot_size = 3.5,
   line_size = 0.8,
   y_title = "Category",
@@ -322,20 +371,19 @@ hlollipop(
 )
 ```
 
-<img src="man/figures/README-example-lollipop-chart-4.png" width="65%" />
+<div class="figure">
+<img src="man/figures/README-example-lollipop-chart-4.png" alt="plot of chunk example-lollipop-chart" width="65%" />
+<p class="caption">plot of chunk example-lollipop-chart</p>
+</div>
 
 ## Lollipop Chart Features
 
 Lollipop charts offer several advantages:
 
 - Clean visualization of point data with connecting lines to a baseline
-- True side-by-side grouped display for easy comparison between
-  categories
+- True side-by-side grouped display for easy comparison between categories
 - Each lollipop maintains its position from dot to baseline
-- Customizable appearance with parameters for dot size, line width, and
-  colors
+- Customizable appearance with parameters for dot size, line width, and colors
 - The `dodge_width` parameter controls spacing between grouped lollipops
 
-The side-by-side positioning for grouped lollipops makes them visually
-distinct from dumbbell plots, which typically connect related points on
-the same line.
+The side-by-side positioning for grouped lollipops makes them visually distinct from dumbbell plots, which typically connect related points on the same line.
