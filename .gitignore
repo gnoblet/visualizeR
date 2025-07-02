@@ -4,3 +4,7 @@
 .httr-oauth
 .DS_Store
 R/test.R
+inst/doc
+
+/.quarto/
+docs

@@ -2,35 +2,61 @@
 % Please edit documentation in R/point.R
 \name{point}
 \alias{point}
-\title{Simple point chart}
+\title{Simple scatterplot}
 \usage{
 point(
   df,
   x,
   y,
-  group = NULL,
+  group = "",
+  facet = "",
+  facet_scales = "free",
+  x_rm_na = TRUE,
+  y_rm_na = TRUE,
+  group_rm_na = TRUE,
+  facet_rm_na = TRUE,
+  add_color = color("cat_5_main_1"),
+  add_color_guide = TRUE,
   flip = TRUE,
   alpha = 1,
-  size = 1,
+  size = 2,
   x_title = NULL,
   y_title = NULL,
   group_title = NULL,
   title = NULL,
   subtitle = NULL,
   caption = NULL,
-  theme = theme_reach()
+  theme_fun = theme_point(),
+  scale_fill_fun = scale_fill_visualizer_discrete(),
+  scale_color_fun = scale_color_visualizer_discrete()
 )
 }
 \arguments{
 \item{df}{A data frame.}
 
-\item{x}{A numeric column.}
+\item{x}{A quoted numeric column.}
 
-\item{y}{A character column or coercible as a character column.}
+\item{y}{A quoted numeric column.}
 
-\item{group}{Some grouping categorical column, e.g. administrative areas or population groups.}
+\item{group}{Some quoted grouping categorical column, e.g. administrative areas or population groups.}
 
-\item{flip}{TRUE or FALSE. Default to TRUE or horizontal bar plot.}
+\item{facet}{Some quoted grouping categorical column.}
+
+\item{facet_scales}{Character. Either "free" (default) or "fixed" for facet scales.}
+
+\item{x_rm_na}{Remove NAs in x?}
+
+\item{y_rm_na}{Remove NAs in y?}
+
+\item{group_rm_na}{Remove NAs in group?}
+
+\item{facet_rm_na}{Remove NAs in facet?}
+
+\item{add_color}{Add a color to points (if no grouping).}
+
+\item{add_color_guide}{Should a legend be added?}
+
+\item{flip}{TRUE or FALSE.}
 
 \item{alpha}{Fill transparency.}
 
@@ -48,11 +74,8 @@ point(
 
 \item{caption}{Plot caption. Default to NULL.}
 
-\item{theme}{Whatever theme. Default to theme_reach().}
-}
-\value{
-A bar chart
+\item{theme_fun}{Whatever theme. Default to theme_point(). NULL if no theming needed.}
 }
 \description{
-Simple point chart
+Simple scatterplot
 }

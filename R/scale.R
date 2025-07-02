@@ -1,119 +1,41 @@
-#' Color scale constructor for REACH or AGORA colors
+#' Scale constructors for fill and colors
 #'
-#' @param initiative Either "reach" or "agora" or "default".
-#' @param palette Palette name from `pal_reach()` or `pal_agora()`.
-#' @param discrete Boolean indicating whether color aesthetic is discrete or not.
-#' @param reverse Boolean indicating whether the palette should be reversed.
+#' This function is based on [palette()]. If palette is NULL, the used palette will be magma from gpplot2's viridis scale constructors.
+#'
+#' @inheritParams palette_gen
+#'
 #' @param reverse_guide Boolean indicating whether the guide should be reversed.
-#' @param ... Additional arguments passed to discrete_scale() or
-#'            scale_fill_gradient(), used respectively when discrete is TRUE or FALSE.
-#'
-#' @return A color scale for ggplot
+#' @param ... Additional arguments passed to [ggplot2::discrete_scale()] if discrete or [ggplot2::scale_fill_gradient()] if continuous.
 #'
 #' @export
-scale_color <- function(initiative = "reach", palette = "main", discrete = TRUE, reverse = FALSE, reverse_guide = TRUE, ...) {
-
-  if (initiative == "reach") {
-
-    pal <- pal_reach(palette)
-
-    if (is.null(pal)) {
-
-      pal <- pal_fallback(
-        reverse = reverse,
-        discrete = discrete,
-        color_ramp_palette = TRUE)
-
-      rlang::warn(
-        c(
-          paste0("There is no palette '", palette, "' for the selected initiative. Fallback to pal_fallback()."),
-          "i" = paste0("Use `pal_reach(show_palettes = TRUE)` to see the list of available palettes.")
-        )
-      )
-
-      if (discrete) palette <- "viridis" else palette <- "magma"
-
-    } else {
-
-      pal <- pal_reach(
-        palette = palette,
-        reverse = reverse,
-        color_ramp_palette = TRUE,
-        show_palettes = FALSE
-      )
-
-    }
-
-  } else if (initiative == "agora") {
-
-    pal <- pal_agora(palette)
-
-    if (is.null(pal)) {
-
-      pal <- pal_fallback(
-        reverse = reverse,
-        discrete = discrete,
-        color_ramp_palette = TRUE)
-
-      rlang::warn(
-        c(
-          paste0("There is no palette '", palette, "' for the selected initiative. Fallback to pal_fallback()."),
-          "i" = paste0("Use `pal_reach(show_palettes = TRUE)` to see the list of available palettes.")
-        )
-      )
-
-      if (discrete) palette <- "viridis" else palette <- "magma"
-
-    } else {
-
-      pal <- pal_agora(
-        palette = palette,
-        reverse = reverse,
-        color_ramp_palette = TRUE,
-        show_palettes = FALSE
-      )
-    }
-
-  } else if (initiative == "default") {
-
-    pal <- pal_fallback(
-      reverse = reverse,
-      discrete = discrete,
-      color_ramp_palette = TRUE)
-
-    if (discrete) palette <- "viridis" else palette <- "magma"
-
-  } else {
-    rlang::abort(
-      c(
-        paste0("There is no initiative '", initiative, "."),
-        "i" = paste0("initiative should be either 'reach', 'agora' or 'default'")
-      )
-    )
-  }
-
-  if (discrete) {
+scale_color_visualizer_discrete <- function(
+  palette = "cat_5_main",
+  direction = 1,
+  reverse_guide = TRUE,
+  title_position = NULL,
+  ...
+) {
+  if (!(is.null(palette))) {
     ggplot2::discrete_scale(
-      "colour",
-      paste0(initiative, "_", palette),
-      palette = pal,
+      "color",
+      palette = palette_gen(palette, "categorical", direction),
       guide = ggplot2::guide_legend(
-        title.position = "top",
+        title.position = title_position,
         draw.ulim = TRUE,
         draw.llim = TRUE,
-        ticks.colour = "#F1F3F5",
+        # ticks.colour = "#F1F3F5",
         reverse = reverse_guide
       ),
       ...
     )
   } else {
-    ggplot2::scale_color_gradientn(
-      colours = pal(256),
-      guide = ggplot2::guide_colorbar(
-        title.position = "top",
+    ggplot2::scale_colour_viridis_d(
+      direction = direction,
+      guide = ggplot2::guide_legend(
+        title.position = title_position,
         draw.ulim = TRUE,
         draw.llim = TRUE,
-        ticks.colour = "#F1F3F5",
+        # ticks.colour = "#F1F3F5",
         reverse = reverse_guide
       ),
       ...
@@ -121,128 +43,118 @@ scale_color <- function(initiative = "reach", palette = "main", discrete = TRUE,
   }
 }
 
-
-
-#' Fill scale constructor for REACH or AGORA colors
-#'
-#' @param initiative Either "reach" or "agora" or "default".
-#' @param palette Palette name from `pal_reach()` or `pal_agora()`.
-#' @param discrete Boolean indicating whether color aesthetic is discrete or not.
-#' @param reverse Boolean indicating whether the palette should be reversed.
-#' @param reverse_guide Boolean indicating whether the guide should be reversed.
-#' @param ... Additional arguments passed to discrete_scale() or
-#'            scale_fill_gradient(), used respectively when discrete is TRUE or FALSE.
-#'
-#' @return A fill scale for ggplot.
+#' @rdname scale_color_visualizer_discrete
 #'
 #' @export
-scale_fill <- function(initiative = "reach", palette = "main", discrete = TRUE, reverse = FALSE, reverse_guide = TRUE, ...) {
-
-
-  if (initiative == "reach") {
-
-    pal <- pal_reach(palette)
-
-    if (is.null(pal)) {
-
-      pal <- pal_fallback(
-        reverse = reverse,
-        discrete = discrete,
-        color_ramp_palette = TRUE)
-
-      rlang::warn(
-        c(
-          paste0("There is no palette '", palette, "' for the selected initiative. Fallback to pal_fallback()."),
-          "i" = paste0("Use `pal_reach(show_palettes = TRUE)` to see the list of available palettes.")
-        )
-      )
-
-      if (discrete) palette <- "viridis" else palette <- "magma"
-
-    } else {
-
-      pal <- pal_reach(
-        palette = palette,
-        reverse = reverse,
-        color_ramp_palette = TRUE,
-        show_palettes = FALSE
-      )
-
-    }
-
-  } else if (initiative == "agora") {
-
-    pal <- pal_agora(palette)
-
-    if (is.null(pal)) {
-
-      pal <- pal_fallback(
-        reverse = reverse,
-        discrete = discrete,
-        color_ramp_palette = TRUE)
-
-      rlang::warn(
-        c(
-          paste0("There is no palette '", palette, "' for the selected initiative. Fallback to pal_fallback()."),
-          "i" = paste0("Use `pal_reach(show_palettes = TRUE)` to see the list of available palettes.")
-        )
-      )
-
-      if (discrete) palette <- "viridis" else palette <- "magma"
-
-    } else {
-
-      pal <- pal_agora(
-        palette = palette,
-        reverse = reverse,
-        color_ramp_palette = TRUE,
-        show_palettes = FALSE
-      )
-    }
-
-  } else if (initiative == "default") {
-
-    pal <- pal_fallback(
-      reverse = reverse,
-      discrete = discrete,
-      color_ramp_palette = TRUE)
-
-    if (discrete) palette <- "viridis" else palette <- "magma"
-
-  } else {
-    rlang::abort(
-      c(
-        paste0("There is no initiative '", initiative, "."),
-        "i" = paste0("initiative should be either 'reach', 'agora' or 'default'")
-      )
-    )
-  }
-
-  if (discrete) {
+scale_fill_visualizer_discrete <- function(
+  palette = "cat_5_main",
+  direction = 1,
+  reverse_guide = TRUE,
+  title_position = NULL,
+  ...
+) {
+  if (!(is.null(palette))) {
     ggplot2::discrete_scale(
       "fill",
-      paste0(initiative, "_", palette),
-      palette = pal,
+      palette = palette_gen(palette, "categorical", direction),
       guide = ggplot2::guide_legend(
-        title.position = "top",
+        title.position = title_position,
         draw.ulim = TRUE,
         draw.llim = TRUE,
-        ticks.colour = "#F1F3F5",
+        # ticks.colour = "#F1F3F5",
         reverse = reverse_guide
       ),
       ...
     )
   } else {
-    ggplot2::scale_color_gradientn(
-      colours = pal(256),
-      guide = ggplot2::guide_colorbar(
-        title.position = "top",
+    ggplot2::scale_fill_viridis_d(
+      direction = direction,
+      guide = ggplot2::guide_legend(
+        title.position = title_position,
         draw.ulim = TRUE,
         draw.llim = TRUE,
-        ticks.colour = "#F1F3F5",
+        # ticks.colour = "#F1F3F5",
         reverse = reverse_guide
       ),
       ...
+    )
+  }
+}
+
+#' @rdname scale_color_visualizer_discrete
+#'
+#' @export
+scale_fill_visualizer_continuous <- function(
+  palette = "seq_5_main",
+  direction = 1,
+  reverse_guide = TRUE,
+  title_position = NULL,
+  ...
+) {
+  if (!(is.null(palette))) {
+    pal <- palette_gen(palette, "continuous", direction)
+
+    ggplot2::scale_fill_gradientn(
+      colors = pal(256),
+      guide = ggplot2::guide_colorbar(
+        title.position = title_position,
+        draw.ulim = TRUE,
+        draw.llim = TRUE,
+        # ticks.colour = "#F1F3F5",
+        reverse = reverse_guide
+      ),
+      ...
+    )
+  } else {
+    ggplot2::scale_fill_viridis_c(
+      option = "magma",
+      guide = ggplot2::guide_colorbar(
+        title.position = title_position,
+        draw.ulim = TRUE,
+        draw.llim = TRUE,
+        # ticks.colour = "#F1F3F5",
+        reverse = reverse_guide
+      ),
+      ...
+    )
+  }
+}
+
+#' @rdname scale_color_visualizer_discrete
+#'
+#' @export
+scale_color_visualizer_continuous <- function(
+  palette = "seq_5_main",
+  direction = 1,
+  reverse_guide = TRUE,
+  title_position = NULL,
+  ...
+) {
+  if (!(is.null(palette))) {
+    pal <- palette_gen(palette, "continuous", direction)
+
+    ggplot2::scale_fill_gradientn(
+      colors = pal(256),
+      guide = ggplot2::guide_colorbar(
+        title.position = title_position,
+        draw.ulim = TRUE,
+        draw.llim = TRUE,
+        # ticks.colour = "#F1F3F5",
+        reverse = reverse_guide
+      ),
+      ...
+    )
+  } else {
+    ggplot2::scale_colour_viridis_c(
+      option = "magma",
+      guide = ggplot2::guide_colorbar(
+        title.position = title_position,
+        draw.ulim = TRUE,
+        draw.llim = TRUE,
+        # ticks.colour = "#F1F3F5",
+        reverse = reverse_guide
+      ),
+      ....
     )
   }
 }
