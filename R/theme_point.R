@@ -1,6 +1,6 @@
 #' Custom Theme for Point Charts
 #'
-#' @param flip Logical. Whether the plot is flipped (horizonal).
+#' @param flip Logical. Whether the plot is flipped (horizontal).
 #' @param axis_text_x_angle Angle for x-axis text.
 #' @param axis_text_x_vjust Vertical justification for x-axis text.
 #' @param axis_text_x_hjust Horizontal justification for x-axis text.
