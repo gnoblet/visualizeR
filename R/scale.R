@@ -9,12 +9,11 @@
 #'
 #' @export
 scale_color_visualizer_discrete <- function(
-  palette = "cat_5_main",
-  direction = 1,
-  reverse_guide = TRUE,
-  title_position = NULL,
-  ...
-) {
+    palette = "cat_5_main",
+    direction = 1,
+    reverse_guide = TRUE,
+    title_position = NULL,
+    ...) {
   if (!(is.null(palette))) {
     ggplot2::discrete_scale(
       "color",
@@ -47,12 +46,11 @@ scale_color_visualizer_discrete <- function(
 #'
 #' @export
 scale_fill_visualizer_discrete <- function(
-  palette = "cat_5_main",
-  direction = 1,
-  reverse_guide = TRUE,
-  title_position = NULL,
-  ...
-) {
+    palette = "cat_5_main",
+    direction = 1,
+    reverse_guide = TRUE,
+    title_position = NULL,
+    ...) {
   if (!(is.null(palette))) {
     ggplot2::discrete_scale(
       "fill",
@@ -85,12 +83,11 @@ scale_fill_visualizer_discrete <- function(
 #'
 #' @export
 scale_fill_visualizer_continuous <- function(
-  palette = "seq_5_main",
-  direction = 1,
-  reverse_guide = TRUE,
-  title_position = NULL,
-  ...
-) {
+    palette = "seq_5_main",
+    direction = 1,
+    reverse_guide = TRUE,
+    title_position = NULL,
+    ...) {
   if (!(is.null(palette))) {
     pal <- palette_gen(palette, "continuous", direction)
 
@@ -124,12 +121,11 @@ scale_fill_visualizer_continuous <- function(
 #'
 #' @export
 scale_color_visualizer_continuous <- function(
-  palette = "seq_5_main",
-  direction = 1,
-  reverse_guide = TRUE,
-  title_position = NULL,
-  ...
-) {
+    palette = "seq_5_main",
+    direction = 1,
+    reverse_guide = TRUE,
+    title_position = NULL,
+    ...) {
   if (!(is.null(palette))) {
     pal <- palette_gen(palette, "continuous", direction)
 
@@ -154,7 +150,7 @@ scale_color_visualizer_continuous <- function(
         # ticks.colour = "#F1F3F5",
         reverse = reverse_guide
       ),
-      ....
+      ...
     )
   }
 }
