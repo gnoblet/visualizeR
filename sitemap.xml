@@ -1,8 +1,6 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
 <url><loc>https://gnoblet.github.io/visualizeR/404.html</loc></url>
 <url><loc>https://gnoblet.github.io/visualizeR/LICENSE.html</loc></url>
-<url><loc>https://gnoblet.github.io/visualizeR/articles/bar_charts.html</loc></url>
-<url><loc>https://gnoblet.github.io/visualizeR/articles/index.html</loc></url>
 <url><loc>https://gnoblet.github.io/visualizeR/authors.html</loc></url>
 <url><loc>https://gnoblet.github.io/visualizeR/index.html</loc></url>
 <url><loc>https://gnoblet.github.io/visualizeR/news/index.html</loc></url>
@@ -10,7 +8,10 @@
 <url><loc>https://gnoblet.github.io/visualizeR/reference/check_vars_in_df.html</loc></url>
 <url><loc>https://gnoblet.github.io/visualizeR/reference/color.html</loc></url>
 <url><loc>https://gnoblet.github.io/visualizeR/reference/dumbbell.html</loc></url>
+<url><loc>https://gnoblet.github.io/visualizeR/reference/grapes-notallin-grapes.html</loc></url>
+<url><loc>https://gnoblet.github.io/visualizeR/reference/grapes-notin-grapes.html</loc></url>
 <url><loc>https://gnoblet.github.io/visualizeR/reference/index.html</loc></url>
+<url><loc>https://gnoblet.github.io/visualizeR/reference/lollipop.html</loc></url>
 <url><loc>https://gnoblet.github.io/visualizeR/reference/palette.html</loc></url>
 <url><loc>https://gnoblet.github.io/visualizeR/reference/palette_gen.html</loc></url>
 <url><loc>https://gnoblet.github.io/visualizeR/reference/point.html</loc></url>
