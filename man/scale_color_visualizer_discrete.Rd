@@ -46,6 +46,8 @@ scale_color_visualizer_continuous(
 
 \item{reverse_guide}{Boolean indicating whether the guide should be reversed.}
 
+\item{title_position}{Position of the title. See [ggplot2::guide_legend()]'s title.position argument.}
+
 \item{...}{Additional arguments passed to [ggplot2::discrete_scale()] if discrete or [ggplot2::scale_fill_gradient()] if continuous.}
 }
 \description{

@@ -1,11 +1,17 @@
 #' ggplot2 theme wrapper with fonts and colors
 #'
-#' @param font_family The font family for all plot's texts. Default to "Segoe UI".
 #' @param title_size The size of the title. Defaults to 12.
 #' @param title_color Title color.
 #' @param title_font_face Title font face. Default to "bold". Font face ("plain", "italic", "bold", "bold.italic").
 #' @param title_hjust Title horizontal justification. Default to NULL. Use 0.5 to center the title.
-#' @param title_font_family Title font family. Default to "Roboto Condensed".
+#' @param title_font_family Title font family. Default to "Carlito".
+#' @param title_position_to_plot TRUE or FALSE. Positioning to plot or to panel?
+#' @param subtitle_font_family Subtitle font family. Default to "Carlito".
+#' @param subtitle_size The size of the subtitle. Defaults to 10.
+#' @param subtitle_color Subtitle color.
+#' @param subtitle_font_face Subtitle font face. Default to "plain". Font face ("plain", "italic", "bold", "bold.italic").
+#' @param subtitle_hjust Subtitle horizontal justification. Default to NULL. Use 0.5 to center the subtitle.
+#' @param text_font_family Text font family. Default to "Carlito".
 #' @param text_size The size of all text other than the title, subtitle and caption. Defaults to 10.
 #' @param text_color Text color.
 #' @param text_font_face Text font face. Default to "bold". Font face ("plain", "italic", "bold", "bold.italic").
@@ -18,16 +24,21 @@
 #' @param legend_title_size Legend title size.
 #' @param legend_title_color Legend title color.
 #' @param legend_title_font_face Legend title font face. Default to "plain". Font face ("plain", "italic", "bold", "bold.italic").
+#' @param legend_title_font_family Legend title font family. Default to "Carlito".
 #' @param legend_text_size Legend text size.
 #' @param legend_text_color Legend text color.
 #' @param legend_text_font_face Legend text font face. Default to "plain". Font face ("plain", "italic", "bold", "bold.italic").
+#' @param legend_text_font_family Legend text font family. Default to "Carlito".
+#'
 #' @param legend_reverse Reverse the color in the guide? Default to TRUE.
-#' @param title_size The size of the legend title. Defaults to 11.
-#' @param title_color Legend title color.
-#' @param title_font_face Legend title font face. Default to "plain". Font face ("plain", "italic", "bold", "bold.italic").
-#' @param title_position_to_plot TRUE or FALSE. Positioning to plot or to panel?
+#' @param facet_size Facet font size.
+#' @param facet_color Facet font color.
+#' @param facet_font_face Facet font face. Default to "plain". Font face ("plain", "italic", "bold", "bold.italic").
+#' @param facet_font_family Facet font family. Default to "Carlito".
+#' @param facet_bg_color Facet background color.
 #' @param axis_x Boolean. Do you need x-axis?
 #' @param axis_y Boolean. Do you need y-axis?
+#' @param axis_text_font_family Axis text font family. Default to "Carlito".
 #' @param axis_text_size Axis text size.
 #' @param axis_text_color Axis text color.
 #' @param axis_text_font_face Axis text font face. Default to "plain". Font face ("plain", "italic", "bold", "bold.italic").
@@ -53,7 +64,11 @@
 #' @param grid_minor_x_size Minor X line size.
 #' @param grid_minor_y_size Minor Y line size.
 #' @param grid_minor_color Minor grid lines color.
+#' @param caption_font_family Caption font family. Default to "Carlito".
+#' @param caption_font_face Caption font face. Default to "plain". Font face ("plain", "italic", "bold", "bold.italic").
 #' @param caption_position_to_plot TRUE or FALSE. Positioning to plot or to panel?
+#' @param caption_size The size of the caption. Defaults to 10.
+#' @param caption_color Caption color.
 #' @param ... Additional arguments passed to [ggplot2::theme()].
 #'
 #'
@@ -61,76 +76,75 @@
 #'
 #' @export
 theme_default <- function(
-  title_font_family = "Carlito",
-  title_size = 20,
-  title_color = color("dark_grey"),
-  title_font_face = "bold",
-  title_hjust = NULL,
-  title_position_to_plot = TRUE,
-  subtitle_font_family = "Carlito",
-  subtitle_size = 16,
-  subtitle_color = color("dark_grey"),
-  subtitle_font_face = "plain",
-  subtitle_hjust = NULL,
-  text_font_family = "Carlito",
-  text_size = 14,
-  text_color = color("dark_grey"),
-  text_font_face = "plain",
-  panel_background_color = "#FFFFFF",
-  panel_border = FALSE,
-  panel_border_color = color("dark_grey"),
-  legend_position = "top",
-  legend_direction = "horizontal",
-  legend_justification = "center",
-  legend_reverse = TRUE,
-  legend_title_size = 14,
-  legend_title_color = color("dark_grey"),
-  legend_title_font_face = "plain",
-  legend_title_font_family = "Carlito",
-  legend_text_size = 14,
-  legend_text_color = color("dark_grey"),
-  legend_text_font_face = "plain",
-  legend_text_font_family = "Carlito",
-  facet_size = 15,
-  facet_color = color("dark_grey"),
-  facet_font_face = "bold",
-  facet_font_family = "Carlito",
-  facet_bg_color = color("lighter_grey"),
-  axis_x = TRUE,
-  axis_y = TRUE,
-  axis_text_x = TRUE,
-  axis_line_x = FALSE,
-  axis_ticks_x = FALSE,
-  axis_text_y = TRUE,
-  axis_line_y = TRUE,
-  axis_ticks_y = TRUE,
-  axis_text_font_family = "Carlito",
-  axis_text_size = 14,
-  axis_text_color = color("dark_grey"),
-  axis_text_font_face = "plain",
-  axis_title_size = 15,
-  axis_title_color = color("dark_grey"),
-  axis_title_font_face = "plain",
-  axis_text_x_angle = 0,
-  axis_text_x_vjust = 0.5,
-  axis_text_x_hjust = 0.5,
-  grid_major_x = TRUE,
-  grid_major_y = FALSE,
-  grid_major_color = color("dark_grey"),
-  grid_major_x_size = 0.1,
-  grid_major_y_size = 0.1,
-  grid_minor_x = TRUE,
-  grid_minor_y = FALSE,
-  grid_minor_color = color("dark_grey"),
-  grid_minor_x_size = 0.05,
-  grid_minor_y_size = 0.05,
-  caption_font_family = "Carlito",
-  caption_font_face = "plain",
-  caption_position_to_plot = TRUE,
-  caption_size = 12,
-  caption_color = color("dark_grey"),
-  ...
-) {
+    title_font_family = "Carlito",
+    title_size = 20,
+    title_color = color("dark_grey"),
+    title_font_face = "bold",
+    title_hjust = NULL,
+    title_position_to_plot = TRUE,
+    subtitle_font_family = "Carlito",
+    subtitle_size = 16,
+    subtitle_color = color("dark_grey"),
+    subtitle_font_face = "plain",
+    subtitle_hjust = NULL,
+    text_font_family = "Carlito",
+    text_size = 14,
+    text_color = color("dark_grey"),
+    text_font_face = "plain",
+    panel_background_color = "#FFFFFF",
+    panel_border = FALSE,
+    panel_border_color = color("dark_grey"),
+    legend_position = "top",
+    legend_direction = "horizontal",
+    legend_justification = "center",
+    legend_reverse = TRUE,
+    legend_title_size = 14,
+    legend_title_color = color("dark_grey"),
+    legend_title_font_face = "plain",
+    legend_title_font_family = "Carlito",
+    legend_text_size = 14,
+    legend_text_color = color("dark_grey"),
+    legend_text_font_face = "plain",
+    legend_text_font_family = "Carlito",
+    facet_size = 15,
+    facet_color = color("dark_grey"),
+    facet_font_face = "bold",
+    facet_font_family = "Carlito",
+    facet_bg_color = color("lighter_grey"),
+    axis_x = TRUE,
+    axis_y = TRUE,
+    axis_text_x = TRUE,
+    axis_line_x = FALSE,
+    axis_ticks_x = FALSE,
+    axis_text_y = TRUE,
+    axis_line_y = TRUE,
+    axis_ticks_y = TRUE,
+    axis_text_font_family = "Carlito",
+    axis_text_size = 14,
+    axis_text_color = color("dark_grey"),
+    axis_text_font_face = "plain",
+    axis_title_size = 15,
+    axis_title_color = color("dark_grey"),
+    axis_title_font_face = "plain",
+    axis_text_x_angle = 0,
+    axis_text_x_vjust = 0.5,
+    axis_text_x_hjust = 0.5,
+    grid_major_x = TRUE,
+    grid_major_y = FALSE,
+    grid_major_color = color("dark_grey"),
+    grid_major_x_size = 0.1,
+    grid_major_y_size = 0.1,
+    grid_minor_x = TRUE,
+    grid_minor_y = FALSE,
+    grid_minor_color = color("dark_grey"),
+    grid_minor_x_size = 0.05,
+    grid_minor_y_size = 0.05,
+    caption_font_family = "Carlito",
+    caption_font_face = "plain",
+    caption_position_to_plot = TRUE,
+    caption_size = 12,
+    caption_color = color("dark_grey"),
+    ...) {
   # Basic simple theme
   theme <- ggplot2::theme_minimal()
 

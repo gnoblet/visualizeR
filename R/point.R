@@ -22,36 +22,35 @@
 #' @param subtitle Plot subtitle. Default to NULL.
 #' @param caption Plot caption. Default to NULL.
 #' @param theme_fun Whatever theme. Default to theme_point(). NULL if no theming needed.
-#'
-#' @inheritParams scale_color_visualizer_discrete
+#' @param scale_fill_fun Scale fill function. Default to scale_fill_visualizer_discrete().
+#' @param scale_color_fun Scale color function. Default to scale_color_visualizer_discrete().
 #'
 #' @export
 point <- function(
-  df,
-  x,
-  y,
-  group = "",
-  facet = "",
-  facet_scales = "free",
-  x_rm_na = TRUE,
-  y_rm_na = TRUE,
-  group_rm_na = TRUE,
-  facet_rm_na = TRUE,
-  add_color = color("cat_5_main_1"),
-  add_color_guide = TRUE,
-  flip = TRUE,
-  alpha = 1,
-  size = 2,
-  x_title = NULL,
-  y_title = NULL,
-  group_title = NULL,
-  title = NULL,
-  subtitle = NULL,
-  caption = NULL,
-  theme_fun = theme_point(),
-  scale_fill_fun = scale_fill_visualizer_discrete(),
-  scale_color_fun = scale_color_visualizer_discrete()
-) {
+    df,
+    x,
+    y,
+    group = "",
+    facet = "",
+    facet_scales = "free",
+    x_rm_na = TRUE,
+    y_rm_na = TRUE,
+    group_rm_na = TRUE,
+    facet_rm_na = TRUE,
+    add_color = color("cat_5_main_1"),
+    add_color_guide = TRUE,
+    flip = TRUE,
+    alpha = 1,
+    size = 2,
+    x_title = NULL,
+    y_title = NULL,
+    group_title = NULL,
+    title = NULL,
+    subtitle = NULL,
+    caption = NULL,
+    theme_fun = theme_point(),
+    scale_fill_fun = scale_fill_visualizer_discrete(),
+    scale_color_fun = scale_color_visualizer_discrete()) {
   #------ Checks
 
   # df is a data frame

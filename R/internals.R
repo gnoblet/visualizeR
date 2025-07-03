@@ -23,17 +23,3 @@
 `%notallin%` <- function(a, b) {
   !(all(a %in% b))
 }
-
-# infix for null replacement
-#' @importFrom rlang `%||%`
-#' If Null Replace Operator
-#'
-#' An alias for the `%||%` operator that returns `a` if it's not NULL, otherwise returns `b`.
-#'
-#' @param a First value to test
-#' @param b Value to use if `a` is NULL
-#'
-#' @return `a` if not NULL, otherwise `b`
-`%ifnullrep%` <- function(a, b) {
-  a %||% b
-}

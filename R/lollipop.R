@@ -1,6 +1,7 @@
 #' @rdname lollipop
 #'
 #' @inheritParams lollipop
+#' @param ... Additional arguments passed to `lollipop()`
 #'
 #' @export
 hlollipop <- function(
@@ -12,6 +13,7 @@ hlollipop <- function(
 
 #' Simple lollipop chart
 #'
+#' @description
 #' `lollipop()` is a simple lollipop chart (dots connected to the baseline by a segment) with some customization allowed.
 #' `hlollipop()` uses `lollipop()` with sane defaults for a horizontal lollipop chart.
 #'
@@ -41,14 +43,24 @@ hlollipop <- function(
 #' @param line_color The color of the line connecting dots to the baseline.
 #' @param dodge_width Width for position dodge when using groups (controls space between grouped lollipops).
 #' @param theme_fun Whatever theme function. For no custom theme, use theme_fun = NULL.
-#' @param scale_fill_fun Scale fill function.
-#' @param scale_color_fun Scale color function.
+#' @param scale_fill_fun Scale fill function. Default to scale_fill_visualizer_discrete().
+#' @param scale_color_fun Scale color function. Default to scale_color_visualizer_discrete().
+#'
 #'
 #' @inheritParams reorder_by
 #'
 #' @importFrom rlang `:=`
 #'
+#' @return A ggplot object
 #' @export
+#' @examples
+#' \dontrun{
+#' df <- data.frame(x = letters[1:5], y = c(10, 5, 7, 12, 8))
+#' # Vertical lollipop
+#' lollipop(df, "x", "y")
+#' # Horizontal lollipop
+#' hlollipop(df, "x", "y")
+#' }
 lollipop <- function(
     df,
     x,

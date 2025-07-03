@@ -5,6 +5,7 @@
 #' @inheritParams palette_gen
 #'
 #' @param reverse_guide Boolean indicating whether the guide should be reversed.
+#' @param title_position Position of the title. See [ggplot2::guide_legend()]'s title.position argument.
 #' @param ... Additional arguments passed to [ggplot2::discrete_scale()] if discrete or [ggplot2::scale_fill_gradient()] if continuous.
 #'
 #' @export

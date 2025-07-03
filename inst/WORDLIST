@@ -1,4 +1,5 @@
 aut
+Carlito
 CMD
 codecov
 Codecov
@@ -6,6 +7,7 @@ coercible
 Config
 covr
 cre
+css
 Customizable
 donut
 Donut
@@ -18,9 +20,11 @@ ggrepel
 ggtext
 github
 gnoblet
+gpplot
 grDevices
 grey
 Guillaume
+hbar
 hlollipop
 horizonal
 https
@@ -41,10 +45,12 @@ RoxygenNote
 Segoe
 stringr
 testthat
+theming
 tidyr
 UI
 vdiffr
 VignetteBuilder
+viridis
 viridisLite
 visualizeR
 withr

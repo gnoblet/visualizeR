@@ -2,13 +2,14 @@
 #'
 #' @inheritParams bar
 #'
+#' @param ... Additional arguments passed to `bar()`
+#'
 #' @export
 hbar <- function(
-  ...,
-  flip = TRUE,
-  add_text = FALSE,
-  theme_fun = theme_bar(flip = flip, add_text = add_text)
-) {
+    ...,
+    flip = TRUE,
+    add_text = FALSE,
+    theme_fun = theme_bar(flip = flip, add_text = add_text)) {
   bar(flip = flip, add_text = add_text, theme_fun = theme_fun, ...)
 }
 
@@ -48,6 +49,8 @@ hbar <- function(
 #' @param add_text_expand_limit Default to adding 10\% on top of the bar.
 #' @param add_text_round Round the text label.
 #' @param theme_fun Whatever theme function. For no custom theme, use theme_fun = NULL.
+#' @param scale_fill_fun Scale fill function. Default to scale_fill_visualizer_discrete().
+#' @param scale_color_fun Scale color function. Default to scale_color_visualizer_discrete().
 #'
 #' @inheritParams reorder_by
 #'
@@ -55,48 +58,47 @@ hbar <- function(
 #'
 #' @export
 bar <- function(
-  df,
-  x,
-  y,
-  group = "",
-  facet = "",
-  order = "none",
-  x_rm_na = TRUE,
-  y_rm_na = TRUE,
-  group_rm_na = TRUE,
-  facet_rm_na = TRUE,
-  y_expand = 0.1,
-  add_color = color("cat_5_main_1"),
-  add_color_guide = TRUE,
-  flip = FALSE,
-  wrap = NULL,
-  position = "dodge",
-  alpha = 1,
-  x_title = NULL,
-  y_title = NULL,
-  group_title = NULL,
-  title = NULL,
-  subtitle = NULL,
-  caption = NULL,
-  width = 0.8,
-  add_text = FALSE,
-  add_text_size = 4.5,
-  add_text_color = color("dark_grey"),
-  add_text_font_face = "bold",
-  add_text_threshold_display = 0.05,
-  add_text_suffix = "%",
-  add_text_expand_limit = 1.2,
-  add_text_round = 1,
-  theme_fun = theme_bar(
-    flip = flip,
-    add_text = add_text,
-    axis_text_x_angle = 0,
-    axis_text_x_vjust = 0.5,
-    axis_text_x_hjust = 0.5
-  ),
-  scale_fill_fun = scale_fill_visualizer_discrete(),
-  scale_color_fun = scale_color_visualizer_discrete()
-) {
+    df,
+    x,
+    y,
+    group = "",
+    facet = "",
+    order = "none",
+    x_rm_na = TRUE,
+    y_rm_na = TRUE,
+    group_rm_na = TRUE,
+    facet_rm_na = TRUE,
+    y_expand = 0.1,
+    add_color = color("cat_5_main_1"),
+    add_color_guide = TRUE,
+    flip = FALSE,
+    wrap = NULL,
+    position = "dodge",
+    alpha = 1,
+    x_title = NULL,
+    y_title = NULL,
+    group_title = NULL,
+    title = NULL,
+    subtitle = NULL,
+    caption = NULL,
+    width = 0.8,
+    add_text = FALSE,
+    add_text_size = 4.5,
+    add_text_color = color("dark_grey"),
+    add_text_font_face = "bold",
+    add_text_threshold_display = 0.05,
+    add_text_suffix = "%",
+    add_text_expand_limit = 1.2,
+    add_text_round = 1,
+    theme_fun = theme_bar(
+      flip = flip,
+      add_text = add_text,
+      axis_text_x_angle = 0,
+      axis_text_x_vjust = 0.5,
+      axis_text_x_hjust = 0.5
+    ),
+    scale_fill_fun = scale_fill_visualizer_discrete(),
+    scale_color_fun = scale_color_visualizer_discrete()) {
   #------ Checks
 
   # df is a data frame
@@ -349,7 +351,7 @@ bar <- function(
     vjust_flip <- -0.5
   }
 
-  # function for interaction
+  # function for interactio
   interaction_f <- function(group, facet, data) {
     if (group == "" && facet == "") {
       return(NULL)
@@ -366,14 +368,7 @@ bar <- function(
 
   # add text labels
   if (add_text & position == "dodge") {
-    df <- dplyr::mutate(
-      df,
-      "y_threshold" := ifelse(
-        !!rlang::sym(y) >= add_text_threshold_display,
-        !!rlang::sym(y),
-        NA
-      )
-    )
+    df$y_threshold <- ifelse(df[[y]] >= add_text_threshold_display, df[[y]], NA)
 
     # expand limits
     g <- g +
@@ -407,14 +402,7 @@ bar <- function(
         position = ggplot2::position_dodge2(width = dodge_width)
       )
   } else if (add_text & position == "stack") {
-    df <- dplyr::mutate(
-      df,
-      "y_threshold" := ifelse(
-        !!rlang::sym(y) >= add_text_threshold_display,
-        !!rlang::sym(y),
-        NA
-      )
-    )
+    df$y_threshold <- ifelse(df[[y]] >= add_text_threshold_display, df[[y]], NA)
 
     g <- g +
       ggplot2::geom_text(

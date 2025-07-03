@@ -6,8 +6,5 @@
 #'
 #' @export
 theme_dumbbell <- function() {
-  theme_default(
-    axis_line_x = TRUE,
-    grid_
-  )
+  theme_default()
 }

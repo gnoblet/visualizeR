@@ -75,6 +75,10 @@ point(
 \item{caption}{Plot caption. Default to NULL.}
 
 \item{theme_fun}{Whatever theme. Default to theme_point(). NULL if no theming needed.}
+
+\item{scale_fill_fun}{Scale fill function. Default to scale_fill_visualizer_discrete().}
+
+\item{scale_color_fun}{Scale color function. Default to scale_color_visualizer_discrete().}
 }
 \description{
 Simple scatterplot

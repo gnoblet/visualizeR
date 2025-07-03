@@ -1,10 +1,27 @@
 #' Custom Theme for Lollipop Charts
 #'
-#' @return A custom theme object.
+#' @description
+#' A custom theme specifically designed for lollipop charts with appropriate grid lines and axis styling
+#' based on whether the chart is flipped (horizontal) or not.
+#'
+#' @param flip Logical indicating whether the lollipop chart is flipped (horizontal). Default is TRUE.
+#' @param axis_text_x_angle Angle for x-axis text labels. Default is 0.
+#' @param axis_text_x_vjust Vertical justification for x-axis text labels. Default is 0.5.
+#' @param axis_text_x_hjust Horizontal justification for x-axis text labels. Default is 0.5.
+#'
+#' @return A ggplot2 theme object
 #'
 #' @rdname theme_default
-#'
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#' library(ggplot2)
+#' df <- data.frame(x = letters[1:5], y = c(10, 5, 7, 12, 8))
+#' ggplot(df, aes(x, y)) +
+#'   geom_point() +
+#'   theme_lollipop()
+#' }
 theme_lollipop <- function(
     flip = TRUE,
     axis_text_x_angle = 0,

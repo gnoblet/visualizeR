@@ -2,16 +2,18 @@
 #'
 #' @return A custom theme object.
 #'
+#'
 #' @rdname theme_default
+#'
+#' @inheritParams bar
 #'
 #' @export
 theme_bar <- function(
-  flip = TRUE,
-  add_text = FALSE,
-  axis_text_x_angle = 0,
-  axis_text_x_vjust = 0.5,
-  axis_text_x_hjust = 0.5
-) {
+    flip = TRUE,
+    add_text = FALSE,
+    axis_text_x_angle = 0,
+    axis_text_x_vjust = 0.5,
+    axis_text_x_hjust = 0.5) {
   # If add_text is TRUE, flip is FALSE
   if (!flip && !add_text) {
     par_axis_text_font_face <- "plain"

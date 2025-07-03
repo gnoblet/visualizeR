@@ -52,6 +52,7 @@ Roadmap is as follows:
   - [ ] Waffle
   - [ ] Donut
   - [ ] Alluvial
+- [ ] Option for tag with css code + for titles/subtitles/captions
 
 ## Request
 
@@ -266,7 +267,6 @@ lollipop(
   y = "stat",
   group = "group",
   order = "grouped_y",
-  dodge_width = 0.8, # Control spacing between grouped lollipops
   dot_size = 3.5,
   line_size = 0.8,
   y_title = "Value",
@@ -280,7 +280,6 @@ hlollipop(
   x = "admin1",
   y = "stat",
   group = "group",
-  dodge_width = 0.7, # Narrower spacing for horizontal orientation
   dot_size = 3.5,
   line_size = 0.8,
   y_title = "Category",
@@ -288,15 +287,3 @@ hlollipop(
   title = "Horizontal side-by-side grouped lollipop chart"
 )
 ```
-
-## Lollipop Chart Features
-
-Lollipop charts offer several advantages:
-
-- Clean visualization of point data with connecting lines to a baseline
-- True side-by-side grouped display for easy comparison between categories
-- Each lollipop maintains its position from dot to baseline
-- Customizable appearance with parameters for dot size, line width, and colors
-- The `dodge_width` parameter controls spacing between grouped lollipops
-
-The side-by-side positioning for grouped lollipops makes them visually distinct from dumbbell plots, which typically connect related points on the same line.
